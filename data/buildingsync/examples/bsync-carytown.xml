@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<auc:BuildingSync xmlns:auc="http://buildingsync.net/schemas/bedes-auc/2019" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://buildingsync.net/schemas/bedes-auc/2019 https://raw.githubusercontent.com/BuildingSync/schema/v2.0/BuildingSync.xsd">
+  <auc:Facilities>
+    <auc:Facility ID="Facility-1">
+      <auc:Sites>
+        <auc:Site ID="Site-1">
+          <auc:Buildings>
+            <auc:Building ID="Building-1">
+              <auc:PremisesName>Carytown</auc:PremisesName>
+              <auc:PremisesIdentifiers>
+                <auc:PremisesIdentifier>
+                  <auc:IdentifierCustomName>Haystack ID</auc:IdentifierCustomName>
+                  <auc:IdentifierValue>r:p:demo:r:23a44701-a89a6c66 Carytown</auc:IdentifierValue>
+                </auc:PremisesIdentifier>
+              </auc:PremisesIdentifiers>
+              <auc:Address>
+                <auc:StreetAddressDetail>
+                  <auc:Simplified>
+                    <auc:StreetAddress>3504 W Cary St</auc:StreetAddress>
+                  </auc:Simplified>
+                </auc:StreetAddressDetail>
+                <auc:City>Richmond</auc:City>
+                <auc:State>VA</auc:State>
+                <auc:PostalCode>23221</auc:PostalCode>
+                <auc:Country>US</auc:Country>
+              </auc:Address>
+              <auc:BuildingClassification>Commercial</auc:BuildingClassification>
+              <auc:OccupancyClassification>Retail</auc:OccupancyClassification>
+              <auc:FloorAreas>
+                <auc:FloorArea>
+                  <auc:FloorAreaType>Gross</auc:FloorAreaType>
+                  <auc:FloorAreaValue>3149</auc:FloorAreaValue>
+                </auc:FloorArea>
+              </auc:FloorAreas>
+              <auc:YearOfConstruction>1996</auc:YearOfConstruction>
+            </auc:Building>
+          </auc:Buildings>
+        </auc:Site>
+      </auc:Sites>
+      <auc:Systems>
+        <auc:HVACSystems>
+          <auc:HVACSystem>
+            <auc:HeatingAndCoolingSystems>
+              <auc:CoolingSources>
+                <auc:CoolingSource ID="Cool1">
+                  <auc:CoolingMedium>Refrigerant</auc:CoolingMedium>
+                  <auc:NumberOfDiscreteCoolingStages>2</auc:NumberOfDiscreteCoolingStages>
+                  <auc:PrimaryFuel>Electricity</auc:PrimaryFuel>
+                </auc:CoolingSource>
+              </auc:CoolingSources>
+              <auc:Deliveries>
+                <auc:Delivery ID="RTU-1">
+                  <auc:DeliveryType>
+                    <auc:CentralAirDistribution>
+                      <auc:AirDeliveryType>Central fan</auc:AirDeliveryType>
+                      <auc:FanBased>
+                        <auc:CoolingSupplyAirTemperature>73</auc:CoolingSupplyAirTemperature>
+                      </auc:FanBased>
+                    </auc:CentralAirDistribution>
+                  </auc:DeliveryType>
+                </auc:Delivery>
+              </auc:Deliveries>
+            </auc:HeatingAndCoolingSystems>
+            <auc:LinkedPremises>
+              <auc:Building>
+                <auc:LinkedBuildingID IDref="Building-1"></auc:LinkedBuildingID>
+              </auc:Building>
+            </auc:LinkedPremises>
+          </auc:HVACSystem>
+        </auc:HVACSystems>
+        <auc:LightingSystems>
+          <auc:LightingSystem ID="Main-Lights">
+            <auc:LinkedPremises>
+              <auc:Building>
+                <auc:LinkedBuildingID IDref="Building-1"></auc:LinkedBuildingID>
+              </auc:Building>
+            </auc:LinkedPremises>
+          </auc:LightingSystem>
+        </auc:LightingSystems>
+        <auc:FanSystems>
+          <auc:FanSystem ID="RTU-1-Fan">
+            <auc:FanApplication>Supply</auc:FanApplication>
+            <auc:FanControlType>Constant Volume</auc:FanControlType>
+            <auc:PrimaryFuel>Electricity</auc:PrimaryFuel>
+            <auc:LinkedSystemIDs>
+              <auc:LinkedSystemID IDref="RTU-1"/>
+            </auc:LinkedSystemIDs>
+          </auc:FanSystem>
+        </auc:FanSystems>
+      </auc:Systems>
+      <auc:Reports>
+        <auc:Report>
+          <auc:Scenarios>
+            <auc:Scenario>
+              <auc:ResourceUses>
+                <auc:ResourceUse>
+                  <auc:EnergyResource>Electricity</auc:EnergyResource>
+                </auc:ResourceUse>
+              </auc:ResourceUses>
+            </auc:Scenario>
+          </auc:Scenarios>
+        </auc:Report>
+      </auc:Reports>
+    </auc:Facility>
+  </auc:Facilities>
+</auc:BuildingSync>
