@@ -48,6 +48,7 @@ def add_triples():
     update_graph(triples)
     t1 = time.time()
     print(f"Graph now contains {len(graph)} triples (updated in {t1-t0:.2f} sec)")
+    graph.serialize('output.ttl', format='ttl')
     return "ok"
 
 

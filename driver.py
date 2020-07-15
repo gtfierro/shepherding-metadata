@@ -50,13 +50,12 @@ class Driver:
 
     def _monitor_push(self):
         while True:
-            self.app.logger.info("Start update")
+            # self.app.logger.info("Start update")
             for srv, updated in self._server_updated.items():
                 if updated:
                     continue
                 self.app.logger.info(f"Push to {srv}")
                 self._push(srv)
-            self.app.logger.info("Finished update")
             time.sleep(10)
 
     def _push(self, server):
@@ -79,7 +78,6 @@ class Driver:
             self.app.logger.error(f"{resp.reason} {resp.content}")
             return
         self._server_updated[server] = True
-        self.app.logger.info(f"Updated {server}")
 
     def http_resources(self):
         return json.jsonify(['ids'])

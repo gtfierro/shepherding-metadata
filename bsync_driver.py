@@ -103,5 +103,6 @@ class BuildingSyncDriver(driver.Driver):
 
 
 if __name__ == '__main__':
-    srv = BuildingSyncDriver(8081, ["http://localhost:6483"], "http://example.com/haystack#", "data/buildingsync/examples/AT_example_SF_audit_report.xml")
+    # srv = BuildingSyncDriver(8081, ["http://localhost:6483"], "http://example.com/haystack#", "data/buildingsync/examples/AT_example_SF_audit_report.xml")
+    srv = BuildingSyncDriver(8081, ["http://localhost:6483"], "http://example.com/building#", "data/buildingsync/examples/bsync-carytown.xml")
     srv.serve()
