@@ -1,0 +1,3 @@
+[submodule "data/buildingsync/github"]
+	path = data/buildingsync/github
+	url = https://github.com/BuildingSync/schema
