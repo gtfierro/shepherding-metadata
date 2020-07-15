@@ -5,7 +5,7 @@ from datetime import datetime
 import driver
 import threading
 import rdflib
-from brickschema.namespaces import RDF
+from brickschema.namespaces import RDF, OWL
 import lxml.etree
 from sys import stdout
 import csv
@@ -58,6 +58,8 @@ class BuildingSyncDriver(driver.Driver):
                     continue
                 res = root.xpath(xpath, namespaces=self.xmlns)
                 things.extend(res)
+                if len(res) == 0:
+                    continue
                 print(f"Found {len(res)} instances of {brick_class}")
 
                 for item in res:
@@ -66,15 +68,16 @@ class BuildingSyncDriver(driver.Driver):
                     # graph.add((NS[ident], RDF.type, rdflib.URIRef(brick_class)))
 
                     rec = {
-                        'id': NS[ident],
+                        'id': ident,
                         'record': {
                             'encoding': 'XML',
                             'content': subtree,
                         },
-                        'triples': [(NS[ident], RDF.type, rdflib.URIRef(brick_class))],
+                        'triples': [(NS[ident], RDF.type, rdflib.URIRef(brick_class)),
+                                    (NS[ident], RDF.type, OWL.NamedIndividual)],
                         'timestamp': timestamp
                     }
-                    self._records[NS[ident]] = rec
+                    self.add_record(ident, rec)
 
             # # TODO: add more relationships
             # for thing in things[:-1]:

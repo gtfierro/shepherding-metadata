@@ -48,12 +48,15 @@ class Driver:
     def get_id(self, ident):
         return self._records.get(ident)
 
+    def add_record(self, ident, record):
+        self._records[ident] = record
+
     def _monitor_push(self):
         while True:
             # self.app.logger.info("Start update")
             for srv, updated in self._server_updated.items():
-                if updated:
-                    continue
+                # if updated:
+                #     continue
                 self.app.logger.info(f"Push to {srv}")
                 self._push(srv)
             time.sleep(10)

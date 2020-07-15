@@ -40,7 +40,7 @@ class HaystackJSONDriver(driver.Driver):
                     'triples': list(sess._generated_triples),
                     'timestamp': timestamp
                 }
-                self._records[rec['id']] = rec
+                self.add_record(rec['id'], rec)
             self.app.logger.info(f"Loaded {len(self._records)} records")
             self._compute_changed()
         # start thread
