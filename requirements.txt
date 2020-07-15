@@ -1,2 +1,5 @@
-brickschema[reasonable]==0.1.7a1
+brickschema[reasonable]>=0.1.7a2
 Flask
+reasonable
+jsonschema
+lxml

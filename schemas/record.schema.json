@@ -1,0 +1,28 @@
+{
+    "additionalProperties": false,
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "id": {"type": "string"},
+            "record": {
+                "type": "object",
+                "properties": {
+                    "encoding": {"type": "string"},
+                    "content": {"type": ["object", "string"]}
+                }
+            },
+            "timestamp": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "triples": {
+                "type": "array",
+                "items": {
+                    "type": "array",
+                    "items": {"type": "string"}
+                }
+            }
+        }
+    }
+}

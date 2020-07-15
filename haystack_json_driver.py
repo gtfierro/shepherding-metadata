@@ -1,25 +1,24 @@
-from brickschema.inference import HaystackInferenceSession
-from flask import Flask, request, json
+import hashlib
+import driver
 from datetime import datetime
+import time
 import threading
+from brickschema.inference import HaystackInferenceSession
+import json
 
-# TODO: hash the file contents and store on disk so we can avoid recompute
-# TODO: periodically check for changed file?
+class HaystackJSONDriver(driver.Driver):
+    def __init__(self, port, servers, bldg_ns, haystack_file):
+        self._haystack_file = haystack_file
+        super().__init__(port, servers, bldg_ns)
 
-class HaystackJSONDriver:
-    def __init__(self, port, bldg_ns, haystack_file):
-        self._port = port
-        self._ns = bldg_ns
-        self._records = {}
+        t = threading.Thread(target=self._check_source)
+        t.start()
 
-        self.app = Flask(__name__, static_url_path='')
 
-        self.load_file(haystack_file)
-
-        self.app.logger.info(f"Setting up Flask routes")
-        self.app.add_url_rule('/', view_func=self.http_resources)
-        self.app.add_url_rule('/ids', view_func=self.http_ids)
-        self.app.add_url_rule('/id/<ident>', view_func=self.http_record)
+    def _check_source(self):
+        while True:
+            self.load_file(self._haystack_file)
+            time.sleep(60)
 
     def load_file(self, haystack_file):
 
@@ -35,30 +34,19 @@ class HaystackJSONDriver:
                 rec = {
                     'id': row['id'],
                     'record': {
-                        'json': row,
+                        'encoding': 'JSON',
+                        'content': row,
                     },
                     'triples': list(sess._generated_triples),
                     'timestamp': timestamp
                 }
                 self._records[rec['id']] = rec
             self.app.logger.info(f"Loaded {len(self._records)} records")
+            self._compute_changed()
         # start thread
         t = threading.Thread(target=do_load_file)
         t.start()
 
-    def http_resources(self):
-        return json.jsonify(['ids'])
-
-    def http_ids(self):
-        return json.jsonify(list(self._records.keys()))
-
-    def http_record(self, ident):
-        return json.jsonify(self._records.get(ident))
-
-    def serve(self):
-        self.app.run(host='localhost', port=str(self._port), debug=True)
-
-
 if __name__ == '__main__':
-    srv = HaystackJSONDriver(8080, "http://example.com/haystack#", "data/haystack/carytown.json")
+    srv = HaystackJSONDriver(8080, ["http://localhost:6483"], "http://example.com/haystack#", "data/haystack/carytown.json")
     srv.serve()

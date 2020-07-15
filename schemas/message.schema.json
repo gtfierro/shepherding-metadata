@@ -1,0 +1,29 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "identifier"
+    ],
+    "schema": {
+        "properties": {
+            "identifier": "string",
+            "metadata": "object",
+            "triples": "object",
+            "values": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "timestamp": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "value": {
+                            "type": "double"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
