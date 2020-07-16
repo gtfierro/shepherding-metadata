@@ -69,12 +69,12 @@ class BuildingSyncDriver(driver.Driver):
 
                     rec = {
                         'id': ident,
+                        'source': type(self).__name__,
                         'record': {
                             'encoding': 'XML',
                             'content': subtree,
                         },
-                        'triples': [(NS[ident], RDF.type, rdflib.URIRef(brick_class)),
-                                    (NS[ident], RDF.type, OWL.NamedIndividual)],
+                        'triples': [(NS[ident], RDF.type, rdflib.URIRef(brick_class))],
                         'timestamp': timestamp
                     }
                     self.add_record(ident, rec)

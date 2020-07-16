@@ -33,6 +33,7 @@ class HaystackJSONDriver(driver.Driver):
 
                 rec = {
                     'id': row['id'],
+                    'source': type(self).__name__,
                     'record': {
                         'encoding': 'JSON',
                         'content': row,
