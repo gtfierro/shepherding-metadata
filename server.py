@@ -97,8 +97,8 @@ class Resolver:
                     id1.endswith(id2),
                     id2.endswith(id1)
                 ]
-                if any(conditions):
-                    print(id1, id2)
+                # if any(conditions):
+                #     print(id1, id2)
 
         # count instances by class by source
         # enumerate the "superclasses" for each ID; this can help in aligning
@@ -159,8 +159,8 @@ def add_triples():
     print(f"Graph now contains {len(graph)} triples (updated in {t1-t0:.2f} sec)")
     graph.serialize('output.ttl', format='ttl')
 
-    print(resolver.ids)
-    print(resolver.resolve())
+    # print(resolver.ids)
+    # print(resolver.resolve())
     return "ok"
 
 

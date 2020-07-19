@@ -2,6 +2,7 @@ import driver
 from datetime import datetime
 import time
 import threading
+from rdflib import RDFS, Literal
 from brickschema.inference import HaystackInferenceSession
 import json
 
@@ -30,6 +31,8 @@ class HaystackJSONDriver(driver.Driver):
                 model = {'rows': [row]}
                 model = sess.infer_model(model)
 
+                # already has labels attached
+                triples = list(sess._generated_triples)
                 rec = {
                     'id': row['id'],
                     'source': type(self).__name__,
@@ -37,7 +40,7 @@ class HaystackJSONDriver(driver.Driver):
                         'encoding': 'JSON',
                         'content': row,
                     },
-                    'triples': list(sess._generated_triples),
+                    'triples': triples,
                     'timestamp': timestamp
                 }
                 self.add_record(rec['id'], rec)

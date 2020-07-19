@@ -1,7 +1,7 @@
 import driver
 import threading
 import time
-from rdflib import URIRef, Namespace
+from rdflib import URIRef, Namespace, Literal, RDFS
 from collections import defaultdict
 from datetime import datetime
 from modelica_brick_parser import Modelica_Brick_Parser
@@ -48,6 +48,13 @@ class ModelicaJSONDriver(driver.Driver):
                 triple = [str(t) for t in triple]
 
                 records[rel['obj1']].append(triple)
+
+                # add "label":
+                label_triple = (
+                    triple[0], RDFS.label, Literal(rel['obj1'])
+                )
+                records[rel['obj1']].append(label_triple)
+
 
             for ent, triples in records.items():
                 rec = {

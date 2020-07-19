@@ -5,7 +5,7 @@ from datetime import datetime
 import driver
 import threading
 import rdflib
-from brickschema.namespaces import RDF, OWL
+from brickschema.namespaces import RDF, OWL, RDFS
 import lxml.etree
 from sys import stdout
 import csv
@@ -74,7 +74,8 @@ class BuildingSyncDriver(driver.Driver):
                             'encoding': 'XML',
                             'content': subtree,
                         },
-                        'triples': [(NS[ident], RDF.type, rdflib.URIRef(brick_class))],
+                        'triples': [(NS[ident], RDF.type, rdflib.URIRef(brick_class)),
+                                    (NS[ident], RDFS.label, rdflib.Literal(ident))],
                         'timestamp': timestamp
                     }
                     self.add_record(ident, rec)
