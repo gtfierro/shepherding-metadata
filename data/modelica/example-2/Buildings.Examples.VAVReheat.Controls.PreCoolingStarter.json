@@ -1,0 +1,561 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat.Controls"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "block",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "PreCoolingStarter",
+            "comment": "\"Outputs true when precooling should start\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Blocks.Interfaces.BooleanSignalSource"
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Temperature",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TOutLim",
+                              "value": "286.15"
+                            },
+                            "comment": {
+                              "string_comment": "\"Limit for activating precooling\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Temperature",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TRooSetCooOcc"
+                            },
+                            "comment": {
+                              "string_comment": "\"Set point for room air temperature during cooling mode\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "ControlBus",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "controlBus"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -72,
+                                        "y": 50
+                                      },
+                                      {
+                                        "x": -52,
+                                        "y": 70
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Logical.GreaterThreshold",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "greater",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "threshold",
+                                    "value": "TRooSetCooOcc"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -40,
+                                        "y": 0
+                                      },
+                                      {
+                                        "x": -20,
+                                        "y": 20
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Logical.LessThreshold",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "greater2",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "threshold",
+                                    "value": "1800"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -40,
+                                        "y": -80
+                                      },
+                                      {
+                                        "x": -20,
+                                        "y": -60
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Logical.LessThreshold",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "greater1",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "threshold",
+                                    "value": "TOutLim"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -40,
+                                        "y": -40
+                                      },
+                                      {
+                                        "x": -20,
+                                        "y": -20
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.MathBoolean.And",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "and3",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "nu",
+                                    "value": "3"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 28,
+                                        "y": -6
+                                      },
+                                      {
+                                        "x": 40,
+                                        "y": 6
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "controlBus",
+                          "dTNexOcc"
+                        ],
+                        "component2": [
+                          "greater2",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -62,
+                                "y": 60
+                              },
+                              {
+                                "x": -54,
+                                "y": 60
+                              },
+                              {
+                                "x": -54,
+                                "y": -70
+                              },
+                              {
+                                "x": -42,
+                                "y": -70
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%first\" ,index =-1 ,extent ={{-6,3},{-6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "controlBus",
+                          "TRooAve"
+                        ],
+                        "component2": [
+                          "greater",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -62,
+                                "y": 60
+                              },
+                              {
+                                "x": -54,
+                                "y": 60
+                              },
+                              {
+                                "x": -54,
+                                "y": 10
+                              },
+                              {
+                                "x": -42,
+                                "y": 10
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%first\" ,index =-1 ,extent ={{-6,3},{-6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "controlBus",
+                          "TOut"
+                        ],
+                        "component2": [
+                          "greater1",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -62,
+                                "y": 60
+                              },
+                              {
+                                "x": -54,
+                                "y": 60
+                              },
+                              {
+                                "x": -54,
+                                "y": -30
+                              },
+                              {
+                                "x": -42,
+                                "y": -30
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%first\" ,index =-1 ,extent ={{-6,3},{-6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "and3",
+                          "y"
+                        ],
+                        "component2": [
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 40.9,
+                                "y": 0
+                              },
+                              {
+                                "x": 110,
+                                "y": 0
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "greater",
+                          "y"
+                        ],
+                        "component2": [
+                          "and3",
+                          "u[1]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -19,
+                                "y": 10
+                              },
+                              {
+                                "x": 6,
+                                "y": 10
+                              },
+                              {
+                                "x": 6,
+                                "y": 2.8
+                              },
+                              {
+                                "x": 28,
+                                "y": 2.8
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "greater1",
+                          "y"
+                        ],
+                        "component2": [
+                          "and3",
+                          "u[2]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -19,
+                                "y": -30
+                              },
+                              {
+                                "x": 6,
+                                "y": -30
+                              },
+                              {
+                                "x": 6,
+                                "y": 0
+                              },
+                              {
+                                "x": 28,
+                                "y": 0
+                              },
+                              {
+                                "x": 28,
+                                "y": 2.22045e-16
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "greater2",
+                          "y"
+                        ],
+                        "component2": [
+                          "and3",
+                          "u[3]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -19,
+                                "y": -70
+                              },
+                              {
+                                "x": 12,
+                                "y": -70
+                              },
+                              {
+                                "x": 12,
+                                "y": -2.8
+                              },
+                              {
+                                "x": 28,
+                                "y": -2.8
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/Controls/PreCoolingStarter.mo"
+  }
+]

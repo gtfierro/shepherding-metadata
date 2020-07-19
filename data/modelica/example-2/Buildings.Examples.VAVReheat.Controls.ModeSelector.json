@@ -1,0 +1,3580 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat.Controls"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "model",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "ModeSelector",
+            "comment": "\"Finite State Machine for the operational modes\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.StateGraph.InitialStep",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "initialStep",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "nIn",
+                                    "value": "0"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": 20
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": 40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.StateGraph.Transition",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "start"
+                            },
+                            "comment": {
+                              "string_comment": "\"Starts the system\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -50,
+                                        "y": 20
+                                      },
+                                      {
+                                        "x": -30,
+                                        "y": 40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "State",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "unOccOff",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "mode",
+                                    "value": "Buildings.Examples.VAVReheat.Controls.OperationModes.unoccupiedOff"
+                                  },
+                                  {
+                                    "name": "nIn",
+                                    "value": "3"
+                                  },
+                                  {
+                                    "name": "nOut",
+                                    "value": "4"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Unoccupied off mode, no coil protection\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": 20
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": 40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "State",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "unOccNigSetBac",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "nOut",
+                                    "value": "2"
+                                  },
+                                  {
+                                    "name": "mode",
+                                    "value": "Buildings.Examples.VAVReheat.Controls.OperationModes.unoccupiedNightSetBack"
+                                  },
+                                  {
+                                    "name": "nIn",
+                                    "value": "1"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Unoccupied night set back\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 80,
+                                        "y": 20
+                                      },
+                                      {
+                                        "x": 100,
+                                        "y": 40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.StateGraph.Transition",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "t2",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "enableTimer",
+                                    "value": "true"
+                                  },
+                                  {
+                                    "name": "waitTime",
+                                    "value": "60"
+                                  },
+                                  {
+                                    "name": "condition",
+                                    "value": "TRooMinErrHea.y > delTRooOnOff/2"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 28,
+                                        "y": 20
+                                      },
+                                      {
+                                        "x": 48,
+                                        "y": 40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.TemperatureDifference",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "delTRooOnOff",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "min",
+                                    "value": "0.1"
+                                  }
+                                ]
+                              },
+                              "value": "1"
+                            },
+                            "comment": {
+                              "string_comment": "\"Deadband in room temperature between occupied on and occupied off\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Temperature",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TRooSetHeaOcc",
+                              "value": "293.15"
+                            },
+                            "comment": {
+                              "string_comment": "\"Set point for room air temperature during heating mode\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Temperature",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TRooSetCooOcc",
+                              "value": "299.15"
+                            },
+                            "comment": {
+                              "string_comment": "\"Set point for room air temperature during cooling mode\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Temperature",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TSetHeaCoiOut",
+                              "value": "303.15"
+                            },
+                            "comment": {
+                              "string_comment": "\"Set point for air outlet temperature at central heating coil\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.StateGraph.Transition",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "t1",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "condition",
+                                    "value": "delTRooOnOff/2 < -TRooMinErrHea.y"
+                                  },
+                                  {
+                                    "name": "enableTimer",
+                                    "value": "true"
+                                  },
+                                  {
+                                    "name": "waitTime",
+                                    "value": "30*60"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 50,
+                                        "y": 70
+                                      },
+                                      {
+                                        "x": 30,
+                                        "y": 90
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "prefix": "inner ",
+                    "component_clause": {
+                      "type_specifier": "Modelica.StateGraph.StateGraphRoot",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "stateGraphRoot"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 160,
+                                        "y": 160
+                                      },
+                                      {
+                                        "x": 180,
+                                        "y": 180
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "ControlBus",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "cb"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -168,
+                                        "y": 130
+                                      },
+                                      {
+                                        "x": -148,
+                                        "y": 150
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": -176,
+                                        "y": 124
+                                      },
+                                      {
+                                        "x": -124,
+                                        "y": 176
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Routing.RealPassThrough",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TRooSetHea"
+                            },
+                            "comment": {
+                              "string_comment": "\"Current heating setpoint temperature\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": 170
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": 190
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "State",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "morWarUp",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "mode",
+                                    "value": "Buildings.Examples.VAVReheat.Controls.OperationModes.unoccupiedWarmUp"
+                                  },
+                                  {
+                                    "name": "nIn",
+                                    "value": "2"
+                                  },
+                                  {
+                                    "name": "nOut",
+                                    "value": "1"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Morning warm up\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -40,
+                                        "y": -100
+                                      },
+                                      {
+                                        "x": -20,
+                                        "y": -80
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.StateGraph.TransitionWithSignal",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "t6",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "enableTimer",
+                                    "value": "true"
+                                  },
+                                  {
+                                    "name": "waitTime",
+                                    "value": "60"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -76,
+                                        "y": -100
+                                      },
+                                      {
+                                        "x": -56,
+                                        "y": -80
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Logical.LessEqualThreshold",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "occThrSho",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "threshold",
+                                    "value": "1800"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Signal to allow transition into morning warmup\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": -190
+                                      },
+                                      {
+                                        "x": -120,
+                                        "y": -170
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.StateGraph.TransitionWithSignal",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "t5"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 118,
+                                        "y": 20
+                                      },
+                                      {
+                                        "x": 138,
+                                        "y": 40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "State",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "occ",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "mode",
+                                    "value": "Buildings.Examples.VAVReheat.Controls.OperationModes.occupied"
+                                  },
+                                  {
+                                    "name": "nIn",
+                                    "value": "3"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Occupied mode\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 60,
+                                        "y": -100
+                                      },
+                                      {
+                                        "x": 80,
+                                        "y": -80
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Routing.RealPassThrough",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TRooMin"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": 140
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": 160
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Math.Feedback",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TRooMinErrHea"
+                            },
+                            "comment": {
+                              "string_comment": "\"Room control error for heating\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -40,
+                                        "y": 170
+                                      },
+                                      {
+                                        "x": -20,
+                                        "y": 190
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.StateGraph.Transition",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "t3",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "condition",
+                                    "value": "TRooMin.y + delTRooOnOff/2 >\n        TRooSetHeaOcc or occupied.y"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 10,
+                                        "y": -100
+                                      },
+                                      {
+                                        "x": 30,
+                                        "y": -80
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Routing.BooleanPassThrough",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "occupied"
+                            },
+                            "comment": {
+                              "string_comment": "\"outputs true if building is occupied\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": 80
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": 100
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.StateGraph.TransitionWithSignal",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "t4",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "enableTimer",
+                                    "value": "false"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 118,
+                                        "y": 120
+                                      },
+                                      {
+                                        "x": 98,
+                                        "y": 140
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "State",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "morPreCoo",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "nIn",
+                                    "value": "1"
+                                  },
+                                  {
+                                    "name": "mode",
+                                    "value": "Buildings.Examples.VAVReheat.Controls.OperationModes.unoccupiedPreCool"
+                                  },
+                                  {
+                                    "name": "nOut",
+                                    "value": "1"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Pre-cooling mode\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -40,
+                                        "y": -140
+                                      },
+                                      {
+                                        "x": -20,
+                                        "y": -120
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.StateGraph.Transition",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "t7",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "condition",
+                                    "value": "TRooMin.y - delTRooOnOff/2 <\n        TRooSetCooOcc or occupied.y"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 10,
+                                        "y": -140
+                                      },
+                                      {
+                                        "x": 30,
+                                        "y": -120
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Logical.And",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "and1"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -100,
+                                        "y": -200
+                                      },
+                                      {
+                                        "x": -80,
+                                        "y": -180
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Routing.RealPassThrough",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TRooAve"
+                            },
+                            "comment": {
+                              "string_comment": "\"Average room temperature\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": 110
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": 130
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.BooleanExpression",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "booleanExpression",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "y",
+                                    "value": "TRooAve.y <\n        TRooSetCooOcc"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -198,
+                                        "y": -224
+                                      },
+                                      {
+                                        "x": -122,
+                                        "y": -200
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "PreCoolingStarter",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "preCooSta",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "TRooSetCooOcc",
+                                    "value": "TRooSetCooOcc"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Model to start pre-cooling\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": -160
+                                      },
+                                      {
+                                        "x": -120,
+                                        "y": -140
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.StateGraph.TransitionWithSignal",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "t9"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -90,
+                                        "y": -140
+                                      },
+                                      {
+                                        "x": -70,
+                                        "y": -120
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Logical.Not",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "not1"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -48,
+                                        "y": -180
+                                      },
+                                      {
+                                        "x": -28,
+                                        "y": -160
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Logical.And",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "and2"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 80,
+                                        "y": 100
+                                      },
+                                      {
+                                        "x": 100,
+                                        "y": 120
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Logical.Not",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "not2"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 0,
+                                        "y": 100
+                                      },
+                                      {
+                                        "x": 20,
+                                        "y": 120
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.StateGraph.TransitionWithSignal",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "t8"
+                            },
+                            "comment": {
+                              "string_comment": "\"changes to occupied in case precooling is deactivated\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 30,
+                                        "y": -30
+                                      },
+                                      {
+                                        "x": 50,
+                                        "y": -10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.MathInteger.Sum",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "sum",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "nu",
+                                    "value": "5"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -186,
+                                        "y": 134
+                                      },
+                                      {
+                                        "x": -174,
+                                        "y": 146
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.BooleanOutput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "yFan"
+                            },
+                            "comment": {
+                              "string_comment": "\"True if the fans are to be switched on\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 220,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 240,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.MathBoolean.Or",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "or1",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "nu",
+                                    "value": "4"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 184,
+                                        "y": -6
+                                      },
+                                      {
+                                        "x": 196,
+                                        "y": 6
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "start",
+                          "outPort"
+                        ],
+                        "component2": [
+                          "unOccOff",
+                          "inPort[1]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -38.5,
+                                "y": 30
+                              },
+                              {
+                                "x": -29.75,
+                                "y": 30
+                              },
+                              {
+                                "x": -29.75,
+                                "y": 30.6667
+                              },
+                              {
+                                "x": -21,
+                                "y": 30.6667
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "initialStep",
+                          "outPort[1]"
+                        ],
+                        "component2": [
+                          "start",
+                          "inPort"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -59.5,
+                                "y": 30
+                              },
+                              {
+                                "x": -44,
+                                "y": 30
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "unOccOff",
+                          "outPort[1]"
+                        ],
+                        "component2": [
+                          "t2",
+                          "inPort"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 0.5,
+                                "y": 30.375
+                              },
+                              {
+                                "x": 8.25,
+                                "y": 30.375
+                              },
+                              {
+                                "x": 8.25,
+                                "y": 30
+                              },
+                              {
+                                "x": 34,
+                                "y": 30
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "t2",
+                          "outPort"
+                        ],
+                        "component2": [
+                          "unOccNigSetBac",
+                          "inPort[1]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 39.5,
+                                "y": 30
+                              },
+                              {
+                                "x": 79,
+                                "y": 30
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "unOccNigSetBac",
+                          "outPort[1]"
+                        ],
+                        "component2": [
+                          "t1",
+                          "inPort"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 100.5,
+                                "y": 30.25
+                              },
+                              {
+                                "x": 112,
+                                "y": 30.25
+                              },
+                              {
+                                "x": 112,
+                                "y": 80
+                              },
+                              {
+                                "x": 44,
+                                "y": 80
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "t1",
+                          "outPort"
+                        ],
+                        "component2": [
+                          "unOccOff",
+                          "inPort[2]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 38.5,
+                                "y": 80
+                              },
+                              {
+                                "x": -30,
+                                "y": 80
+                              },
+                              {
+                                "x": -30,
+                                "y": 30
+                              },
+                              {
+                                "x": -21,
+                                "y": 30
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "cb",
+                          "dTNexOcc"
+                        ],
+                        "component2": [
+                          "occThrSho",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -158,
+                                "y": 140
+                              },
+                              {
+                                "x": -150,
+                                "y": 140
+                              },
+                              {
+                                "x": -150,
+                                "y": -180
+                              },
+                              {
+                                "x": -142,
+                                "y": -180
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%first\" ,index =-1 ,extent ={{-6,3},{-6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "t6",
+                          "outPort"
+                        ],
+                        "component2": [
+                          "morWarUp",
+                          "inPort[1]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -64.5,
+                                "y": -90
+                              },
+                              {
+                                "x": -41,
+                                "y": -90
+                              },
+                              {
+                                "x": -41,
+                                "y": -89.5
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "t5",
+                          "outPort"
+                        ],
+                        "component2": [
+                          "morWarUp",
+                          "inPort[2]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 129.5,
+                                "y": 30
+                              },
+                              {
+                                "x": 140,
+                                "y": 30
+                              },
+                              {
+                                "x": 140,
+                                "y": -60
+                              },
+                              {
+                                "x": -48,
+                                "y": -60
+                              },
+                              {
+                                "x": -48,
+                                "y": -90.5
+                              },
+                              {
+                                "x": -41,
+                                "y": -90.5
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "unOccNigSetBac",
+                          "outPort[2]"
+                        ],
+                        "component2": [
+                          "t5",
+                          "inPort"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 100.5,
+                                "y": 29.75
+                              },
+                              {
+                                "x": 113.25,
+                                "y": 29.75
+                              },
+                              {
+                                "x": 113.25,
+                                "y": 30
+                              },
+                              {
+                                "x": 124,
+                                "y": 30
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "cb",
+                          "TRooMin"
+                        ],
+                        "component2": [
+                          "TRooMin",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -158,
+                                "y": 140
+                              },
+                              {
+                                "x": -92,
+                                "y": 140
+                              },
+                              {
+                                "x": -92,
+                                "y": 150
+                              },
+                              {
+                                "x": -82,
+                                "y": 150
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%first\" ,index =-1 ,extent ={{-6,3},{-6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TRooSetHea",
+                          "y"
+                        ],
+                        "component2": [
+                          "TRooMinErrHea",
+                          "u1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -59,
+                                "y": 180
+                              },
+                              {
+                                "x": -38,
+                                "y": 180
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TRooMin",
+                          "y"
+                        ],
+                        "component2": [
+                          "TRooMinErrHea",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -59,
+                                "y": 150
+                              },
+                              {
+                                "x": -30,
+                                "y": 150
+                              },
+                              {
+                                "x": -30,
+                                "y": 172
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "unOccOff",
+                          "outPort[2]"
+                        ],
+                        "component2": [
+                          "t6",
+                          "inPort"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 0.5,
+                                "y": 30.125
+                              },
+                              {
+                                "x": 12,
+                                "y": 30.125
+                              },
+                              {
+                                "x": 12,
+                                "y": -48
+                              },
+                              {
+                                "x": -80,
+                                "y": -48
+                              },
+                              {
+                                "x": -80,
+                                "y": -90
+                              },
+                              {
+                                "x": -70,
+                                "y": -90
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "morWarUp",
+                          "outPort[1]"
+                        ],
+                        "component2": [
+                          "t3",
+                          "inPort"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -19.5,
+                                "y": -90
+                              },
+                              {
+                                "x": 16,
+                                "y": -90
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "cb",
+                          "occupied"
+                        ],
+                        "component2": [
+                          "occupied",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -158,
+                                "y": 140
+                              },
+                              {
+                                "x": -120,
+                                "y": 140
+                              },
+                              {
+                                "x": -120,
+                                "y": 90
+                              },
+                              {
+                                "x": -82,
+                                "y": 90
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%first\" ,index =-1 ,extent ={{-6,3},{-6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "occ",
+                          "outPort[1]"
+                        ],
+                        "component2": [
+                          "t4",
+                          "inPort"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 80.5,
+                                "y": -90
+                              },
+                              {
+                                "x": 150,
+                                "y": -90
+                              },
+                              {
+                                "x": 150,
+                                "y": 130
+                              },
+                              {
+                                "x": 112,
+                                "y": 130
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "t4",
+                          "outPort"
+                        ],
+                        "component2": [
+                          "unOccOff",
+                          "inPort[3]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 106.5,
+                                "y": 130
+                              },
+                              {
+                                "x": -30,
+                                "y": 130
+                              },
+                              {
+                                "x": -30,
+                                "y": 29.3333
+                              },
+                              {
+                                "x": -21,
+                                "y": 29.3333
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "occThrSho",
+                          "y"
+                        ],
+                        "component2": [
+                          "and1",
+                          "u1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -119,
+                                "y": -180
+                              },
+                              {
+                                "x": -110,
+                                "y": -180
+                              },
+                              {
+                                "x": -110,
+                                "y": -190
+                              },
+                              {
+                                "x": -102,
+                                "y": -190
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "and1",
+                          "y"
+                        ],
+                        "component2": [
+                          "t6",
+                          "condition"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -79,
+                                "y": -190
+                              },
+                              {
+                                "x": -66,
+                                "y": -190
+                              },
+                              {
+                                "x": -66,
+                                "y": -102
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "and1",
+                          "y"
+                        ],
+                        "component2": [
+                          "t5",
+                          "condition"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -79,
+                                "y": -190
+                              },
+                              {
+                                "x": 128,
+                                "y": -190
+                              },
+                              {
+                                "x": 128,
+                                "y": 18
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "cb",
+                          "TRooAve"
+                        ],
+                        "component2": [
+                          "TRooAve",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -158,
+                                "y": 140
+                              },
+                              {
+                                "x": -100,
+                                "y": 140
+                              },
+                              {
+                                "x": -100,
+                                "y": 120
+                              },
+                              {
+                                "x": -82,
+                                "y": 120
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%first\" ,index =-1 ,extent ={{-6,3},{-6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "booleanExpression",
+                          "y"
+                        ],
+                        "component2": [
+                          "and1",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -118.2,
+                                "y": -212
+                              },
+                              {
+                                "x": -110.1,
+                                "y": -212
+                              },
+                              {
+                                "x": -110.1,
+                                "y": -198
+                              },
+                              {
+                                "x": -102,
+                                "y": -198
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "preCooSta",
+                          "y"
+                        ],
+                        "component2": [
+                          "t9",
+                          "condition"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -119,
+                                "y": -150
+                              },
+                              {
+                                "x": -80,
+                                "y": -150
+                              },
+                              {
+                                "x": -80,
+                                "y": -142
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "t9",
+                          "outPort"
+                        ],
+                        "component2": [
+                          "morPreCoo",
+                          "inPort[1]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -78.5,
+                                "y": -130
+                              },
+                              {
+                                "x": -59.75,
+                                "y": -130
+                              },
+                              {
+                                "x": -59.75,
+                                "y": -130
+                              },
+                              {
+                                "x": -41,
+                                "y": -130
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "unOccOff",
+                          "outPort[3]"
+                        ],
+                        "component2": [
+                          "t9",
+                          "inPort"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 0.5,
+                                "y": 29.875
+                              },
+                              {
+                                "x": 12,
+                                "y": 29.875
+                              },
+                              {
+                                "x": 12,
+                                "y": 0
+                              },
+                              {
+                                "x": -100,
+                                "y": 0
+                              },
+                              {
+                                "x": -100,
+                                "y": -130
+                              },
+                              {
+                                "x": -84,
+                                "y": -130
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "cb"
+                        ],
+                        "component2": [
+                          "preCooSta",
+                          "controlBus"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -158,
+                                "y": 140
+                              },
+                              {
+                                "x": -150,
+                                "y": 140
+                              },
+                              {
+                                "x": -150,
+                                "y": -144
+                              },
+                              {
+                                "x": -136.2,
+                                "y": -144
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%first\" ,index =-1 ,extent ={{-6,3},{-6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "morPreCoo",
+                          "outPort[1]"
+                        ],
+                        "component2": [
+                          "t7",
+                          "inPort"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -19.5,
+                                "y": -130
+                              },
+                              {
+                                "x": 16,
+                                "y": -130
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "t7",
+                          "outPort"
+                        ],
+                        "component2": [
+                          "occ",
+                          "inPort[2]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 21.5,
+                                "y": -130
+                              },
+                              {
+                                "x": 30,
+                                "y": -130
+                              },
+                              {
+                                "x": 30,
+                                "y": -128
+                              },
+                              {
+                                "x": 46,
+                                "y": -128
+                              },
+                              {
+                                "x": 46,
+                                "y": -90
+                              },
+                              {
+                                "x": 59,
+                                "y": -90
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "t3",
+                          "outPort"
+                        ],
+                        "component2": [
+                          "occ",
+                          "inPort[1]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 21.5,
+                                "y": -90
+                              },
+                              {
+                                "x": 42,
+                                "y": -90
+                              },
+                              {
+                                "x": 42,
+                                "y": -89.3333
+                              },
+                              {
+                                "x": 59,
+                                "y": -89.3333
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "occThrSho",
+                          "y"
+                        ],
+                        "component2": [
+                          "not1",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -119,
+                                "y": -180
+                              },
+                              {
+                                "x": -110,
+                                "y": -180
+                              },
+                              {
+                                "x": -110,
+                                "y": -170
+                              },
+                              {
+                                "x": -50,
+                                "y": -170
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "not1",
+                          "y"
+                        ],
+                        "component2": [
+                          "and2",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -27,
+                                "y": -170
+                              },
+                              {
+                                "x": 144,
+                                "y": -170
+                              },
+                              {
+                                "x": 144,
+                                "y": 84
+                              },
+                              {
+                                "x": 66,
+                                "y": 84
+                              },
+                              {
+                                "x": 66,
+                                "y": 102
+                              },
+                              {
+                                "x": 78,
+                                "y": 102
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "and2",
+                          "y"
+                        ],
+                        "component2": [
+                          "t4",
+                          "condition"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 101,
+                                "y": 110
+                              },
+                              {
+                                "x": 108,
+                                "y": 110
+                              },
+                              {
+                                "x": 108,
+                                "y": 118
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "occupied",
+                          "y"
+                        ],
+                        "component2": [
+                          "not2",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -59,
+                                "y": 90
+                              },
+                              {
+                                "x": -20,
+                                "y": 90
+                              },
+                              {
+                                "x": -20,
+                                "y": 110
+                              },
+                              {
+                                "x": -2,
+                                "y": 110
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "not2",
+                          "y"
+                        ],
+                        "component2": [
+                          "and2",
+                          "u1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 21,
+                                "y": 110
+                              },
+                              {
+                                "x": 78,
+                                "y": 110
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "cb",
+                          "TRooSetHea"
+                        ],
+                        "component2": [
+                          "TRooSetHea",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -158,
+                                "y": 140
+                              },
+                              {
+                                "x": -92,
+                                "y": 140
+                              },
+                              {
+                                "x": -92,
+                                "y": 180
+                              },
+                              {
+                                "x": -82,
+                                "y": 180
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%first\" ,index =-1 ,extent ={{-6,3},{-6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "t8",
+                          "outPort"
+                        ],
+                        "component2": [
+                          "occ",
+                          "inPort[3]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 41.5,
+                                "y": -20
+                              },
+                              {
+                                "x": 52,
+                                "y": -20
+                              },
+                              {
+                                "x": 52,
+                                "y": -90.6667
+                              },
+                              {
+                                "x": 59,
+                                "y": -90.6667
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "unOccOff",
+                          "outPort[4]"
+                        ],
+                        "component2": [
+                          "t8",
+                          "inPort"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 0.5,
+                                "y": 29.625
+                              },
+                              {
+                                "x": 12,
+                                "y": 29.625
+                              },
+                              {
+                                "x": 12,
+                                "y": -20
+                              },
+                              {
+                                "x": 36,
+                                "y": -20
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "occupied",
+                          "y"
+                        ],
+                        "component2": [
+                          "t8",
+                          "condition"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -59,
+                                "y": 90
+                              },
+                              {
+                                "x": -50,
+                                "y": 90
+                              },
+                              {
+                                "x": -50,
+                                "y": -40
+                              },
+                              {
+                                "x": 40,
+                                "y": -40
+                              },
+                              {
+                                "x": 40,
+                                "y": -32
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "morPreCoo",
+                          "y"
+                        ],
+                        "component2": [
+                          "sum",
+                          "u[1]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -19,
+                                "y": -136
+                              },
+                              {
+                                "x": -8,
+                                "y": -136
+                              },
+                              {
+                                "x": -8,
+                                "y": -68
+                              },
+                              {
+                                "x": -192,
+                                "y": -68
+                              },
+                              {
+                                "x": -192,
+                                "y": 143.36
+                              },
+                              {
+                                "x": -186,
+                                "y": 143.36
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 127,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "morWarUp",
+                          "y"
+                        ],
+                        "component2": [
+                          "sum",
+                          "u[2]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -19,
+                                "y": -96
+                              },
+                              {
+                                "x": -8,
+                                "y": -96
+                              },
+                              {
+                                "x": -8,
+                                "y": -68
+                              },
+                              {
+                                "x": -192,
+                                "y": -68
+                              },
+                              {
+                                "x": -192,
+                                "y": 141.68
+                              },
+                              {
+                                "x": -186,
+                                "y": 141.68
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 127,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "occ",
+                          "y"
+                        ],
+                        "component2": [
+                          "sum",
+                          "u[3]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 81,
+                                "y": -96
+                              },
+                              {
+                                "x": 100,
+                                "y": -96
+                              },
+                              {
+                                "x": 100,
+                                "y": -108
+                              },
+                              {
+                                "x": -192,
+                                "y": -108
+                              },
+                              {
+                                "x": -192,
+                                "y": 140
+                              },
+                              {
+                                "x": -186,
+                                "y": 140
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 127,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "unOccOff",
+                          "y"
+                        ],
+                        "component2": [
+                          "sum",
+                          "u[4]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1,
+                                "y": 24
+                              },
+                              {
+                                "x": 6,
+                                "y": 24
+                              },
+                              {
+                                "x": 6,
+                                "y": 8
+                              },
+                              {
+                                "x": -192,
+                                "y": 8
+                              },
+                              {
+                                "x": -192,
+                                "y": 138.32
+                              },
+                              {
+                                "x": -186,
+                                "y": 138.32
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 127,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "unOccNigSetBac",
+                          "y"
+                        ],
+                        "component2": [
+                          "sum",
+                          "u[5]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 101,
+                                "y": 24
+                              },
+                              {
+                                "x": 112,
+                                "y": 24
+                              },
+                              {
+                                "x": 112,
+                                "y": 8
+                              },
+                              {
+                                "x": -192,
+                                "y": 8
+                              },
+                              {
+                                "x": -192,
+                                "y": 136.64
+                              },
+                              {
+                                "x": -186,
+                                "y": 136.64
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 127,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "sum",
+                          "y"
+                        ],
+                        "component2": [
+                          "cb",
+                          "controlMode"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -173.1,
+                                "y": 140
+                              },
+                              {
+                                "x": -158,
+                                "y": 140
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 127,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%second\" ,index =1 ,extent ={{6,3},{6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "yFan"
+                        ],
+                        "component2": [
+                          "or1",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 230,
+                                "y": 0
+                              },
+                              {
+                                "x": 196.9,
+                                "y": 0
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "unOccNigSetBac",
+                          "active"
+                        ],
+                        "component2": [
+                          "or1",
+                          "u[1]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 90,
+                                "y": 19
+                              },
+                              {
+                                "x": 90,
+                                "y": 3.15
+                              },
+                              {
+                                "x": 184,
+                                "y": 3.15
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "occ",
+                          "active"
+                        ],
+                        "component2": [
+                          "or1",
+                          "u[2]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 70,
+                                "y": -101
+                              },
+                              {
+                                "x": 70,
+                                "y": -104
+                              },
+                              {
+                                "x": 168,
+                                "y": -104
+                              },
+                              {
+                                "x": 168,
+                                "y": 1.05
+                              },
+                              {
+                                "x": 184,
+                                "y": 1.05
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "morWarUp",
+                          "active"
+                        ],
+                        "component2": [
+                          "or1",
+                          "u[3]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -30,
+                                "y": -101
+                              },
+                              {
+                                "x": -30,
+                                "y": -112
+                              },
+                              {
+                                "x": 170,
+                                "y": -112
+                              },
+                              {
+                                "x": 170,
+                                "y": -1.05
+                              },
+                              {
+                                "x": 184,
+                                "y": -1.05
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "morPreCoo",
+                          "active"
+                        ],
+                        "component2": [
+                          "or1",
+                          "u[4]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -30,
+                                "y": -141
+                              },
+                              {
+                                "x": -30,
+                                "y": -150
+                              },
+                              {
+                                "x": 174,
+                                "y": -150
+                              },
+                              {
+                                "x": 174,
+                                "y": -3.15
+                              },
+                              {
+                                "x": 184,
+                                "y": -3.15
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "comp_annotation": {
+                "diagram": {
+                  "coordinateSystem": {
+                    "extent": [
+                      {
+                        "x": -220,
+                        "y": -220
+                      },
+                      {
+                        "x": 220,
+                        "y": 220
+                      }
+                    ],
+                    "preserveAspectRatio": true
+                  }
+                },
+                "icon": {
+                  "coordinateSystem": {
+                    "extent": [
+                      {
+                        "x": -220,
+                        "y": -220
+                      },
+                      {
+                        "x": 220,
+                        "y": 220
+                      }
+                    ],
+                    "preserveAspectRatio": true
+                  },
+                  "graphics": {
+                    "rectangle": [
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 215,
+                          "g": 215,
+                          "b": 215
+                        },
+                        "fillPattern": "FillPattern.Solid",
+                        "extent": [
+                          {
+                            "x": -200,
+                            "y": 200
+                          },
+                          {
+                            "x": 200,
+                            "y": -200
+                          }
+                        ]
+                      }
+                    ],
+                    "text": [
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "extent": [
+                          {
+                            "x": -176,
+                            "y": 80
+                          },
+                          {
+                            "x": 192,
+                            "y": -84
+                          }
+                        ],
+                        "textString": "\"%name\""
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/Controls/ModeSelector.mo"
+  }
+]

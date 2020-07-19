@@ -1,0 +1,784 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat.ThermalZones"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "model",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "RoomLeakage",
+            "comment": "\"Room leakage model\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Buildings.BaseClasses.BaseIcon"
+                    }
+                  },
+                  {
+                    "replaceable": "replaceable",
+                    "replaceable_class_definition": {
+                      "class_prefixes": "package",
+                      "class_specifier": {
+                        "short_class_specifier": {
+                          "className": "Medium",
+                          "inputName": "Modelica.Media.Interfaces.PartialMedium",
+                          "comment": {
+                            "string_comment": "\"Medium in the component\"",
+                            "annotation": {
+                              "others": [
+                                {
+                                  "name": "choicesAllMatching",
+                                  "value": "true"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Volume",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "VRoo"
+                            },
+                            "comment": {
+                              "string_comment": "\"Room volume\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Boolean",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "use_windPressure",
+                              "value": "false"
+                            },
+                            "comment": {
+                              "string_comment": "\"Set to true to enable wind pressure\"",
+                              "annotation": {
+                                "others": [
+                                  {
+                                    "name": "Evaluate",
+                                    "value": "true"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Fluid.FixedResistances.PressureDrop",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "res",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "Medium "
+                                  },
+                                  {
+                                    "name": "dp_nominal",
+                                    "value": "50"
+                                  },
+                                  {
+                                    "name": "m_flow_nominal",
+                                    "value": "VRoo*1.2/3600"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Resistance model\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 20,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 40,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Fluid.Interfaces.FluidPort_b",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "port_b",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "Medium "
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 90,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 110,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Fluid.Sources.Outside_CpLowRise",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "amb",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "Medium "
+                                  },
+                                  {
+                                    "name": "nPorts",
+                                    "value": "1"
+                                  },
+                                  {
+                                    "name": "s",
+                                    "value": "s"
+                                  },
+                                  {
+                                    "name": "azi",
+                                    "value": "azi"
+                                  },
+                                  {
+                                    "name": "Cp0",
+                                    "value": "if use_windPressure then 0.6 else 0"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -60,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": -40,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "BoundaryConditions.WeatherData.Bus",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "weaBus"
+                            },
+                            "comment": {
+                              "string_comment": "\"Bus with weather data\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -110,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": -90,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Fluid.Sensors.MassFlowRate",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "senMasFlo1",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "Medium"
+                                  },
+                                  {
+                                    "name": "allowFlowReversal",
+                                    "value": "true"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Sensor for mass flow rate\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 10,
+                                        "y": 10
+                                      },
+                                      {
+                                        "x": -10,
+                                        "y": -10
+                                      }
+                                    ],
+                                    "rotation": 180,
+                                    "origin": {
+                                      "x": -10,
+                                      "y": 0
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Math.Gain",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "ACHInf",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "1/VRoo/1.2*3600"
+                                  },
+                                  {
+                                    "name": "y",
+                                    "variable_modification": {
+                                      "modification": {
+                                        "modifications": [
+                                          {
+                                            "name": "unit",
+                                            "value": "\"1/h\""
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Air change per hour due to infiltration\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 12,
+                                        "y": 30
+                                      },
+                                      {
+                                        "x": 32,
+                                        "y": 50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Real",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "s"
+                            },
+                            "comment": {
+                              "string_comment": "\"Side ratio, s=length of this wall/length of adjacent wall\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Angle",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "azi"
+                            },
+                            "comment": {
+                              "string_comment": "\"Surface azimuth (South:0, West:pi/2)\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "res",
+                          "port_b"
+                        ],
+                        "component2": [
+                          "port_b"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 40,
+                                "y": 6.10623e-16
+                              },
+                              {
+                                "x": 55,
+                                "y": 6.10623e-16
+                              },
+                              {
+                                "x": 55,
+                                "y": 1.16573e-15
+                              },
+                              {
+                                "x": 70,
+                                "y": 1.16573e-15
+                              },
+                              {
+                                "x": 70,
+                                "y": 5.55112e-16
+                              },
+                              {
+                                "x": 100,
+                                "y": 5.55112e-16
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "amb",
+                          "weaBus"
+                        ],
+                        "component2": [
+                          "weaBus"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -60,
+                                "y": 0.2
+                              },
+                              {
+                                "x": -80,
+                                "y": 0.2
+                              },
+                              {
+                                "x": -80,
+                                "y": 5.55112e-16
+                              },
+                              {
+                                "x": -100,
+                                "y": 5.55112e-16
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "amb",
+                          "ports[1]"
+                        ],
+                        "component2": [
+                          "senMasFlo1",
+                          "port_a"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -40,
+                                "y": 6.66134e-16
+                              },
+                              {
+                                "x": -20,
+                                "y": 6.66134e-16
+                              },
+                              {
+                                "x": -20,
+                                "y": 7.25006e-16
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "senMasFlo1",
+                          "port_b"
+                        ],
+                        "component2": [
+                          "res",
+                          "port_a"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 5.55112e-16,
+                                "y": -1.72421e-15
+                              },
+                              {
+                                "x": 10,
+                                "y": -1.72421e-15
+                              },
+                              {
+                                "x": 10,
+                                "y": 6.10623e-16
+                              },
+                              {
+                                "x": 20,
+                                "y": 6.10623e-16
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "senMasFlo1",
+                          "m_flow"
+                        ],
+                        "component2": [
+                          "ACHInf",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -10,
+                                "y": 11
+                              },
+                              {
+                                "x": -10,
+                                "y": 40
+                              },
+                              {
+                                "x": 10,
+                                "y": 40
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "comp_annotation": {
+                "icon": {
+                  "coordinateSystem": {
+                    "extent": [
+                      {
+                        "x": -100,
+                        "y": -100
+                      },
+                      {
+                        "x": 100,
+                        "y": 100
+                      }
+                    ],
+                    "preserveAspectRatio": false
+                  },
+                  "graphics": {
+                    "line": [
+                      {
+                        "points": [
+                          {
+                            "x": -100,
+                            "y": 0
+                          },
+                          {
+                            "x": -80,
+                            "y": 0
+                          }
+                        ],
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        }
+                      },
+                      {
+                        "points": [
+                          {
+                            "x": 0,
+                            "y": 0
+                          },
+                          {
+                            "x": 20,
+                            "y": 0
+                          }
+                        ],
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        }
+                      },
+                      {
+                        "points": [
+                          {
+                            "x": 80,
+                            "y": 0
+                          },
+                          {
+                            "x": 90,
+                            "y": 0
+                          }
+                        ],
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        }
+                      }
+                    ],
+                    "rectangle": [
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 192,
+                          "g": 192,
+                          "b": 192
+                        },
+                        "fillPattern": "FillPattern.HorizontalCylinder",
+                        "extent": [
+                          {
+                            "x": 20,
+                            "y": 12
+                          },
+                          {
+                            "x": 80,
+                            "y": -12
+                          }
+                        ]
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 127,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.HorizontalCylinder",
+                        "extent": [
+                          {
+                            "x": 20,
+                            "y": 6
+                          },
+                          {
+                            "x": 80,
+                            "y": -6
+                          }
+                        ]
+                      }
+                    ],
+                    "ellipse": [
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 127,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.Sphere",
+                        "extent": [
+                          {
+                            "x": -80,
+                            "y": 40
+                          },
+                          {
+                            "x": 0,
+                            "y": -40
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "documentation": {
+                  "info": "\"<html>\n<p>\nRoom leakage.\n</p></html>\"",
+                  "revisions": "\"<html>\n<ul>\n<li>\nJuly 20, 2007 by Michael Wetter:<br/>\nFirst implementation.\n</li>\n</ul>\n</html>\""
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/ThermalZones/RoomLeakage.mo"
+  }
+]

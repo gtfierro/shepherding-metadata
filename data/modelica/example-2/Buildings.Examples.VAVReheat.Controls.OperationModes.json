@@ -1,0 +1,62 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat.Controls"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "type",
+        "class_specifier": {
+          "short_class_specifier": {
+            "className": "OperationModes",
+            "prefix": "enumeration",
+            "enum_list": {
+              "enumeration_literal": [
+                {
+                  "name": "occupied",
+                  "comment": {
+                    "string_comment": "\"Occupied\""
+                  }
+                },
+                {
+                  "name": "unoccupiedOff",
+                  "comment": {
+                    "string_comment": "\"Unoccupied off\""
+                  }
+                },
+                {
+                  "name": "unoccupiedNightSetBack",
+                  "comment": {
+                    "string_comment": "\"Unoccupied, night set back\""
+                  }
+                },
+                {
+                  "name": "unoccupiedWarmUp",
+                  "comment": {
+                    "string_comment": "\"Unoccupied, warm-up\""
+                  }
+                },
+                {
+                  "name": "unoccupiedPreCool",
+                  "comment": {
+                    "string_comment": "\"Unoccupied, pre-cool\""
+                  }
+                },
+                {
+                  "name": "safety",
+                  "comment": {
+                    "string_comment": "\"Safety (smoke, fire, etc.)\""
+                  }
+                }
+              ]
+            },
+            "comment": {
+              "string_comment": "\"Enumeration for modes of operation\""
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/Controls/OperationModes.mo"
+  }
+]

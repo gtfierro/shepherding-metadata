@@ -1,0 +1,1304 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat.Controls"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "model",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "DuctStaticPressureSetpoint",
+            "comment": "\"Computes the duct static pressure setpoint\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Blocks.Interfaces.MISO"
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.AbsolutePressure",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "pMin",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "displayUnit",
+                                    "value": "\"Pa\""
+                                  }
+                                ]
+                              },
+                              "value": "100"
+                            },
+                            "comment": {
+                              "string_comment": "\"Minimum duct static pressure setpoint\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.AbsolutePressure",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "pMax",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "displayUnit",
+                                    "value": "\"Pa\""
+                                  }
+                                ]
+                              },
+                              "value": "410"
+                            },
+                            "comment": {
+                              "string_comment": "\"Maximum duct static pressure setpoint\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Real",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "k",
+                              "value": "0.1"
+                            },
+                            "comment": {
+                              "string_comment": "\"Gain of controller\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Time",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "Ti",
+                              "value": "60"
+                            },
+                            "comment": {
+                              "string_comment": "\"Time constant of integrator block\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Time",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "Td",
+                              "value": "60"
+                            },
+                            "comment": {
+                              "string_comment": "\"Time constant of derivative block\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.Blocks.Types.SimpleController",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "controllerType",
+                              "value": "Modelica.Blocks.Types.SimpleController.PI"
+                            },
+                            "comment": {
+                              "string_comment": "\"Type of controller\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.Continuous.LimPID",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "limPID",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "controllerType",
+                                    "value": "controllerType"
+                                  },
+                                  {
+                                    "name": "k",
+                                    "value": "k"
+                                  },
+                                  {
+                                    "name": "Ti",
+                                    "value": "Ti"
+                                  },
+                                  {
+                                    "name": "Td",
+                                    "value": "Td"
+                                  },
+                                  {
+                                    "name": "initType",
+                                    "value": "Modelica.Blocks.Types.InitPID.InitialState"
+                                  },
+                                  {
+                                    "name": "reverseActing",
+                                    "value": "false"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": 40
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": 60
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "prefix_public": [
+                "public",
+                "public"
+              ],
+              "prefix_protect": [
+                "protected",
+                "protected"
+              ],
+              "prefixed_element": [
+                {
+                  "element": [
+                    {
+                      "component_clause": {
+                        "type_specifier": "Buildings.Utilities.Math.Max",
+                        "component_list": {
+                          "component_declaration": [
+                            {
+                              "declaration": {
+                                "name": "max",
+                                "class_modification": {
+                                  "modifications": [
+                                    {
+                                      "prefix": "final",
+                                      "name": "nin",
+                                      "value": "nin"
+                                    }
+                                  ]
+                                }
+                              },
+                              "comment": {
+                                "annotation": {
+                                  "placement": {
+                                    "transformation": {
+                                      "extent": [
+                                        {
+                                          "x": -60,
+                                          "y": -10
+                                        },
+                                        {
+                                          "x": -40,
+                                          "y": 10
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "component_clause": {
+                        "type_specifier": "Modelica.Blocks.Sources.Constant",
+                        "component_list": {
+                          "component_declaration": [
+                            {
+                              "declaration": {
+                                "name": "ySet",
+                                "class_modification": {
+                                  "modifications": [
+                                    {
+                                      "name": "k",
+                                      "value": "0.9"
+                                    }
+                                  ]
+                                }
+                              },
+                              "comment": {
+                                "string_comment": "\"Setpoint for maximum damper position\"",
+                                "annotation": {
+                                  "placement": {
+                                    "transformation": {
+                                      "extent": [
+                                        {
+                                          "x": -60,
+                                          "y": 40
+                                        },
+                                        {
+                                          "x": -40,
+                                          "y": 60
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "component_clause": {
+                        "type_specifier": "Modelica.Blocks.Math.Add",
+                        "component_list": {
+                          "component_declaration": [
+                            {
+                              "declaration": {
+                                "name": "dp",
+                                "class_modification": {
+                                  "modifications": [
+                                    {
+                                      "prefix": "final",
+                                      "name": "k2",
+                                      "value": "-1"
+                                    }
+                                  ]
+                                }
+                              },
+                              "comment": {
+                                "string_comment": "\"Pressure difference\"",
+                                "annotation": {
+                                  "placement": {
+                                    "transformation": {
+                                      "extent": [
+                                        {
+                                          "x": -20,
+                                          "y": -60
+                                        },
+                                        {
+                                          "x": 0,
+                                          "y": -40
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "component_clause": {
+                        "type_specifier": "Modelica.Blocks.Sources.Constant",
+                        "component_list": {
+                          "component_declaration": [
+                            {
+                              "declaration": {
+                                "name": "pMaxSig",
+                                "class_modification": {
+                                  "modifications": [
+                                    {
+                                      "name": "k",
+                                      "value": "pMax"
+                                    }
+                                  ]
+                                }
+                              },
+                              "comment": {
+                                "annotation": {
+                                  "placement": {
+                                    "transformation": {
+                                      "extent": [
+                                        {
+                                          "x": -60,
+                                          "y": -40
+                                        },
+                                        {
+                                          "x": -40,
+                                          "y": -20
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "component_clause": {
+                        "type_specifier": "Modelica.Blocks.Sources.Constant",
+                        "component_list": {
+                          "component_declaration": [
+                            {
+                              "declaration": {
+                                "name": "pMinSig",
+                                "class_modification": {
+                                  "modifications": [
+                                    {
+                                      "name": "k",
+                                      "value": "pMin"
+                                    }
+                                  ]
+                                }
+                              },
+                              "comment": {
+                                "annotation": {
+                                  "placement": {
+                                    "transformation": {
+                                      "extent": [
+                                        {
+                                          "x": -60,
+                                          "y": -80
+                                        },
+                                        {
+                                          "x": -40,
+                                          "y": -60
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "component_clause": {
+                        "type_specifier": "Modelica.Blocks.Math.Add",
+                        "component_list": {
+                          "component_declaration": [
+                            {
+                              "declaration": {
+                                "name": "pSet"
+                              },
+                              "comment": {
+                                "string_comment": "\"Pressure setpoint\"",
+                                "annotation": {
+                                  "placement": {
+                                    "transformation": {
+                                      "extent": [
+                                        {
+                                          "x": 60,
+                                          "y": -10
+                                        },
+                                        {
+                                          "x": 80,
+                                          "y": 10
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "component_clause": {
+                        "type_specifier": "Modelica.Blocks.Math.Product",
+                        "component_list": {
+                          "component_declaration": [
+                            {
+                              "declaration": {
+                                "name": "product"
+                              },
+                              "comment": {
+                                "annotation": {
+                                  "placement": {
+                                    "transformation": {
+                                      "extent": [
+                                        {
+                                          "x": 20,
+                                          "y": 10
+                                        },
+                                        {
+                                          "x": 40,
+                                          "y": 30
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "element": [
+                    {
+                      "component_clause": {
+                        "type_specifier": "Modelica.Blocks.Logical.Hysteresis",
+                        "component_list": {
+                          "component_declaration": [
+                            {
+                              "declaration": {
+                                "name": "hysteresis",
+                                "class_modification": {
+                                  "modifications": [
+                                    {
+                                      "name": "uLow",
+                                      "value": "283.15"
+                                    },
+                                    {
+                                      "name": "uHigh",
+                                      "value": "284.15"
+                                    }
+                                  ]
+                                }
+                              },
+                              "comment": {
+                                "string_comment": "\"Hysteresis to put fan on minimum revolution\"",
+                                "annotation": {
+                                  "placement": {
+                                    "transformation": {
+                                      "extent": [
+                                        {
+                                          "x": -60,
+                                          "y": 70
+                                        },
+                                        {
+                                          "x": -40,
+                                          "y": 90
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "component_clause": {
+                        "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                        "component_list": {
+                          "component_declaration": [
+                            {
+                              "declaration": {
+                                "name": "TOut"
+                              },
+                              "comment": {
+                                "string_comment": "\"Outside air temperature\"",
+                                "annotation": {
+                                  "placement": {
+                                    "transformation": {
+                                      "extent": [
+                                        {
+                                          "x": -140,
+                                          "y": 60
+                                        },
+                                        {
+                                          "x": -100,
+                                          "y": 100
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "element": [
+                    {
+                      "component_clause": {
+                        "type_specifier": "Modelica.Blocks.Sources.Constant",
+                        "component_list": {
+                          "component_declaration": [
+                            {
+                              "declaration": {
+                                "name": "zero",
+                                "class_modification": {
+                                  "modifications": [
+                                    {
+                                      "name": "k",
+                                      "value": "0"
+                                    }
+                                  ]
+                                }
+                              },
+                              "comment": {
+                                "string_comment": "\"Zero output signal\"",
+                                "annotation": {
+                                  "placement": {
+                                    "transformation": {
+                                      "extent": [
+                                        {
+                                          "x": 20,
+                                          "y": 42
+                                        },
+                                        {
+                                          "x": 40,
+                                          "y": 62
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "element": [
+                    {
+                      "component_clause": {
+                        "type_specifier": "Modelica.Blocks.Logical.Switch",
+                        "component_list": {
+                          "component_declaration": [
+                            {
+                              "declaration": {
+                                "name": "switch1"
+                              },
+                              "comment": {
+                                "annotation": {
+                                  "placement": {
+                                    "transformation": {
+                                      "extent": [
+                                        {
+                                          "x": 60,
+                                          "y": 50
+                                        },
+                                        {
+                                          "x": 80,
+                                          "y": 70
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "max",
+                          "u"
+                        ],
+                        "component2": [
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -62,
+                                "y": 6.66134e-16
+                              },
+                              {
+                                "x": -80,
+                                "y": 6.66134e-16
+                              },
+                              {
+                                "x": -80,
+                                "y": 0
+                              },
+                              {
+                                "x": -120,
+                                "y": 0
+                              },
+                              {
+                                "x": -120,
+                                "y": 1.11022e-15
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "ySet",
+                          "y"
+                        ],
+                        "component2": [
+                          "limPID",
+                          "u_s"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -39,
+                                "y": 50
+                              },
+                              {
+                                "x": -22,
+                                "y": 50
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "max",
+                          "y"
+                        ],
+                        "component2": [
+                          "limPID",
+                          "u_m"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -39,
+                                "y": 6.10623e-16
+                              },
+                              {
+                                "x": -10,
+                                "y": 6.10623e-16
+                              },
+                              {
+                                "x": -10,
+                                "y": 38
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "limPID",
+                          "y"
+                        ],
+                        "component2": [
+                          "product",
+                          "u1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1,
+                                "y": 50
+                              },
+                              {
+                                "x": 10,
+                                "y": 50
+                              },
+                              {
+                                "x": 10,
+                                "y": 26
+                              },
+                              {
+                                "x": 18,
+                                "y": 26
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "pMaxSig",
+                          "y"
+                        ],
+                        "component2": [
+                          "dp",
+                          "u1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -39,
+                                "y": -30
+                              },
+                              {
+                                "x": -32,
+                                "y": -30
+                              },
+                              {
+                                "x": -32,
+                                "y": -44
+                              },
+                              {
+                                "x": -22,
+                                "y": -44
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "pMinSig",
+                          "y"
+                        ],
+                        "component2": [
+                          "dp",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -39,
+                                "y": -70
+                              },
+                              {
+                                "x": -30,
+                                "y": -70
+                              },
+                              {
+                                "x": -30,
+                                "y": -56
+                              },
+                              {
+                                "x": -22,
+                                "y": -56
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "dp",
+                          "y"
+                        ],
+                        "component2": [
+                          "product",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1,
+                                "y": -50
+                              },
+                              {
+                                "x": 10,
+                                "y": -50
+                              },
+                              {
+                                "x": 10,
+                                "y": 14
+                              },
+                              {
+                                "x": 18,
+                                "y": 14
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "pMinSig",
+                          "y"
+                        ],
+                        "component2": [
+                          "pSet",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -39,
+                                "y": -70
+                              },
+                              {
+                                "x": 30,
+                                "y": -70
+                              },
+                              {
+                                "x": 30,
+                                "y": -6
+                              },
+                              {
+                                "x": 58,
+                                "y": -6
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "pSet",
+                          "y"
+                        ],
+                        "component2": [
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 81,
+                                "y": 6.10623e-16
+                              },
+                              {
+                                "x": 90.5,
+                                "y": 6.10623e-16
+                              },
+                              {
+                                "x": 90.5,
+                                "y": 5.55112e-16
+                              },
+                              {
+                                "x": 110,
+                                "y": 5.55112e-16
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "hysteresis",
+                          "u"
+                        ],
+                        "component2": [
+                          "TOut"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -62,
+                                "y": 80
+                              },
+                              {
+                                "x": -120,
+                                "y": 80
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "product",
+                          "y"
+                        ],
+                        "component2": [
+                          "switch1",
+                          "u1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 41,
+                                "y": 20
+                              },
+                              {
+                                "x": 50,
+                                "y": 20
+                              },
+                              {
+                                "x": 50,
+                                "y": 68
+                              },
+                              {
+                                "x": 58,
+                                "y": 68
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "zero",
+                          "y"
+                        ],
+                        "component2": [
+                          "switch1",
+                          "u3"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 41,
+                                "y": 52
+                              },
+                              {
+                                "x": 58,
+                                "y": 52
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "switch1",
+                          "y"
+                        ],
+                        "component2": [
+                          "pSet",
+                          "u1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 81,
+                                "y": 60
+                              },
+                              {
+                                "x": 90,
+                                "y": 60
+                              },
+                              {
+                                "x": 90,
+                                "y": 20
+                              },
+                              {
+                                "x": 52,
+                                "y": 20
+                              },
+                              {
+                                "x": 52,
+                                "y": 6
+                              },
+                              {
+                                "x": 58,
+                                "y": 6
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "hysteresis",
+                          "y"
+                        ],
+                        "component2": [
+                          "switch1",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -39,
+                                "y": 80
+                              },
+                              {
+                                "x": 46,
+                                "y": 80
+                              },
+                              {
+                                "x": 46,
+                                "y": 60
+                              },
+                              {
+                                "x": 58,
+                                "y": 60
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "comp_annotation": {
+                "icon": {
+                  "graphics": {
+                    "text": [
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 127
+                        },
+                        "extent": [
+                          {
+                            "x": -76,
+                            "y": 148
+                          },
+                          {
+                            "x": 50,
+                            "y": -26
+                          }
+                        ],
+                        "textString": "\"PSet\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 127
+                        },
+                        "extent": [
+                          {
+                            "x": -10,
+                            "y": 8
+                          },
+                          {
+                            "x": 44,
+                            "y": -82
+                          }
+                        ],
+                        "textString": "\"%pMax\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 127
+                        },
+                        "extent": [
+                          {
+                            "x": -16,
+                            "y": -54
+                          },
+                          {
+                            "x": 48,
+                            "y": -90
+                          }
+                        ],
+                        "textString": "\"%pMin\""
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/Controls/DuctStaticPressureSetpoint.mo"
+  }
+]

@@ -1,0 +1,1499 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat.Controls"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "block",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "RoomVAV",
+            "comment": "\"Controller for room VAV box\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Blocks.Icons.Block"
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Real",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "ratVFloMin",
+                              "value": "0.3"
+                            },
+                            "comment": {
+                              "string_comment": "\"VAV box minimum airflow ratio to the cooling maximum flow rate, typically between 0.3 to 0.5\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Types.SimpleController",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "cooController",
+                              "value": "Buildings.Controls.OBC.CDL.Types.SimpleController.PI"
+                            },
+                            "comment": {
+                              "string_comment": "\"Type of controller\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "group",
+                                    "value": "\"Cooling controller\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Real",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "kCoo",
+                              "value": "0.1"
+                            },
+                            "comment": {
+                              "string_comment": "\"Gain of controller\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "group",
+                                    "value": "\"Cooling controller\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Time",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TiCoo",
+                              "value": "120"
+                            },
+                            "comment": {
+                              "string_comment": "\"Time constant of integrator block\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "group",
+                                    "value": "\"Cooling controller\""
+                                  },
+                                  {
+                                    "name": "enable",
+                                    "value": "cooController==Buildings.Controls.OBC.CDL.Types.SimpleController.PI or\n                                                          cooController==Buildings.Controls.OBC.CDL.Types.SimpleController.PID"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Time",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TdCoo",
+                              "value": "60"
+                            },
+                            "comment": {
+                              "string_comment": "\"Time constant of derivative block\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "group",
+                                    "value": "\"Cooling controller\""
+                                  },
+                                  {
+                                    "name": "enable",
+                                    "value": "cooController==Buildings.Controls.OBC.CDL.Types.SimpleController.PD or\n                                                          cooController==Buildings.Controls.OBC.CDL.Types.SimpleController.PID"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Types.SimpleController",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "heaController",
+                              "value": "Buildings.Controls.OBC.CDL.Types.SimpleController.PI"
+                            },
+                            "comment": {
+                              "string_comment": "\"Type of controller\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "group",
+                                    "value": "\"Heating controller\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Real",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "kHea",
+                              "value": "0.1"
+                            },
+                            "comment": {
+                              "string_comment": "\"Gain of controller\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "group",
+                                    "value": "\"Heating controller\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Time",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TiHea",
+                              "value": "120"
+                            },
+                            "comment": {
+                              "string_comment": "\"Time constant of integrator block\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "group",
+                                    "value": "\"Heating controller\""
+                                  },
+                                  {
+                                    "name": "enable",
+                                    "value": "heaController==Buildings.Controls.OBC.CDL.Types.SimpleController.PI or\n                                                          heaController==Buildings.Controls.OBC.CDL.Types.SimpleController.PID"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Time",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TdHea",
+                              "value": "60"
+                            },
+                            "comment": {
+                              "string_comment": "\"Time constant of derivative block\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "group",
+                                    "value": "\"Heating controller\""
+                                  },
+                                  {
+                                    "name": "enable",
+                                    "value": "heaController==Buildings.Controls.OBC.CDL.Types.SimpleController.PD or\n                                                          heaController==Buildings.Controls.OBC.CDL.Types.SimpleController.PID"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TRooHeaSet",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "final",
+                                    "name": "quantity",
+                                    "value": "\"ThermodynamicTemperature\""
+                                  },
+                                  {
+                                    "prefix": "final",
+                                    "name": "unit",
+                                    "value": "\"K\""
+                                  },
+                                  {
+                                    "name": "displayUnit",
+                                    "value": "\"degC\""
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Setpoint temperature for room for heating\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": 40
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 80
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": 50
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 90
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TRooCooSet",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "final",
+                                    "name": "quantity",
+                                    "value": "\"ThermodynamicTemperature\""
+                                  },
+                                  {
+                                    "prefix": "final",
+                                    "name": "unit",
+                                    "value": "\"K\""
+                                  },
+                                  {
+                                    "name": "displayUnit",
+                                    "value": "\"degC\""
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Setpoint temperature for room for cooling\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": -20
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 20
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": -20
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 20
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TRoo",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "final",
+                                    "name": "quantity",
+                                    "value": "\"ThermodynamicTemperature\""
+                                  },
+                                  {
+                                    "prefix": "final",
+                                    "name": "unit",
+                                    "value": "\"K\""
+                                  },
+                                  {
+                                    "name": "displayUnit",
+                                    "value": "\"degC\""
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Measured room temperature\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": -90
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": -50
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": -120,
+                                        "y": -80
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": -60
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealOutput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "yDam"
+                            },
+                            "comment": {
+                              "string_comment": "\"Signal for VAV damper\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 100,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 120,
+                                        "y": 10
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": 100,
+                                        "y": 38
+                                      },
+                                      {
+                                        "x": 120,
+                                        "y": 58
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealOutput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "yVal"
+                            },
+                            "comment": {
+                              "string_comment": "\"Signal for heating coil valve\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 100,
+                                        "y": -80
+                                      },
+                                      {
+                                        "x": 120,
+                                        "y": -60
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": 100,
+                                        "y": -60
+                                      },
+                                      {
+                                        "x": 120,
+                                        "y": -40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Continuous.LimPID",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "conHea",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "yMax",
+                                    "value": "yMax"
+                                  },
+                                  {
+                                    "name": "Td",
+                                    "value": "TdHea"
+                                  },
+                                  {
+                                    "name": "yMin",
+                                    "value": "yMin"
+                                  },
+                                  {
+                                    "name": "k",
+                                    "value": "kHea"
+                                  },
+                                  {
+                                    "name": "Ti",
+                                    "value": "TiHea"
+                                  },
+                                  {
+                                    "name": "controllerType",
+                                    "value": "heaController"
+                                  },
+                                  {
+                                    "name": "Ni",
+                                    "value": "10"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Controller for heating\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 40,
+                                        "y": -80
+                                      },
+                                      {
+                                        "x": 60,
+                                        "y": -60
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Continuous.LimPID",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "conCoo",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "yMax",
+                                    "value": "yMax"
+                                  },
+                                  {
+                                    "name": "Td",
+                                    "value": "TdCoo"
+                                  },
+                                  {
+                                    "name": "k",
+                                    "value": "kCoo"
+                                  },
+                                  {
+                                    "name": "Ti",
+                                    "value": "TiCoo"
+                                  },
+                                  {
+                                    "name": "controllerType",
+                                    "value": "cooController"
+                                  },
+                                  {
+                                    "name": "yMin",
+                                    "value": "yMin"
+                                  },
+                                  {
+                                    "name": "reverseActing",
+                                    "value": "false"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Controller for cooling (acts on damper)\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -60,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": -40,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Continuous.Line",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "reqFlo"
+                            },
+                            "comment": {
+                              "string_comment": "\"Required flow rate\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 20,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 40,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Continuous.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "cooMax",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "1"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Cooling maximum flow\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": -50
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": -30
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Continuous.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "minFlo",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "ratVFloMin"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"VAV box minimum flow\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -60,
+                                        "y": 30
+                                      },
+                                      {
+                                        "x": -40,
+                                        "y": 50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Continuous.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "conOne",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "1"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Constant 1\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -60,
+                                        "y": -50
+                                      },
+                                      {
+                                        "x": -40,
+                                        "y": -30
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Continuous.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "conZer",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "0"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Constant 0\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": 30
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": 50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "prefix_protect": [
+                "protected"
+              ],
+              "prefixed_element": [
+                {
+                  "element": [
+                    {
+                      "component_clause": {
+                        "type_prefix": "parameter",
+                        "type_specifier": "Real",
+                        "component_list": {
+                          "component_declaration": [
+                            {
+                              "declaration": {
+                                "name": "yMax",
+                                "value": "1"
+                              },
+                              "comment": {
+                                "string_comment": "\"Upper limit of PID control output\""
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "component_clause": {
+                        "type_prefix": "parameter",
+                        "type_specifier": "Real",
+                        "component_list": {
+                          "component_declaration": [
+                            {
+                              "declaration": {
+                                "name": "yMin",
+                                "value": "0"
+                              },
+                              "comment": {
+                                "string_comment": "\"Lower limit of PID control output\""
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TRooCooSet"
+                        ],
+                        "component2": [
+                          "conCoo",
+                          "u_s"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -120,
+                                "y": 0
+                              },
+                              {
+                                "x": -62,
+                                "y": 0
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TRoo"
+                        ],
+                        "component2": [
+                          "conHea",
+                          "u_m"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -120,
+                                "y": -70
+                              },
+                              {
+                                "x": -80,
+                                "y": -70
+                              },
+                              {
+                                "x": -80,
+                                "y": -90
+                              },
+                              {
+                                "x": 50,
+                                "y": -90
+                              },
+                              {
+                                "x": 50,
+                                "y": -82
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TRooHeaSet"
+                        ],
+                        "component2": [
+                          "conHea",
+                          "u_s"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -120,
+                                "y": 60
+                              },
+                              {
+                                "x": -70,
+                                "y": 60
+                              },
+                              {
+                                "x": -70,
+                                "y": -70
+                              },
+                              {
+                                "x": 38,
+                                "y": -70
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conHea",
+                          "y"
+                        ],
+                        "component2": [
+                          "yVal"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 62,
+                                "y": -70
+                              },
+                              {
+                                "x": 110,
+                                "y": -70
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conZer",
+                          "y"
+                        ],
+                        "component2": [
+                          "reqFlo",
+                          "x1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 2,
+                                "y": 40
+                              },
+                              {
+                                "x": 10,
+                                "y": 40
+                              },
+                              {
+                                "x": 10,
+                                "y": 8
+                              },
+                              {
+                                "x": 18,
+                                "y": 8
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "minFlo",
+                          "y"
+                        ],
+                        "component2": [
+                          "reqFlo",
+                          "f1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -38,
+                                "y": 40
+                              },
+                              {
+                                "x": -30,
+                                "y": 40
+                              },
+                              {
+                                "x": -30,
+                                "y": 4
+                              },
+                              {
+                                "x": 18,
+                                "y": 4
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "cooMax",
+                          "y"
+                        ],
+                        "component2": [
+                          "reqFlo",
+                          "f2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 2,
+                                "y": -40
+                              },
+                              {
+                                "x": 10,
+                                "y": -40
+                              },
+                              {
+                                "x": 10,
+                                "y": -8
+                              },
+                              {
+                                "x": 18,
+                                "y": -8
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conOne",
+                          "y"
+                        ],
+                        "component2": [
+                          "reqFlo",
+                          "x2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -38,
+                                "y": -40
+                              },
+                              {
+                                "x": -30,
+                                "y": -40
+                              },
+                              {
+                                "x": -30,
+                                "y": -4
+                              },
+                              {
+                                "x": 18,
+                                "y": -4
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conCoo",
+                          "y"
+                        ],
+                        "component2": [
+                          "reqFlo",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -38,
+                                "y": 0
+                              },
+                              {
+                                "x": 18,
+                                "y": 0
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TRoo"
+                        ],
+                        "component2": [
+                          "conCoo",
+                          "u_m"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -120,
+                                "y": -70
+                              },
+                              {
+                                "x": -80,
+                                "y": -70
+                              },
+                              {
+                                "x": -80,
+                                "y": -20
+                              },
+                              {
+                                "x": -50,
+                                "y": -20
+                              },
+                              {
+                                "x": -50,
+                                "y": -12
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "reqFlo",
+                          "y"
+                        ],
+                        "component2": [
+                          "yDam"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 42,
+                                "y": 0
+                              },
+                              {
+                                "x": 72,
+                                "y": 0
+                              },
+                              {
+                                "x": 72,
+                                "y": 0
+                              },
+                              {
+                                "x": 110,
+                                "y": 0
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "comp_annotation": {
+                "defaultName": "\"terCon\"",
+                "diagram": {
+                  "coordinateSystem": {
+                    "extent": [
+                      {
+                        "x": -100,
+                        "y": -100
+                      },
+                      {
+                        "x": 100,
+                        "y": 100
+                      }
+                    ]
+                  }
+                },
+                "icon": {
+                  "coordinateSystem": {
+                    "extent": [
+                      {
+                        "x": -100,
+                        "y": -100
+                      },
+                      {
+                        "x": 100,
+                        "y": 100
+                      }
+                    ]
+                  },
+                  "graphics": {
+                    "text": [
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 127
+                        },
+                        "extent": [
+                          {
+                            "x": -100,
+                            "y": -62
+                          },
+                          {
+                            "x": -66,
+                            "y": -76
+                          }
+                        ],
+                        "textString": "\"TRoo\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 127
+                        },
+                        "extent": [
+                          {
+                            "x": 64,
+                            "y": -38
+                          },
+                          {
+                            "x": 92,
+                            "y": -58
+                          }
+                        ],
+                        "textString": "\"yVal\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 127
+                        },
+                        "extent": [
+                          {
+                            "x": 56,
+                            "y": 62
+                          },
+                          {
+                            "x": 90,
+                            "y": 40
+                          }
+                        ],
+                        "textString": "\"yDam\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 127
+                        },
+                        "extent": [
+                          {
+                            "x": -96,
+                            "y": 82
+                          },
+                          {
+                            "x": -36,
+                            "y": 60
+                          }
+                        ],
+                        "textString": "\"TRooHeaSet\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 127
+                        },
+                        "extent": [
+                          {
+                            "x": -96,
+                            "y": 10
+                          },
+                          {
+                            "x": -36,
+                            "y": -10
+                          }
+                        ],
+                        "textString": "\"TRooCooSet\""
+                      }
+                    ]
+                  }
+                },
+                "documentation": {
+                  "info": "\"<html>\n<p>\nController for terminal VAV box with hot water reheat and pressure independent damper.\nIt was implemented according to\n<a href=\\\"https://newbuildings.org/sites/default/files/A-11_LG_VAV_Guide_3.6.2.pdf\\\">\n[Advanced Variabled Air Volume System Design Guide]</a>, single maximum VAV reheat box\ncontrol.\nThe damper control signal <code>yDam</code> corresponds to the discharge air flow rate\nset-point, normalized to the nominal value.\n</p>\n<ul>\n<li>\nIn cooling demand, the damper control signal <code>yDam</code> is modulated between\na minimum value <code>ratVFloMin</code> (typically between 30% and 50%) and 1\n(corresponding to the nominal value).\nThe control signal for the reheat coil valve <code>yVal</code> is 0\n(corresponding to the valve fully closed).\n</li>\n<li>\nIn heating demand, the damper control signal <code>yDam</code> is fixed at the minimum value\n<code>ratVFloMin</code>.\nThe control signal for the reheat coil valve <code>yVal</code> is modulated between\n0 and 1 (corresponding to the valve fully open).\n</li>\n</ul>\n<p align=\\\"center\\\">\n<img alt=\\\"image\\\" src=\\\"modelica://Buildings/Resources/Images/Examples/VAVReheat/vavBoxSingleMax.png\\\" border=\\\"1\\\"/>\n</p>\n<br/>\n</html>\"",
+                  "revisions": "\"<html>\n<ul>\n<li>\nApril 24, 2020, by Jianjun Hu:<br/>\nRefactored the model to implement a single maximum control logic.\nThe previous implementation led to a maximum air flow rate in heating demand.<br/>\nThe input connector <code>TDis</code> is removed. This is non backward compatible.<br/>\nThis is for\n<a href=\\\"https://github.com/lbl-srg/modelica-buildings/issues/1873\\\">issue 1873</a>.\n</li>\n<li>\nSeptember 20, 2017, by Michael Wetter:<br/>\nRemoved blocks with blocks from CDL package.\n</li>\n</ul>\n</html>\""
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/Controls/RoomVAV.mo"
+  }
+]

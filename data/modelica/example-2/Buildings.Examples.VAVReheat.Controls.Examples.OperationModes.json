@@ -1,0 +1,1953 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat.Controls.Examples"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "model",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "OperationModes",
+            "comment": "\"Test model for operation modes\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Icons.Example"
+                    }
+                  },
+                  {
+                    "import_clause": {
+                      "prefix": "import",
+                      "ident": "ModelicaVAV",
+                      "symbols": "=",
+                      "name": "Buildings.Examples.VAVReheat"
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "ModelicaVAV.Controls.ModeSelector",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "operationModes"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -40,
+                                        "y": -20
+                                      },
+                                      {
+                                        "x": -20,
+                                        "y": 0
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "preHeaFlo"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 90,
+                                        "y": -60
+                                      },
+                                      {
+                                        "x": 110,
+                                        "y": -40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Thermal.HeatTransfer.Sources.FixedTemperature",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "fixTem",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "T",
+                                    "value": "273.15"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -40,
+                                        "y": 90
+                                      },
+                                      {
+                                        "x": -20,
+                                        "y": 110
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Thermal.HeatTransfer.Components.HeatCapacitor",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "cap",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "C",
+                                    "value": "20000"
+                                  },
+                                  {
+                                    "name": "T",
+                                    "variable_modification": {
+                                      "modification": {
+                                        "modifications": [
+                                          {
+                                            "name": "fixed",
+                                            "value": "true"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 40,
+                                        "y": 100
+                                      },
+                                      {
+                                        "x": 60,
+                                        "y": 120
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Thermal.HeatTransfer.Components.ThermalConductor",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "con",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "G",
+                                    "value": "1"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 0,
+                                        "y": 90
+                                      },
+                                      {
+                                        "x": 20,
+                                        "y": 110
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Logical.Switch",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "switch1"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 60,
+                                        "y": -60
+                                      },
+                                      {
+                                        "x": 80,
+                                        "y": -40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "on",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "200"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 20,
+                                        "y": -40
+                                      },
+                                      {
+                                        "x": 40,
+                                        "y": -20
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "off",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "0"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -60,
+                                        "y": -80
+                                      },
+                                      {
+                                        "x": -40,
+                                        "y": -60
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "temperatureSensor"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 100,
+                                        "y": 110
+                                      },
+                                      {
+                                        "x": 120,
+                                        "y": 130
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.RealExpression",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TRooSetHea",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "y",
+                                    "value": "if mode.y == Integer(ModelicaVAV.Controls.OperationModes.occupied)\n      then 293.15 else 287.15"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -160,
+                                        "y": 40
+                                      },
+                                      {
+                                        "x": -140,
+                                        "y": 60
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TCoiHea",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "283.15"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Temperature after heating coil\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -160,
+                                        "y": -40
+                                      },
+                                      {
+                                        "x": -140,
+                                        "y": -20
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "ModelicaVAV.Controls.ControlBus",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "controlBus"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -60,
+                                        "y": 30
+                                      },
+                                      {
+                                        "x": -40,
+                                        "y": 50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Routing.IntegerPassThrough",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "mode"
+                            },
+                            "comment": {
+                              "string_comment": "\"Outputs the control mode\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 0,
+                                        "y": 20
+                                      },
+                                      {
+                                        "x": 20,
+                                        "y": 40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.BooleanExpression",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "modSel",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "y",
+                                    "value": "mode.y == Integer(ModelicaVAV.Controls.OperationModes.unoccupiedNightSetBack) or\n      mode.y == Integer(ModelicaVAV.Controls.OperationModes.unoccupiedWarmUp)"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": -60
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": -40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TOut",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "283.15"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Outside temperature\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -160,
+                                        "y": -80
+                                      },
+                                      {
+                                        "x": -140,
+                                        "y": -60
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "temperatureSensor1"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 100,
+                                        "y": 142
+                                      },
+                                      {
+                                        "x": 120,
+                                        "y": 162
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.BooleanExpression",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "modSel1",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "y",
+                                    "value": "mode.y == Integer(ModelicaVAV.Controls.OperationModes.occupied)"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": -130
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": -110
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "preHeaFlo1"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 112,
+                                        "y": -130
+                                      },
+                                      {
+                                        "x": 132,
+                                        "y": -110
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.Continuous.LimPID",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "PID",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "initType",
+                                    "value": "Modelica.Blocks.Types.InitPID.InitialState"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": -130
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": -110
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Logical.Switch",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "switch2"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 20,
+                                        "y": -130
+                                      },
+                                      {
+                                        "x": 40,
+                                        "y": -110
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Math.Gain",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "gain",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "200"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 62,
+                                        "y": -130
+                                      },
+                                      {
+                                        "x": 82,
+                                        "y": -110
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.SetPoints.OccupancySchedule",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "occSch"
+                            },
+                            "comment": {
+                              "string_comment": "\"Occupancy schedule\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -160,
+                                        "y": 80
+                                      },
+                                      {
+                                        "x": -140,
+                                        "y": 100
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "fixTem",
+                          "port"
+                        ],
+                        "component2": [
+                          "con",
+                          "port_a"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -20,
+                                "y": 100
+                              },
+                              {
+                                "x": 0,
+                                "y": 100
+                              }
+                            ],
+                            "color": {
+                              "r": 191,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "preHeaFlo",
+                          "port"
+                        ],
+                        "component2": [
+                          "cap",
+                          "port"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 110,
+                                "y": -50
+                              },
+                              {
+                                "x": 120,
+                                "y": -50
+                              },
+                              {
+                                "x": 120,
+                                "y": 100
+                              },
+                              {
+                                "x": 50,
+                                "y": 100
+                              }
+                            ],
+                            "color": {
+                              "r": 191,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "con",
+                          "port_b"
+                        ],
+                        "component2": [
+                          "cap",
+                          "port"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 20,
+                                "y": 100
+                              },
+                              {
+                                "x": 50,
+                                "y": 100
+                              }
+                            ],
+                            "color": {
+                              "r": 191,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "switch1",
+                          "y"
+                        ],
+                        "component2": [
+                          "preHeaFlo",
+                          "Q_flow"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 81,
+                                "y": -50
+                              },
+                              {
+                                "x": 90,
+                                "y": -50
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "on",
+                          "y"
+                        ],
+                        "component2": [
+                          "switch1",
+                          "u1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 41,
+                                "y": -30
+                              },
+                              {
+                                "x": 48,
+                                "y": -30
+                              },
+                              {
+                                "x": 48,
+                                "y": -42
+                              },
+                              {
+                                "x": 58,
+                                "y": -42
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "off",
+                          "y"
+                        ],
+                        "component2": [
+                          "switch1",
+                          "u3"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -39,
+                                "y": -70
+                              },
+                              {
+                                "x": 48,
+                                "y": -70
+                              },
+                              {
+                                "x": 48,
+                                "y": -58
+                              },
+                              {
+                                "x": 58,
+                                "y": -58
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "cap",
+                          "port"
+                        ],
+                        "component2": [
+                          "temperatureSensor",
+                          "port"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 50,
+                                "y": 100
+                              },
+                              {
+                                "x": 64,
+                                "y": 100
+                              },
+                              {
+                                "x": 64,
+                                "y": 120
+                              },
+                              {
+                                "x": 100,
+                                "y": 120
+                              }
+                            ],
+                            "color": {
+                              "r": 191,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "controlBus"
+                        ],
+                        "component2": [
+                          "operationModes",
+                          "cb"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -50,
+                                "y": 40
+                              },
+                              {
+                                "x": -50,
+                                "y": -3.18182
+                              },
+                              {
+                                "x": -36.8182,
+                                "y": -3.18182
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "temperatureSensor",
+                          "T"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TRooMin"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 120,
+                                "y": 120
+                              },
+                              {
+                                "x": 166,
+                                "y": 120
+                              },
+                              {
+                                "x": 166,
+                                "y": 60
+                              },
+                              {
+                                "x": -50,
+                                "y": 60
+                              },
+                              {
+                                "x": -50,
+                                "y": 40
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%second\" ,index =1 ,extent ={{6,3},{6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TCoiHea",
+                          "y"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TCoiHeaOut"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -139,
+                                "y": -30
+                              },
+                              {
+                                "x": -78,
+                                "y": -30
+                              },
+                              {
+                                "x": -78,
+                                "y": 40
+                              },
+                              {
+                                "x": -50,
+                                "y": 40
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%second\" ,index =1 ,extent ={{6,3},{6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "controlBus",
+                          "controlMode"
+                        ],
+                        "component2": [
+                          "mode",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -50,
+                                "y": 40
+                              },
+                              {
+                                "x": -30,
+                                "y": 40
+                              },
+                              {
+                                "x": -30,
+                                "y": 30
+                              },
+                              {
+                                "x": -2,
+                                "y": 30
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%first\" ,index =-1 ,extent ={{-6,3},{-6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "modSel",
+                          "y"
+                        ],
+                        "component2": [
+                          "switch1",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1,
+                                "y": -50
+                              },
+                              {
+                                "x": 58,
+                                "y": -50
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TOut",
+                          "y"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TOut"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -139,
+                                "y": -70
+                              },
+                              {
+                                "x": -72,
+                                "y": -70
+                              },
+                              {
+                                "x": -72,
+                                "y": 40
+                              },
+                              {
+                                "x": -50,
+                                "y": 40
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%second\" ,index =1 ,extent ={{6,3},{6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "cap",
+                          "port"
+                        ],
+                        "component2": [
+                          "temperatureSensor1",
+                          "port"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 50,
+                                "y": 100
+                              },
+                              {
+                                "x": 64,
+                                "y": 100
+                              },
+                              {
+                                "x": 64,
+                                "y": 152
+                              },
+                              {
+                                "x": 100,
+                                "y": 152
+                              }
+                            ],
+                            "color": {
+                              "r": 191,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "temperatureSensor1",
+                          "T"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TRooAve"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 120,
+                                "y": 152
+                              },
+                              {
+                                "x": 166,
+                                "y": 152
+                              },
+                              {
+                                "x": 166,
+                                "y": 60
+                              },
+                              {
+                                "x": -50,
+                                "y": 60
+                              },
+                              {
+                                "x": -50,
+                                "y": 40
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%second\" ,index =1 ,extent ={{6,3},{6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TRooSetHea",
+                          "y"
+                        ],
+                        "component2": [
+                          "PID",
+                          "u_s"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -139,
+                                "y": 50
+                              },
+                              {
+                                "x": -110,
+                                "y": 50
+                              },
+                              {
+                                "x": -110,
+                                "y": -120
+                              },
+                              {
+                                "x": -82,
+                                "y": -120
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "temperatureSensor",
+                          "T"
+                        ],
+                        "component2": [
+                          "PID",
+                          "u_m"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 120,
+                                "y": 120
+                              },
+                              {
+                                "x": 166,
+                                "y": 120
+                              },
+                              {
+                                "x": 166,
+                                "y": -150
+                              },
+                              {
+                                "x": -70,
+                                "y": -150
+                              },
+                              {
+                                "x": -70,
+                                "y": -132
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "modSel1",
+                          "y"
+                        ],
+                        "component2": [
+                          "switch2",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1,
+                                "y": -120
+                              },
+                              {
+                                "x": 18,
+                                "y": -120
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "off",
+                          "y"
+                        ],
+                        "component2": [
+                          "switch2",
+                          "u3"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -39,
+                                "y": -70
+                              },
+                              {
+                                "x": -30,
+                                "y": -70
+                              },
+                              {
+                                "x": -30,
+                                "y": -132
+                              },
+                              {
+                                "x": 10,
+                                "y": -132
+                              },
+                              {
+                                "x": 10,
+                                "y": -128
+                              },
+                              {
+                                "x": 18,
+                                "y": -128
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "preHeaFlo1",
+                          "port"
+                        ],
+                        "component2": [
+                          "cap",
+                          "port"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 132,
+                                "y": -120
+                              },
+                              {
+                                "x": 148,
+                                "y": -120
+                              },
+                              {
+                                "x": 148,
+                                "y": 100
+                              },
+                              {
+                                "x": 50,
+                                "y": 100
+                              }
+                            ],
+                            "color": {
+                              "r": 191,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "PID",
+                          "y"
+                        ],
+                        "component2": [
+                          "switch2",
+                          "u1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -59,
+                                "y": -120
+                              },
+                              {
+                                "x": -38,
+                                "y": -120
+                              },
+                              {
+                                "x": -38,
+                                "y": -100
+                              },
+                              {
+                                "x": 8,
+                                "y": -100
+                              },
+                              {
+                                "x": 8,
+                                "y": -112
+                              },
+                              {
+                                "x": 18,
+                                "y": -112
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "gain",
+                          "y"
+                        ],
+                        "component2": [
+                          "preHeaFlo1",
+                          "Q_flow"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 83,
+                                "y": -120
+                              },
+                              {
+                                "x": 112,
+                                "y": -120
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "switch2",
+                          "y"
+                        ],
+                        "component2": [
+                          "gain",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 41,
+                                "y": -120
+                              },
+                              {
+                                "x": 60,
+                                "y": -120
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "occSch",
+                          "tNexOcc"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "dTNexOcc"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -139,
+                                "y": 96
+                              },
+                              {
+                                "x": -50,
+                                "y": 96
+                              },
+                              {
+                                "x": -50,
+                                "y": 40
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%second\" ,index =1 ,extent ={{6,3},{6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TRooSetHea",
+                          "y"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TRooSetHea"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -139,
+                                "y": 50
+                              },
+                              {
+                                "x": -100,
+                                "y": 50
+                              },
+                              {
+                                "x": -100,
+                                "y": 40
+                              },
+                              {
+                                "x": -50,
+                                "y": 40
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%second\" ,index =1 ,extent ={{6,3},{6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "occSch",
+                          "occupied"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "occupied"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -139,
+                                "y": 84
+                              },
+                              {
+                                "x": -50,
+                                "y": 84
+                              },
+                              {
+                                "x": -50,
+                                "y": 40
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%second\" ,index =1 ,extent ={{6,3},{6,3}}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "comp_annotation": {
+                "diagram": {
+                  "coordinateSystem": {
+                    "extent": [
+                      {
+                        "x": -200,
+                        "y": -200
+                      },
+                      {
+                        "x": 200,
+                        "y": 200
+                      }
+                    ],
+                    "preserveAspectRatio": true
+                  }
+                },
+                "documentation": {
+                  "info": "\"<html>\n<p>\nThis model tests the transition between the different modes of operation of the HVAC system.\n</p>\n</html>\""
+                },
+                "vendor_annotation": {
+                  "name": "__Dymola_Commands",
+                  "annotation": [
+                    {
+                      "name": "file",
+                      "value": "\"modelica://Buildings/Resources/Scripts/Dymola/Examples/VAVReheat/Controls/Examples/OperationModes.mos\" \"Simulate and plot"
+                    }
+                  ]
+                },
+                "othAnns": " ,__Dymola_Commands (file =\"modelica://Buildings/Resources/Scripts/Dymola/Examples/VAVReheat/Controls/Examples/OperationModes.mos\" \"Simulate and plot\") ,experiment (StopTime =172800 ,Tolerance =1e-6 ) ,"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/Controls/Examples/OperationModes.mo"
+  }
+]

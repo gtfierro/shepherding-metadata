@@ -1,0 +1,673 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat.Controls"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "block",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "CoolingCoilTemperatureSetpoint",
+            "comment": "\"Set point scheduler for cooling coil\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Blocks.Icons.Block"
+                    }
+                  },
+                  {
+                    "import_clause": {
+                      "prefix": "import",
+                      "name": "Buildings.Examples.VAVReheat.Controls.OperationModes"
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Temperature",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TCooOn",
+                              "value": "273.15+12"
+                            },
+                            "comment": {
+                              "string_comment": "\"Cooling setpoint during on\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Temperature",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TCooOff",
+                              "value": "273.15+30"
+                            },
+                            "comment": {
+                              "string_comment": "\"Cooling setpoint during off\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.RealExpression",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TSupSetCoo",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "y",
+                                    "value": "if (mode.y == Integer(OperationModes.occupied) or\n         mode.y == Integer(OperationModes.unoccupiedPreCool) or\n         mode.y == Integer(OperationModes.safety)) then\n          TCooOn else TCooOff"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Supply air temperature setpoint for cooling\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -22,
+                                        "y": -50
+                                      },
+                                      {
+                                        "x": -2,
+                                        "y": -30
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TSetHea",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "unit",
+                                    "value": "\"K\""
+                                  },
+                                  {
+                                    "name": "displayUnit",
+                                    "value": "\"degC\""
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Set point for heating coil\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": -20
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 20
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Math.Add",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "add"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 20,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 40,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "dTMin",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "1"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Minimum offset for cooling coil setpoint\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": 10
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": 30
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Math.Max",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "max1"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 60,
+                                        "y": -30
+                                      },
+                                      {
+                                        "x": 80,
+                                        "y": -10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "ControlBus",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "controlBus"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -28,
+                                        "y": -90
+                                      },
+                                      {
+                                        "x": -8,
+                                        "y": -70
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Routing.IntegerPassThrough",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "mode"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 40,
+                                        "y": -90
+                                      },
+                                      {
+                                        "x": 60,
+                                        "y": -70
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealOutput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TSet",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "unit",
+                                    "value": "\"K\""
+                                  },
+                                  {
+                                    "name": "displayUnit",
+                                    "value": "\"degC\""
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Temperature set point\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 100,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 120,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "dTMin",
+                          "y"
+                        ],
+                        "component2": [
+                          "add",
+                          "u1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1,
+                                "y": 20
+                              },
+                              {
+                                "x": 10,
+                                "y": 20
+                              },
+                              {
+                                "x": 10,
+                                "y": 6
+                              },
+                              {
+                                "x": 18,
+                                "y": 6
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "add",
+                          "y"
+                        ],
+                        "component2": [
+                          "max1",
+                          "u1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 41,
+                                "y": 6.10623e-16
+                              },
+                              {
+                                "x": 52,
+                                "y": 6.10623e-16
+                              },
+                              {
+                                "x": 52,
+                                "y": -14
+                              },
+                              {
+                                "x": 58,
+                                "y": -14
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TSupSetCoo",
+                          "y"
+                        ],
+                        "component2": [
+                          "max1",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -1,
+                                "y": -40
+                              },
+                              {
+                                "x": 20,
+                                "y": -40
+                              },
+                              {
+                                "x": 20,
+                                "y": -26
+                              },
+                              {
+                                "x": 58,
+                                "y": -26
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "controlBus",
+                          "controlMode"
+                        ],
+                        "component2": [
+                          "mode",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -18,
+                                "y": -80
+                              },
+                              {
+                                "x": 38,
+                                "y": -80
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%first\" ,index =-1 ,extent ={{-6,3},{-6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "max1",
+                          "y"
+                        ],
+                        "component2": [
+                          "TSet"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 81,
+                                "y": -20
+                              },
+                              {
+                                "x": 86,
+                                "y": -20
+                              },
+                              {
+                                "x": 86,
+                                "y": 0
+                              },
+                              {
+                                "x": 110,
+                                "y": 0
+                              },
+                              {
+                                "x": 110,
+                                "y": 5.55112e-16
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TSetHea"
+                        ],
+                        "component2": [
+                          "add",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -120,
+                                "y": 1.11022e-15
+                              },
+                              {
+                                "x": -52,
+                                "y": 1.11022e-15
+                              },
+                              {
+                                "x": -52,
+                                "y": -6
+                              },
+                              {
+                                "x": 18,
+                                "y": -6
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "comp_annotation": {
+                "icon": {
+                  "graphics": {
+                    "text": [
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "extent": [
+                          {
+                            "x": 44,
+                            "y": 16
+                          },
+                          {
+                            "x": 90,
+                            "y": -18
+                          }
+                        ],
+                        "textString": "\"TSetCoo\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "extent": [
+                          {
+                            "x": -88,
+                            "y": 22
+                          },
+                          {
+                            "x": -20,
+                            "y": -26
+                          }
+                        ],
+                        "textString": "\"TSetHea\""
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/Controls/CoolingCoilTemperatureSetpoint.mo"
+  }
+]

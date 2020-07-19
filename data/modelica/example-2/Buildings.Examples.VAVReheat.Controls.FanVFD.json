@@ -1,0 +1,835 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat.Controls"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "block",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "FanVFD",
+            "comment": "\"Controller for fan revolution\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Blocks.Interfaces.SISO"
+                    }
+                  },
+                  {
+                    "import_clause": {
+                      "prefix": "import",
+                      "name": "Buildings.Examples.VAVReheat.Controls.OperationModes"
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.Continuous.LimPID",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "con",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "yMax",
+                                    "value": "1"
+                                  },
+                                  {
+                                    "name": "Td",
+                                    "value": "60"
+                                  },
+                                  {
+                                    "name": "yMin",
+                                    "value": "r_N_min"
+                                  },
+                                  {
+                                    "name": "k",
+                                    "value": "k"
+                                  },
+                                  {
+                                    "name": "Ti",
+                                    "value": "Ti"
+                                  },
+                                  {
+                                    "name": "controllerType",
+                                    "value": "controllerType"
+                                  },
+                                  {
+                                    "name": "reset",
+                                    "value": "Buildings.Types.Reset.Disabled"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Controller\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": 20
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": 40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Math.Gain",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "gaiMea",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "1/xSet_nominal"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Gain to normalize measurement signal\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -60,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": -40,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Real",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "xSet_nominal"
+                            },
+                            "comment": {
+                              "string_comment": "\"Nominal setpoint (used for normalization)\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "off",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "0"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Off signal\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -60,
+                                        "y": -60
+                                      },
+                                      {
+                                        "x": -40,
+                                        "y": -40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Math.Gain",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "gaiSet",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "1/xSet_nominal"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Gain to normalize setpoint signal\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -60,
+                                        "y": 20
+                                      },
+                                      {
+                                        "x": -40,
+                                        "y": 40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "u_m"
+                            },
+                            "comment": {
+                              "string_comment": "\"Connector of measurement input signal\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": -20
+                                      },
+                                      {
+                                        "x": 20,
+                                        "y": 20
+                                      }
+                                    ],
+                                    "rotation": 90,
+                                    "origin": {
+                                      "x": 0,
+                                      "y": -120
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Real",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "r_N_min",
+                              "value": "0.01"
+                            },
+                            "comment": {
+                              "string_comment": "\"Minimum normalized fan speed\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.Blocks.Types.Init",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "initType",
+                              "value": "Modelica.Blocks.Types.Init.NoInit"
+                            },
+                            "comment": {
+                              "string_comment": "\"Type of initialization (1: no init, 2: steady state, 3/4: initial output)\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Real",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "y_start",
+                              "value": "0"
+                            },
+                            "comment": {
+                              "string_comment": "\"Initial or guess value of output (= state)\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.Blocks.Types.SimpleController",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "controllerType",
+                              "value": "Modelica.Blocks.Types.SimpleController.PI"
+                            },
+                            "comment": {
+                              "string_comment": "\"Type of controller\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "group",
+                                    "value": "\"Setpoint tracking\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Real",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "k",
+                              "value": "0.5"
+                            },
+                            "comment": {
+                              "string_comment": "\"Gain of controller\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "group",
+                                    "value": "\"Setpoint tracking\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Time",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "Ti",
+                              "value": "15"
+                            },
+                            "comment": {
+                              "string_comment": "\"Time constant of integrator block\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "group",
+                                    "value": "\"Setpoint tracking\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Logical.Switch",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "swi"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 40,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 60,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Interfaces.BooleanInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "uFan"
+                            },
+                            "comment": {
+                              "string_comment": "\"Set to true to enable the fan on\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": 40
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 80
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "gaiMea",
+                          "y"
+                        ],
+                        "component2": [
+                          "con",
+                          "u_m"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -39,
+                                "y": 6.10623e-16
+                              },
+                              {
+                                "x": -10,
+                                "y": 6.10623e-16
+                              },
+                              {
+                                "x": -10,
+                                "y": 18
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "gaiSet",
+                          "y"
+                        ],
+                        "component2": [
+                          "con",
+                          "u_s"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -39,
+                                "y": 30
+                              },
+                              {
+                                "x": -22,
+                                "y": 30
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "u_m"
+                        ],
+                        "component2": [
+                          "gaiMea",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1.11022e-15,
+                                "y": -120
+                              },
+                              {
+                                "x": 1.11022e-15,
+                                "y": -92
+                              },
+                              {
+                                "x": -80,
+                                "y": -92
+                              },
+                              {
+                                "x": -80,
+                                "y": 0
+                              },
+                              {
+                                "x": -62,
+                                "y": 0
+                              },
+                              {
+                                "x": -62,
+                                "y": 6.66134e-16
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "gaiSet",
+                          "u"
+                        ],
+                        "component2": [
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -62,
+                                "y": 30
+                              },
+                              {
+                                "x": -90,
+                                "y": 30
+                              },
+                              {
+                                "x": -90,
+                                "y": 1.11022e-15
+                              },
+                              {
+                                "x": -120,
+                                "y": 1.11022e-15
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "con",
+                          "y"
+                        ],
+                        "component2": [
+                          "swi",
+                          "u1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1,
+                                "y": 30
+                              },
+                              {
+                                "x": 18,
+                                "y": 30
+                              },
+                              {
+                                "x": 18,
+                                "y": 8
+                              },
+                              {
+                                "x": 38,
+                                "y": 8
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "off",
+                          "y"
+                        ],
+                        "component2": [
+                          "swi",
+                          "u3"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -39,
+                                "y": -50
+                              },
+                              {
+                                "x": 20,
+                                "y": -50
+                              },
+                              {
+                                "x": 20,
+                                "y": -8
+                              },
+                              {
+                                "x": 38,
+                                "y": -8
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "swi",
+                          "u2"
+                        ],
+                        "component2": [
+                          "uFan"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 38,
+                                "y": 0
+                              },
+                              {
+                                "x": 12,
+                                "y": 0
+                              },
+                              {
+                                "x": 12,
+                                "y": 60
+                              },
+                              {
+                                "x": -120,
+                                "y": 60
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "swi",
+                          "y"
+                        ],
+                        "component2": [
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 61,
+                                "y": 0
+                              },
+                              {
+                                "x": 110,
+                                "y": 0
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "comp_annotation": {
+                "icon": {
+                  "graphics": {
+                    "text": [
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "extent": [
+                          {
+                            "x": -90,
+                            "y": -50
+                          },
+                          {
+                            "x": 96,
+                            "y": -96
+                          }
+                        ],
+                        "textString": "\"r_N_min=%r_N_min\""
+                      }
+                    ]
+                  }
+                },
+                "documentation": {
+                  "revisions": "\"<html>\n<ul>\n<li>\nDecember 20, 2016, by Michael Wetter:<br/>\nAdded type conversion for enumeration when used as an array index.<br/>\nThis is for\n<a href=\\\"https://github.com/lbl-srg/modelica-buildings/issues/602\\\">#602</a>.\n</li>\n</ul>\n</html>\""
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/Controls/FanVFD.mo"
+  }
+]

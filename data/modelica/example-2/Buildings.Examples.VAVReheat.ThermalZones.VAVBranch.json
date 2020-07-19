@@ -1,0 +1,1650 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat.ThermalZones"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "model",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "VAVBranch",
+            "comment": "\"Supply branch of a VAV system\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Blocks.Icons.Block"
+                    }
+                  },
+                  {
+                    "replaceable": "replaceable",
+                    "replaceable_class_definition": {
+                      "class_prefixes": "package",
+                      "class_specifier": {
+                        "short_class_specifier": {
+                          "className": "MediumA",
+                          "inputName": "Modelica.Media.Interfaces.PartialMedium",
+                          "comment": {
+                            "string_comment": "\"Medium model for air\"",
+                            "annotation": {
+                              "others": [
+                                {
+                                  "name": "choicesAllMatching",
+                                  "value": "true"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "replaceable": "replaceable",
+                    "replaceable_class_definition": {
+                      "class_prefixes": "package",
+                      "class_specifier": {
+                        "short_class_specifier": {
+                          "className": "MediumW",
+                          "inputName": "Modelica.Media.Interfaces.PartialMedium",
+                          "comment": {
+                            "string_comment": "\"Medium model for water\"",
+                            "annotation": {
+                              "others": [
+                                {
+                                  "name": "choicesAllMatching",
+                                  "value": "true"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Boolean",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "allowFlowReversal",
+                              "value": "true"
+                            },
+                            "comment": {
+                              "string_comment": "\"= false to simplify equations, assuming, but not enforcing, no flow reversal\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.MassFlowRate",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "m_flow_nominal"
+                            },
+                            "comment": {
+                              "string_comment": "\"Mass flow rate of this thermal zone\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Volume",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "VRoo"
+                            },
+                            "comment": {
+                              "string_comment": "\"Room volume\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Fluid.Actuators.Dampers.PressureIndependent",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "vav",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "MediumA "
+                                  },
+                                  {
+                                    "name": "m_flow_nominal",
+                                    "value": "m_flow_nominal"
+                                  },
+                                  {
+                                    "name": "dpDamper_nominal",
+                                    "value": "220 + 20"
+                                  },
+                                  {
+                                    "name": "allowFlowReversal",
+                                    "value": "allowFlowReversal"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"VAV box for room\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -10,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 10,
+                                        "y": 10
+                                      }
+                                    ],
+                                    "rotation": 90,
+                                    "origin": {
+                                      "x": -50,
+                                      "y": 40
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Fluid.HeatExchangers.DryCoilEffectivenessNTU",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "terHea",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium1",
+                                    "name": "MediumA "
+                                  },
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium2",
+                                    "name": "MediumW"
+                                  },
+                                  {
+                                    "name": "m1_flow_nominal",
+                                    "value": "m_flow_nominal"
+                                  },
+                                  {
+                                    "name": "m2_flow_nominal",
+                                    "value": "m_flow_nominal*1000*(50 - 17)/4200/10"
+                                  },
+                                  {
+                                    "name": "Q_flow_nominal",
+                                    "value": "m_flow_nominal*1006*(50 - 16.7)"
+                                  },
+                                  {
+                                    "name": "configuration",
+                                    "value": "Buildings.Fluid.Types.HeatExchangerConfiguration.CounterFlow"
+                                  },
+                                  {
+                                    "name": "dp1_nominal",
+                                    "value": "0"
+                                  },
+                                  {
+                                    "name": "from_dp2",
+                                    "value": "true"
+                                  },
+                                  {
+                                    "name": "dp2_nominal",
+                                    "value": "0"
+                                  },
+                                  {
+                                    "name": "allowFlowReversal1",
+                                    "value": "allowFlowReversal"
+                                  },
+                                  {
+                                    "name": "allowFlowReversal2",
+                                    "value": "false"
+                                  },
+                                  {
+                                    "name": "T_a1_nominal",
+                                    "value": "289.85"
+                                  },
+                                  {
+                                    "name": "T_a2_nominal",
+                                    "value": "355.35"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Heat exchanger of terminal box\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -10,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 10,
+                                        "y": 10
+                                      }
+                                    ],
+                                    "rotation": 90,
+                                    "origin": {
+                                      "x": -44,
+                                      "y": 0
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Fluid.Sources.Boundary_pT",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "sinTer",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "MediumW "
+                                  },
+                                  {
+                                    "name": "p",
+                                    "value": "3E5",
+                                    "variable_modification": {
+                                      "modification": {
+                                        "modifications": [
+                                          {
+                                            "name": "displayUnit",
+                                            "value": "\"Pa\""
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "name": "nPorts",
+                                    "value": "1"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Sink for terminal box \"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -10,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 10,
+                                        "y": 10
+                                      }
+                                    ],
+                                    "rotation": 180,
+                                    "origin": {
+                                      "x": 40,
+                                      "y": -20
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Fluid.Interfaces.FluidPort_a",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "port_a",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "MediumA "
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -60,
+                                        "y": -110
+                                      },
+                                      {
+                                        "x": -40,
+                                        "y": -90
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": -60,
+                                        "y": -110
+                                      },
+                                      {
+                                        "x": -40,
+                                        "y": -90
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Fluid.Interfaces.FluidPort_a",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "port_b",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "MediumA "
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Fluid connector b (positive design flow direction is from port_a1 to port_b1)\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -60,
+                                        "y": 90
+                                      },
+                                      {
+                                        "x": -40,
+                                        "y": 110
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": -60,
+                                        "y": 90
+                                      },
+                                      {
+                                        "x": -40,
+                                        "y": 110
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Fluid.Sensors.MassFlowRate",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "senMasFlo",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "MediumA"
+                                  },
+                                  {
+                                    "name": "allowFlowReversal",
+                                    "value": "allowFlowReversal"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Sensor for mass flow rate\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -10,
+                                        "y": 10
+                                      },
+                                      {
+                                        "x": 10,
+                                        "y": -10
+                                      }
+                                    ],
+                                    "rotation": 90,
+                                    "origin": {
+                                      "x": -50,
+                                      "y": 70
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Math.Gain",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "fraMasFlo",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "1/m_flow_nominal"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Fraction of mass flow rate, relative to nominal flow\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 0,
+                                        "y": 70
+                                      },
+                                      {
+                                        "x": 20,
+                                        "y": 90
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Math.Gain",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "ACH",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "1/VRoo/1.2*3600"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Air change per hour\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 0,
+                                        "y": 30
+                                      },
+                                      {
+                                        "x": 20,
+                                        "y": 50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Fluid.Sources.MassFlowSource_T",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "souTer",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "MediumW "
+                                  },
+                                  {
+                                    "name": "nPorts",
+                                    "value": "1"
+                                  },
+                                  {
+                                    "name": "use_m_flow_in",
+                                    "value": "true"
+                                  },
+                                  {
+                                    "name": "T",
+                                    "value": "323.15"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Source for terminal box \"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -10,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 10,
+                                        "y": 10
+                                      }
+                                    ],
+                                    "rotation": 180,
+                                    "origin": {
+                                      "x": 40,
+                                      "y": 20
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "yVAV"
+                            },
+                            "comment": {
+                              "string_comment": "\"Signal for VAV damper\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": 20
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 60
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": 20
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 60
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "yVal"
+                            },
+                            "comment": {
+                              "string_comment": "\"Actuator position for reheat valve (0: closed, 1: open)\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": -60
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": -20
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": -60
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": -20
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Continuous.Gain",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "gaiM_flow",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "final",
+                                    "name": "k",
+                                    "value": "m_flow_nominal*1000*15/4200/10"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Gain for mass flow rate\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 80,
+                                        "y": 2
+                                      },
+                                      {
+                                        "x": 60,
+                                        "y": 22
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealOutput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "y_actual"
+                            },
+                            "comment": {
+                              "string_comment": "\"Actual VAV damper position\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 100,
+                                        "y": 46
+                                      },
+                                      {
+                                        "x": 120,
+                                        "y": 66
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": 100,
+                                        "y": 70
+                                      },
+                                      {
+                                        "x": 120,
+                                        "y": 90
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "fraMasFlo",
+                          "u"
+                        ],
+                        "component2": [
+                          "senMasFlo",
+                          "m_flow"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -2,
+                                "y": 80
+                              },
+                              {
+                                "x": -24,
+                                "y": 80
+                              },
+                              {
+                                "x": -24,
+                                "y": 70
+                              },
+                              {
+                                "x": -39,
+                                "y": 70
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash",
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "vav",
+                          "port_b"
+                        ],
+                        "component2": [
+                          "senMasFlo",
+                          "port_a"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -50,
+                                "y": 50
+                              },
+                              {
+                                "x": -50,
+                                "y": 60
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "ACH",
+                          "u"
+                        ],
+                        "component2": [
+                          "senMasFlo",
+                          "m_flow"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -2,
+                                "y": 40
+                              },
+                              {
+                                "x": -24,
+                                "y": 40
+                              },
+                              {
+                                "x": -24,
+                                "y": 70
+                              },
+                              {
+                                "x": -39,
+                                "y": 70
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash",
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "souTer",
+                          "ports[1]"
+                        ],
+                        "component2": [
+                          "terHea",
+                          "port_a2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 30,
+                                "y": 20
+                              },
+                              {
+                                "x": -38,
+                                "y": 20
+                              },
+                              {
+                                "x": -38,
+                                "y": 10
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "port_a"
+                        ],
+                        "component2": [
+                          "terHea",
+                          "port_a1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -50,
+                                "y": -100
+                              },
+                              {
+                                "x": -50,
+                                "y": -10
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "senMasFlo",
+                          "port_b"
+                        ],
+                        "component2": [
+                          "port_b"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -50,
+                                "y": 80
+                              },
+                              {
+                                "x": -50,
+                                "y": 100
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "terHea",
+                          "port_b1"
+                        ],
+                        "component2": [
+                          "vav",
+                          "port_a"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -50,
+                                "y": 10
+                              },
+                              {
+                                "x": -50,
+                                "y": 30
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            },
+                            "thickness": 0.5
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "vav",
+                          "y"
+                        ],
+                        "component2": [
+                          "yVAV"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -62,
+                                "y": 40
+                              },
+                              {
+                                "x": -120,
+                                "y": 40
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "souTer",
+                          "m_flow_in"
+                        ],
+                        "component2": [
+                          "gaiM_flow",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 52,
+                                "y": 12
+                              },
+                              {
+                                "x": 58,
+                                "y": 12
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "sinTer",
+                          "ports[1]"
+                        ],
+                        "component2": [
+                          "terHea",
+                          "port_b2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 30,
+                                "y": -20
+                              },
+                              {
+                                "x": -38,
+                                "y": -20
+                              },
+                              {
+                                "x": -38,
+                                "y": -10
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "gaiM_flow",
+                          "u"
+                        ],
+                        "component2": [
+                          "yVal"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 82,
+                                "y": 12
+                              },
+                              {
+                                "x": 90,
+                                "y": 12
+                              },
+                              {
+                                "x": 90,
+                                "y": -40
+                              },
+                              {
+                                "x": -120,
+                                "y": -40
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "vav",
+                          "y_actual"
+                        ],
+                        "component2": [
+                          "y_actual"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -57,
+                                "y": 45
+                              },
+                              {
+                                "x": -57,
+                                "y": 56
+                              },
+                              {
+                                "x": 110,
+                                "y": 56
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "comp_annotation": {
+                "icon": {
+                  "graphics": {
+                    "polygon": [
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "pattern": "LinePattern.None",
+                        "fillPattern": "FillPattern.Solid",
+                        "points": [
+                          {
+                            "x": -62,
+                            "y": 32
+                          },
+                          {
+                            "x": -34,
+                            "y": 48
+                          },
+                          {
+                            "x": -34,
+                            "y": 46
+                          },
+                          {
+                            "x": -62,
+                            "y": 30
+                          },
+                          {
+                            "x": -62,
+                            "y": 32
+                          }
+                        ],
+                        "smooth": "Smooth.None"
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "pattern": "LinePattern.None",
+                        "fillPattern": "FillPattern.Solid",
+                        "points": [
+                          {
+                            "x": -68,
+                            "y": -28
+                          },
+                          {
+                            "x": -34,
+                            "y": -28
+                          },
+                          {
+                            "x": -34,
+                            "y": -30
+                          },
+                          {
+                            "x": -68,
+                            "y": -30
+                          },
+                          {
+                            "x": -68,
+                            "y": -28
+                          }
+                        ],
+                        "smooth": "Smooth.None"
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "pattern": "LinePattern.None",
+                        "fillPattern": "FillPattern.Solid",
+                        "points": [
+                          {
+                            "x": -68,
+                            "y": -52
+                          },
+                          {
+                            "x": -34,
+                            "y": -52
+                          },
+                          {
+                            "x": -34,
+                            "y": -54
+                          },
+                          {
+                            "x": -68,
+                            "y": -54
+                          },
+                          {
+                            "x": -68,
+                            "y": -52
+                          }
+                        ],
+                        "smooth": "Smooth.None"
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "pattern": "LinePattern.None",
+                        "fillPattern": "FillPattern.Solid",
+                        "points": [
+                          {
+                            "x": -48,
+                            "y": -34
+                          },
+                          {
+                            "x": -34,
+                            "y": -28
+                          },
+                          {
+                            "x": -34,
+                            "y": -30
+                          },
+                          {
+                            "x": -48,
+                            "y": -36
+                          },
+                          {
+                            "x": -48,
+                            "y": -34
+                          }
+                        ],
+                        "smooth": "Smooth.None"
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "pattern": "LinePattern.None",
+                        "fillPattern": "FillPattern.Solid",
+                        "points": [
+                          {
+                            "x": -48,
+                            "y": -34
+                          },
+                          {
+                            "x": -34,
+                            "y": -40
+                          },
+                          {
+                            "x": -34,
+                            "y": -42
+                          },
+                          {
+                            "x": -48,
+                            "y": -36
+                          },
+                          {
+                            "x": -48,
+                            "y": -34
+                          }
+                        ],
+                        "smooth": "Smooth.None"
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "pattern": "LinePattern.None",
+                        "fillPattern": "FillPattern.Solid",
+                        "points": [
+                          {
+                            "x": -48,
+                            "y": -46
+                          },
+                          {
+                            "x": -34,
+                            "y": -52
+                          },
+                          {
+                            "x": -34,
+                            "y": -54
+                          },
+                          {
+                            "x": -48,
+                            "y": -48
+                          },
+                          {
+                            "x": -48,
+                            "y": -46
+                          }
+                        ],
+                        "smooth": "Smooth.None"
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "pattern": "LinePattern.None",
+                        "fillPattern": "FillPattern.Solid",
+                        "points": [
+                          {
+                            "x": -48,
+                            "y": -46
+                          },
+                          {
+                            "x": -34,
+                            "y": -40
+                          },
+                          {
+                            "x": -34,
+                            "y": -42
+                          },
+                          {
+                            "x": -48,
+                            "y": -48
+                          },
+                          {
+                            "x": -48,
+                            "y": -46
+                          }
+                        ],
+                        "smooth": "Smooth.None"
+                      }
+                    ],
+                    "rectangle": [
+                      {
+                        "origin": {
+                          "x": -68.1286,
+                          "y": 6.07
+                        },
+                        "rotation": 90,
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 127,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.HorizontalCylinder",
+                        "extent": [
+                          {
+                            "x": -108.07,
+                            "y": -16.1286
+                          },
+                          {
+                            "x": 93.93,
+                            "y": -20.1286
+                          }
+                        ]
+                      },
+                      {
+                        "fillColor": {
+                          "r": 175,
+                          "g": 175,
+                          "b": 175
+                        },
+                        "pattern": "LinePattern.None",
+                        "fillPattern": "FillPattern.Solid",
+                        "extent": [
+                          {
+                            "x": -68,
+                            "y": -20
+                          },
+                          {
+                            "x": -26,
+                            "y": -60
+                          }
+                        ]
+                      },
+                      {
+                        "origin": {
+                          "x": -82,
+                          "y": -76.8
+                        },
+                        "rotation": 90,
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 192,
+                          "g": 192,
+                          "b": 192
+                        },
+                        "fillPattern": "FillPattern.HorizontalCylinder",
+                        "extent": [
+                          {
+                            "x": 100.8,
+                            "y": -22
+                          },
+                          {
+                            "x": 128.8,
+                            "y": -44
+                          }
+                        ]
+                      },
+                      {
+                        "origin": {
+                          "x": -67.6667,
+                          "y": -78.2
+                        },
+                        "rotation": 90,
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 127,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.HorizontalCylinder",
+                        "extent": [
+                          {
+                            "x": 102.2,
+                            "y": -11.6667
+                          },
+                          {
+                            "x": 130.2,
+                            "y": -25.6667
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "documentation": {
+                  "info": "\"<html>\n<p>\nModel for a VAV supply branch. \nThe terminal VAV box has a pressure independent damper and a water reheat coil. \nThe pressure independent damper model includes an idealized flow rate controller \nand requires a discharge air flow rate set-point (normalized to the nominal value) \nas a control signal.\n</p>\n</html>\""
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/ThermalZones/VAVBranch.mo"
+  }
+]

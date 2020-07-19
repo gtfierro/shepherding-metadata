@@ -1,0 +1,494 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat.Controls"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "block",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "RoomTemperatureSetpoint",
+            "comment": "\"Set point scheduler for room temperature\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Blocks.Icons.Block"
+                    }
+                  },
+                  {
+                    "import_clause": {
+                      "prefix": "import",
+                      "name": "Buildings.Examples.VAVReheat.Controls.OperationModes"
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Temperature",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "THeaOn",
+                              "value": "293.15"
+                            },
+                            "comment": {
+                              "string_comment": "\"Heating setpoint during on\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Temperature",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "THeaOff",
+                              "value": "285.15"
+                            },
+                            "comment": {
+                              "string_comment": "\"Heating setpoint during off\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Temperature",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TCooOn",
+                              "value": "297.15"
+                            },
+                            "comment": {
+                              "string_comment": "\"Cooling setpoint during on\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Temperature",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TCooOff",
+                              "value": "303.15"
+                            },
+                            "comment": {
+                              "string_comment": "\"Cooling setpoint during off\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "ControlBus",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "controlBus"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 10,
+                                        "y": 50
+                                      },
+                                      {
+                                        "x": 30,
+                                        "y": 70
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Routing.IntegerPassThrough",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "mode"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 60,
+                                        "y": 50
+                                      },
+                                      {
+                                        "x": 80,
+                                        "y": 70
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.RealExpression",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "setPoiHea",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "y",
+                                    "value": "if (mode.y == Integer(OperationModes.occupied) or mode.y == Integer(OperationModes.unoccupiedWarmUp)\n         or mode.y == Integer(OperationModes.safety)) then THeaOn else THeaOff"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": 70
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": 90
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.RealExpression",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "setPoiCoo",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "y",
+                                    "value": "if (mode.y == Integer(OperationModes.occupied) or\n          mode.y == Integer(OperationModes.unoccupiedPreCool) or\n          mode.y == Integer(OperationModes.safety)) then TCooOn else TCooOff"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Cooling setpoint\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": 30
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": 50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "controlBus",
+                          "controlMode"
+                        ],
+                        "component2": [
+                          "mode",
+                          " u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 20,
+                                "y": 60
+                              },
+                              {
+                                "x": 58,
+                                "y": 60
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%first\" ,index =-1 ,extent ={{-6,3},{-6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "setPoiHea",
+                          "y"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TRooSetHea"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -59,
+                                "y": 80
+                              },
+                              {
+                                "x": 20,
+                                "y": 80
+                              },
+                              {
+                                "x": 20,
+                                "y": 60
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%second\" ,index =1 ,extent ={{6,3},{6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "setPoiCoo",
+                          "y"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TRooSetCoo"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -59,
+                                "y": 40
+                              },
+                              {
+                                "x": 20,
+                                "y": 40
+                              },
+                              {
+                                "x": 20,
+                                "y": 60
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%second\" ,index =1 ,extent ={{6,3},{6,3}}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "comp_annotation": {
+                "icon": {
+                  "graphics": {
+                    "text": [
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "extent": [
+                          {
+                            "x": -92,
+                            "y": 90
+                          },
+                          {
+                            "x": -52,
+                            "y": 70
+                          }
+                        ],
+                        "textString": "\"TRet\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "extent": [
+                          {
+                            "x": -96,
+                            "y": 50
+                          },
+                          {
+                            "x": -56,
+                            "y": 30
+                          }
+                        ],
+                        "textString": "\"TMix\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "extent": [
+                          {
+                            "x": -94,
+                            "y": 22
+                          },
+                          {
+                            "x": -26,
+                            "y": -26
+                          }
+                        ],
+                        "textString": "\"VOut_flow\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "extent": [
+                          {
+                            "x": -88,
+                            "y": -22
+                          },
+                          {
+                            "x": -26,
+                            "y": -60
+                          }
+                        ],
+                        "textString": "\"TSupHeaSet\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "extent": [
+                          {
+                            "x": -86,
+                            "y": -58
+                          },
+                          {
+                            "x": -24,
+                            "y": -96
+                          }
+                        ],
+                        "textString": "\"TSupCooSet\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "extent": [
+                          {
+                            "x": 42,
+                            "y": 16
+                          },
+                          {
+                            "x": 88,
+                            "y": -18
+                          }
+                        ],
+                        "textString": "\"yOA\""
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/Controls/RoomTemperatureSetpoint.mo"
+  }
+]

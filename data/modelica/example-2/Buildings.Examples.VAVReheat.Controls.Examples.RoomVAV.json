@@ -1,0 +1,513 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat.Controls.Examples"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "model",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "RoomVAV",
+            "comment": "\"Test model for the room VAV controller\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Icons.Example"
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Examples.VAVReheat.Controls.RoomVAV",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "vavBoxCon"
+                            },
+                            "comment": {
+                              "string_comment": "\"VAV terminal unit single maximum controller\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 40,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 60,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Continuous.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "heaSet",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "273.15 + 21"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Heating setpoint\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -40,
+                                        "y": 60
+                                      },
+                                      {
+                                        "x": -20,
+                                        "y": 80
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Continuous.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "cooSet",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "273.15 + 22"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Cooling setpoint\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -40,
+                                        "y": 10
+                                      },
+                                      {
+                                        "x": -20,
+                                        "y": 30
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Continuous.Sources.Ramp",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "ram",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "height",
+                                    "value": "4"
+                                  },
+                                  {
+                                    "name": "duration",
+                                    "value": "3600"
+                                  },
+                                  {
+                                    "name": "offset",
+                                    "value": "-4"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Ramp source\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": -40
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": -20
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Continuous.Sources.Sine",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "sin",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "amplitude",
+                                    "value": "1"
+                                  },
+                                  {
+                                    "name": "freqHz",
+                                    "value": "1/3600"
+                                  },
+                                  {
+                                    "name": "offset",
+                                    "value": "273.15 + 23.5"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Sine source\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": -80
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": -60
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Continuous.Add",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "rooTem"
+                            },
+                            "comment": {
+                              "string_comment": "\"Room temperature\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": -60
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": -40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "rooTem",
+                          "y"
+                        ],
+                        "component2": [
+                          "vavBoxCon",
+                          "TRoo"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 2,
+                                "y": -50
+                              },
+                              {
+                                "x": 20,
+                                "y": -50
+                              },
+                              {
+                                "x": 20,
+                                "y": -7
+                              },
+                              {
+                                "x": 39,
+                                "y": -7
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "cooSet",
+                          "y"
+                        ],
+                        "component2": [
+                          "vavBoxCon",
+                          "TRooCooSet"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -18,
+                                "y": 20
+                              },
+                              {
+                                "x": 0,
+                                "y": 20
+                              },
+                              {
+                                "x": 0,
+                                "y": 0
+                              },
+                              {
+                                "x": 38,
+                                "y": 0
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "heaSet",
+                          "y"
+                        ],
+                        "component2": [
+                          "vavBoxCon",
+                          "TRooHeaSet"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -18,
+                                "y": 70
+                              },
+                              {
+                                "x": 20,
+                                "y": 70
+                              },
+                              {
+                                "x": 20,
+                                "y": 7
+                              },
+                              {
+                                "x": 38,
+                                "y": 7
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "sin",
+                          "y"
+                        ],
+                        "component2": [
+                          "rooTem",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -58,
+                                "y": -70
+                              },
+                              {
+                                "x": -40,
+                                "y": -70
+                              },
+                              {
+                                "x": -40,
+                                "y": -56
+                              },
+                              {
+                                "x": -22,
+                                "y": -56
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "ram",
+                          "y"
+                        ],
+                        "component2": [
+                          "rooTem",
+                          "u1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -58,
+                                "y": -30
+                              },
+                              {
+                                "x": -40,
+                                "y": -30
+                              },
+                              {
+                                "x": -40,
+                                "y": -44
+                              },
+                              {
+                                "x": -22,
+                                "y": -44
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "comp_annotation": {
+                "diagram": {
+                  "coordinateSystem": {
+                    "preserveAspectRatio": false
+                  }
+                },
+                "icon": {
+                  "coordinateSystem": {
+                    "preserveAspectRatio": false
+                  }
+                },
+                "documentation": {
+                  "info": "\"<html>\n<p>\nThis model tests the VAV box contoller of transition from heating control to cooling\ncontrol.\n</p>\n</html>\""
+                },
+                "vendor_annotation": {
+                  "name": "__Dymola_Commands",
+                  "annotation": [
+                    {
+                      "name": "file",
+                      "value": "\"modelica://Buildings/Resources/Scripts/Dymola/Examples/VAVReheat/Controls/Examples/RoomVAV.mos\" \"Simulate and plot"
+                    }
+                  ]
+                },
+                "othAnns": "__Dymola_Commands (file =\"modelica://Buildings/Resources/Scripts/Dymola/Examples/VAVReheat/Controls/Examples/RoomVAV.mos\" \"Simulate and plot\") ,experiment (StopTime =3600 ,Tolerance =1e-6 ) , , ,"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/Controls/Examples/RoomVAV.mo"
+  }
+]

@@ -1,0 +1,316 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat.Validation"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "model",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "Guideline36SteadyState",
+            "comment": "\"Validation of detailed model that is at steady state with constant weather data\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Buildings.Examples.VAVReheat.Guideline36",
+                      "class_modification": {
+                        "modifications": [
+                          {
+                            "name": "weaDat",
+                            "variable_modification": {
+                              "modification": {
+                                "modifications": [
+                                  {
+                                    "name": "pAtmSou",
+                                    "value": "Buildings.BoundaryConditions.Types.DataSource.Parameter"
+                                  },
+                                  {
+                                    "name": "ceiHeiSou",
+                                    "value": "Buildings.BoundaryConditions.Types.DataSource.Parameter"
+                                  },
+                                  {
+                                    "name": "totSkyCovSou",
+                                    "value": "Buildings.BoundaryConditions.Types.DataSource.Parameter"
+                                  },
+                                  {
+                                    "name": "opaSkyCovSou",
+                                    "value": "Buildings.BoundaryConditions.Types.DataSource.Parameter"
+                                  },
+                                  {
+                                    "name": "TDryBulSou",
+                                    "value": "Buildings.BoundaryConditions.Types.DataSource.Parameter"
+                                  },
+                                  {
+                                    "name": "TDewPoiSou",
+                                    "value": "Buildings.BoundaryConditions.Types.DataSource.Parameter"
+                                  },
+                                  {
+                                    "name": "TBlaSkySou",
+                                    "value": "Buildings.BoundaryConditions.Types.DataSource.Parameter"
+                                  },
+                                  {
+                                    "name": "TBlaSky",
+                                    "value": "293.15"
+                                  },
+                                  {
+                                    "name": "relHumSou",
+                                    "value": "Buildings.BoundaryConditions.Types.DataSource.Parameter"
+                                  },
+                                  {
+                                    "name": "winSpeSou",
+                                    "value": "Buildings.BoundaryConditions.Types.DataSource.Parameter"
+                                  },
+                                  {
+                                    "name": "winDirSou",
+                                    "value": "Buildings.BoundaryConditions.Types.DataSource.Parameter"
+                                  },
+                                  {
+                                    "name": "HInfHorSou",
+                                    "value": "Buildings.BoundaryConditions.Types.DataSource.Parameter"
+                                  },
+                                  {
+                                    "name": "HSou",
+                                    "value": "Buildings.BoundaryConditions.Types.RadiationDataSource.Input_HGloHor_HDifHor"
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "name": "use_windPressure",
+                            "value": "false"
+                          },
+                          {
+                            "name": "sampleModel",
+                            "value": "false"
+                          },
+                          {
+                            "name": "flo",
+                            "variable_modification": {
+                              "modification": {
+                                "modifications": [
+                                  {
+                                    "name": "gai",
+                                    "variable_modification": {
+                                      "modification": {
+                                        "modifications": [
+                                          {
+                                            "name": "K",
+                                            "value": "0*[0.4; 0.4; 0.2]"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "name": "occSch",
+                            "variable_modification": {
+                              "modification": {
+                                "modifications": [
+                                  {
+                                    "name": "occupancy",
+                                    "value": "3600*24*365*{1,2}"
+                                  },
+                                  {
+                                    "name": "period",
+                                    "value": "2*3600*24*365"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Continuous.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "solRad",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "0"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Solar radiation\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -400,
+                                        "y": 160
+                                      },
+                                      {
+                                        "x": -380,
+                                        "y": 180
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "weaDat",
+                          "HDifHor_in"
+                        ],
+                        "component2": [
+                          "solRad",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -361,
+                                "y": 170.5
+                              },
+                              {
+                                "x": -370,
+                                "y": 170.5
+                              },
+                              {
+                                "x": -370,
+                                "y": 170
+                              },
+                              {
+                                "x": -378,
+                                "y": 170
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "weaDat",
+                          "HGloHor_in"
+                        ],
+                        "component2": [
+                          "solRad",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -361,
+                                "y": 167
+                              },
+                              {
+                                "x": -370,
+                                "y": 167
+                              },
+                              {
+                                "x": -370,
+                                "y": 170
+                              },
+                              {
+                                "x": -378,
+                                "y": 170
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "comp_annotation": {
+                "diagram": {
+                  "coordinateSystem": {
+                    "extent": [
+                      {
+                        "x": -420,
+                        "y": -300
+                      },
+                      {
+                        "x": 1360,
+                        "y": 660
+                      }
+                    ]
+                  }
+                },
+                "icon": {
+                  "coordinateSystem": {
+                    "extent": [
+                      {
+                        "x": -100,
+                        "y": -100
+                      },
+                      {
+                        "x": 100,
+                        "y": 100
+                      }
+                    ]
+                  }
+                },
+                "documentation": {
+                  "info": "\"<html>\n<p>\nThis model validates that the detailed model of multiple rooms and an HVAC system\nstarts at and remains at exactly <i>20</i>&deg;C room air temperature\nif there is no solar radiation, constant outdoor conditions, no internal gains and\nno HVAC operation.\n</p>\n</html>\"",
+                  "revisions": "\"<html>\n<ul>\n<li>\nApril 18, 2020, by Michael Wetter:<br/>\nFirst implementation.\n</li>\n</ul>\n</html>\""
+                },
+                "vendor_annotation": {
+                  "name": "__Dymola_Commands",
+                  "annotation": [
+                    {
+                      "name": "file",
+                      "value": "\"modelica://Buildings/Resources/Scripts/Dymola/Examples/VAVReheat/Validation/Guideline36SteadyState.mos\" \"Simulate and plot"
+                    }
+                  ]
+                },
+                "othAnns": "experiment (StopTime =604800 ,Tolerance =1e-06 ) ,__Dymola_Commands (file =\"modelica://Buildings/Resources/Scripts/Dymola/Examples/VAVReheat/Validation/Guideline36SteadyState.mos\" \"Simulate and plot\") , , ,"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/Validation/Guideline36SteadyState.mo"
+  }
+]

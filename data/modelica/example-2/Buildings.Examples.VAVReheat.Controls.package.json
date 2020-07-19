@@ -1,0 +1,30 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "package",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "Controls",
+            "comment": "\"Package with controller models\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Icons.VariantsPackage"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/Controls/package.mo"
+  }
+]

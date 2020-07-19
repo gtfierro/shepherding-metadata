@@ -1,0 +1,883 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat.Controls"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "model",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "MixedAirTemperatureSetpoint",
+            "comment": "\"Mixed air temperature setpoint for economizer\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Blocks.Icons.Block"
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Routing.Extractor",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TSetMix",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "nin",
+                                    "value": "6"
+                                  },
+                                  {
+                                    "name": "index",
+                                    "variable_modification": {
+                                      "modification": {
+                                        "modifications": [
+                                          {
+                                            "name": "start",
+                                            "value": "2"
+                                          },
+                                          {
+                                            "name": "fixed",
+                                            "value": "true"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Mixed air setpoint temperature extractor\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 60,
+                                        "y": 0
+                                      },
+                                      {
+                                        "x": 80,
+                                        "y": 20
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "off",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "273.15 + 13"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Setpoint temperature to close damper\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": 20
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": 40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Utilities.Math.Average",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "ave",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "nin",
+                                    "value": "2"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": -70
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": -50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TSupHeaSet"
+                            },
+                            "comment": {
+                              "string_comment": "\"Supply temperature setpoint for heating\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": 40
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 80
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": 40
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 80
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TSupCooSet"
+                            },
+                            "comment": {
+                              "string_comment": "\"Supply temperature setpoint for cooling\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": -80
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": -40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TPreCoo",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "273.15 + 13"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Setpoint during pre-cooling\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": -20
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": 0
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "ControlBus",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "controlBus"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -40,
+                                        "y": 60
+                                      },
+                                      {
+                                        "x": -20,
+                                        "y": 80
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealOutput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TSet"
+                            },
+                            "comment": {
+                              "string_comment": "\"Mixed air temperature setpoint\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 100,
+                                        "y": 0
+                                      },
+                                      {
+                                        "x": 120,
+                                        "y": 20
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Routing.Multiplex2",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "multiplex2_1"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -60,
+                                        "y": -70
+                                      },
+                                      {
+                                        "x": -40,
+                                        "y": -50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TSetMix",
+                          "u[1]"
+                        ],
+                        "component2": [
+                          "ave",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 58,
+                                "y": 8.33333
+                              },
+                              {
+                                "x": 14,
+                                "y": 8.33333
+                              },
+                              {
+                                "x": 14,
+                                "y": -60
+                              },
+                              {
+                                "x": 1,
+                                "y": -60
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "ave",
+                          "y"
+                        ],
+                        "component2": [
+                          "TSetMix",
+                          "u[1]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1,
+                                "y": -60
+                              },
+                              {
+                                "x": 42,
+                                "y": -60
+                              },
+                              {
+                                "x": 42,
+                                "y": 8.33333
+                              },
+                              {
+                                "x": 58,
+                                "y": 8.33333
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "off",
+                          "y"
+                        ],
+                        "component2": [
+                          "TSetMix",
+                          "u[2]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -59,
+                                "y": 30
+                              },
+                              {
+                                "x": 40,
+                                "y": 30
+                              },
+                              {
+                                "x": 40,
+                                "y": 12
+                              },
+                              {
+                                "x": 58,
+                                "y": 12
+                              },
+                              {
+                                "x": 58,
+                                "y": 9
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "off",
+                          "y"
+                        ],
+                        "component2": [
+                          "TSetMix",
+                          "u[3]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -59,
+                                "y": 30
+                              },
+                              {
+                                "x": 40,
+                                "y": 30
+                              },
+                              {
+                                "x": 40,
+                                "y": 9.66667
+                              },
+                              {
+                                "x": 58,
+                                "y": 9.66667
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "off",
+                          "y"
+                        ],
+                        "component2": [
+                          "TSetMix",
+                          "u[4]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -59,
+                                "y": 30
+                              },
+                              {
+                                "x": 9.5,
+                                "y": 30
+                              },
+                              {
+                                "x": 9.5,
+                                "y": 10.3333
+                              },
+                              {
+                                "x": 58,
+                                "y": 10.3333
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TPreCoo",
+                          "y"
+                        ],
+                        "component2": [
+                          "TSetMix",
+                          "u[5]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -59,
+                                "y": -10
+                              },
+                              {
+                                "x": 0,
+                                "y": -10
+                              },
+                              {
+                                "x": 0,
+                                "y": 11
+                              },
+                              {
+                                "x": 58,
+                                "y": 11
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "off",
+                          "y"
+                        ],
+                        "component2": [
+                          "TSetMix",
+                          "u[6]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -59,
+                                "y": 30
+                              },
+                              {
+                                "x": 40,
+                                "y": 30
+                              },
+                              {
+                                "x": 40,
+                                "y": 11.6667
+                              },
+                              {
+                                "x": 58,
+                                "y": 11.6667
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "controlBus",
+                          "controlMode"
+                        ],
+                        "component2": [
+                          "TSetMix",
+                          "index"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -30,
+                                "y": 70
+                              },
+                              {
+                                "x": -30,
+                                "y": -14
+                              },
+                              {
+                                "x": 70,
+                                "y": -14
+                              },
+                              {
+                                "x": 70,
+                                "y": -2
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%first\" ,index =-1 ,extent ={{-6,3},{-6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TSetMix",
+                          "y"
+                        ],
+                        "component2": [
+                          "TSet"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 81,
+                                "y": 10
+                              },
+                              {
+                                "x": 110,
+                                "y": 10
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "multiplex2_1",
+                          "y"
+                        ],
+                        "component2": [
+                          "ave",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -39,
+                                "y": -60
+                              },
+                              {
+                                "x": -22,
+                                "y": -60
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TSupCooSet"
+                        ],
+                        "component2": [
+                          "multiplex2_1",
+                          "u2[1]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -120,
+                                "y": -60
+                              },
+                              {
+                                "x": -90,
+                                "y": -60
+                              },
+                              {
+                                "x": -90,
+                                "y": -66
+                              },
+                              {
+                                "x": -62,
+                                "y": -66
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TSupHeaSet"
+                        ],
+                        "component2": [
+                          "multiplex2_1",
+                          "u1[1]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -120,
+                                "y": 60
+                              },
+                              {
+                                "x": -90,
+                                "y": 60
+                              },
+                              {
+                                "x": -90,
+                                "y": -54
+                              },
+                              {
+                                "x": -62,
+                                "y": -54
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/Controls/MixedAirTemperatureSetpoint.mo"
+  }
+]

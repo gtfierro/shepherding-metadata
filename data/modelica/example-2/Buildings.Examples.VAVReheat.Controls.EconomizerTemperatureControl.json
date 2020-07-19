@@ -1,0 +1,1050 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat.Controls"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "block",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "EconomizerTemperatureControl",
+            "comment": "\"Controller for economizer mixed air temperature\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Blocks.Icons.Block"
+                    }
+                  },
+                  {
+                    "import_clause": {
+                      "prefix": "import",
+                      "name": "Buildings.Examples.VAVReheat.Controls.OperationModes"
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.Continuous.LimPID",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "con",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "k"
+                                  },
+                                  {
+                                    "name": "Ti",
+                                    "value": "Ti"
+                                  },
+                                  {
+                                    "name": "yMax",
+                                    "value": "0.995"
+                                  },
+                                  {
+                                    "name": "yMin",
+                                    "value": "0.005"
+                                  },
+                                  {
+                                    "name": "Td",
+                                    "value": "60"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Controller for mixed air temperature\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 60,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 80,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Real",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "k",
+                              "value": "1"
+                            },
+                            "comment": {
+                              "string_comment": "\"Gain of controller\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Time",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "Ti"
+                            },
+                            "comment": {
+                              "string_comment": "\"Time constant of integrator block\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Logical.Switch",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "swi1"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 0,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 20,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Logical.Switch",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "swi2"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 0,
+                                        "y": -50
+                                      },
+                                      {
+                                        "x": 20,
+                                        "y": -30
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealOutput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "yOA"
+                            },
+                            "comment": {
+                              "string_comment": "\"Control signal for outside air damper\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 100,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 120,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TRet"
+                            },
+                            "comment": {
+                              "string_comment": "\"Return air temperature\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": 40
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 80
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TOut"
+                            },
+                            "comment": {
+                              "string_comment": "\"Outside air temperature\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": 0
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TMix"
+                            },
+                            "comment": {
+                              "string_comment": "\"Mixed air temperature\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": -40
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 0
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TMixSet"
+                            },
+                            "comment": {
+                              "string_comment": "\"Setpoint for mixed air temperature\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": -80
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": -40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Logical.Hysteresis",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "hysConGai",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "uLow",
+                                    "value": "-0.1"
+                                  },
+                                  {
+                                    "name": "uHigh",
+                                    "value": "0.1"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Hysteresis for control gain\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -40,
+                                        "y": 50
+                                      },
+                                      {
+                                        "x": -20,
+                                        "y": 70
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Math.Feedback",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "feedback"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -70,
+                                        "y": 50
+                                      },
+                                      {
+                                        "x": -50,
+                                        "y": 70
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "swi1",
+                          "y"
+                        ],
+                        "component2": [
+                          "con",
+                          "u_s"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 21,
+                                "y": 6.10623e-16
+                              },
+                              {
+                                "x": 30,
+                                "y": 0
+                              },
+                              {
+                                "x": 40,
+                                "y": 1.27676e-15
+                              },
+                              {
+                                "x": 40,
+                                "y": 6.66134e-16
+                              },
+                              {
+                                "x": 58,
+                                "y": 6.66134e-16
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "swi2",
+                          "y"
+                        ],
+                        "component2": [
+                          "con",
+                          "u_m"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 21,
+                                "y": -40
+                              },
+                              {
+                                "x": 70,
+                                "y": -40
+                              },
+                              {
+                                "x": 70,
+                                "y": -12
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "con",
+                          "y"
+                        ],
+                        "component2": [
+                          "yOA"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 81,
+                                "y": 6.10623e-16
+                              },
+                              {
+                                "x": 90.5,
+                                "y": 6.10623e-16
+                              },
+                              {
+                                "x": 90.5,
+                                "y": 5.55112e-16
+                              },
+                              {
+                                "x": 110,
+                                "y": 5.55112e-16
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "swi1",
+                          "u1"
+                        ],
+                        "component2": [
+                          "TMix"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -2,
+                                "y": 8
+                              },
+                              {
+                                "x": -80,
+                                "y": 8
+                              },
+                              {
+                                "x": -80,
+                                "y": -20
+                              },
+                              {
+                                "x": -120,
+                                "y": -20
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "swi2",
+                          "u3"
+                        ],
+                        "component2": [
+                          "TMix"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -2,
+                                "y": -48
+                              },
+                              {
+                                "x": -80,
+                                "y": -48
+                              },
+                              {
+                                "x": -80,
+                                "y": -20
+                              },
+                              {
+                                "x": -120,
+                                "y": -20
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "swi1",
+                          "u3"
+                        ],
+                        "component2": [
+                          "TMixSet"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -2,
+                                "y": -8
+                              },
+                              {
+                                "x": -60,
+                                "y": -8
+                              },
+                              {
+                                "x": -60,
+                                "y": -60
+                              },
+                              {
+                                "x": -120,
+                                "y": -60
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "swi2",
+                          "u1"
+                        ],
+                        "component2": [
+                          "TMixSet"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -2,
+                                "y": -32
+                              },
+                              {
+                                "x": -60,
+                                "y": -32
+                              },
+                              {
+                                "x": -60,
+                                "y": -60
+                              },
+                              {
+                                "x": -120,
+                                "y": -60
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "feedback",
+                          "u1"
+                        ],
+                        "component2": [
+                          "TRet"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -68,
+                                "y": 60
+                              },
+                              {
+                                "x": -68,
+                                "y": 60
+                              },
+                              {
+                                "x": -88,
+                                "y": 60
+                              },
+                              {
+                                "x": -88,
+                                "y": 60
+                              },
+                              {
+                                "x": -120,
+                                "y": 60
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TOut"
+                        ],
+                        "component2": [
+                          "feedback",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -120,
+                                "y": 20
+                              },
+                              {
+                                "x": -60,
+                                "y": 20
+                              },
+                              {
+                                "x": -60,
+                                "y": 52
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "feedback",
+                          "y"
+                        ],
+                        "component2": [
+                          "hysConGai",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -51,
+                                "y": 60
+                              },
+                              {
+                                "x": -48,
+                                "y": 60
+                              },
+                              {
+                                "x": -46,
+                                "y": 60
+                              },
+                              {
+                                "x": -42,
+                                "y": 60
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "hysConGai",
+                          "y"
+                        ],
+                        "component2": [
+                          "swi2",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -19,
+                                "y": 60
+                              },
+                              {
+                                "x": -12,
+                                "y": 60
+                              },
+                              {
+                                "x": -12,
+                                "y": -40
+                              },
+                              {
+                                "x": -2,
+                                "y": -40
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "hysConGai",
+                          "y"
+                        ],
+                        "component2": [
+                          "swi1",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -19,
+                                "y": 60
+                              },
+                              {
+                                "x": -12,
+                                "y": 60
+                              },
+                              {
+                                "x": -12,
+                                "y": 0
+                              },
+                              {
+                                "x": -2,
+                                "y": 0
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "comp_annotation": {
+                "icon": {
+                  "coordinateSystem": {
+                    "extent": [
+                      {
+                        "x": -100,
+                        "y": -100
+                      },
+                      {
+                        "x": 100,
+                        "y": 100
+                      }
+                    ],
+                    "preserveAspectRatio": true
+                  },
+                  "graphics": {
+                    "text": [
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 127
+                        },
+                        "extent": [
+                          {
+                            "x": -92,
+                            "y": 78
+                          },
+                          {
+                            "x": -66,
+                            "y": 50
+                          }
+                        ],
+                        "textString": "\"TRet\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 127
+                        },
+                        "extent": [
+                          {
+                            "x": -88,
+                            "y": 34
+                          },
+                          {
+                            "x": -62,
+                            "y": 6
+                          }
+                        ],
+                        "textString": "\"TOut\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 127
+                        },
+                        "extent": [
+                          {
+                            "x": -86,
+                            "y": -6
+                          },
+                          {
+                            "x": -60,
+                            "y": -34
+                          }
+                        ],
+                        "textString": "\"TMix\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 127
+                        },
+                        "extent": [
+                          {
+                            "x": -84,
+                            "y": -46
+                          },
+                          {
+                            "x": -58,
+                            "y": -74
+                          }
+                        ],
+                        "textString": "\"TMixSet\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 127
+                        },
+                        "extent": [
+                          {
+                            "x": 64,
+                            "y": 14
+                          },
+                          {
+                            "x": 90,
+                            "y": -14
+                          }
+                        ],
+                        "textString": "\"yOA\""
+                      }
+                    ]
+                  }
+                },
+                "documentation": {
+                  "info": "\"<html>\n<p>\nThis controller outputs the control signal for the outside\nair damper in order to regulate the mixed air temperature\n<code>TMix</code>.\n</p>\n<h4>Implementation</h4>\n<p>\nIf the control error <i>T<sub>mix,set</sub> - T<sub>mix</sub> &lt; 0</i>,\nthen more outside air is needed provided that <i>T<sub>out</sub> &lt; T<sub>ret</sub></i>,\nwhere\n<i>T<sub>out</sub></i> is the outside air temperature and\n<i>T<sub>ret</sub></i> is the return air temperature.\nHowever, if <i>T<sub>out</sub> &ge; T<sub>ret</sub></i>,\nthen less outside air is needed.\nHence, the control gain need to switch sign depending on this difference.\nThis is accomplished by taking the difference between these signals,\nand then switching the input of the controller.\nA hysteresis is used to avoid chattering, for example if\n<code>TRet</code> has numerical noise in the simulation, or\nmeasurement error in a real application.\n</p>\n</html>\"",
+                  "revisions": "\"<html>\n<ul>\n<li>\nApril 1, 2016, by Michael Wetter:<br/>\nAdded hysteresis to avoid too many events that stall the simulation.\nThis is for\n<a href=\\\"https://github.com/lbl-srg/modelica-buildings/issues/502\\\">#502</a>.\n</li>\n<li>\nMarch 8, 2013, by Michael Wetter:<br/>\nFirst implementation.\n</li>\n</ul>\n</html>\""
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/Controls/EconomizerTemperatureControl.mo"
+  }
+]

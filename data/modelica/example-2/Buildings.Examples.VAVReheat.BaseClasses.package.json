@@ -1,0 +1,36 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "package",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "BaseClasses",
+            "comment": "\"Package with base classes for Buildings.Examples.VAVReheat\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Icons.BasesPackage"
+                    }
+                  }
+                ]
+              },
+              "comp_annotation": {
+                "documentation": {
+                  "info": "\"<html>\n<p>\nThis package contains base classes that are used to construct the models in\n<a href=\\\"modelica://Buildings.Examples.VAVReheat\\\">Buildings.Examples.VAVReheat</a>.\n</p>\n</html>\""
+                },
+                "othAnns": "preferredView =\"info\" ,"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/BaseClasses/package.mo"
+  }
+]

@@ -1,0 +1,3813 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "model",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "ASHRAE2006",
+            "comment": "\"Variable air volume flow system with terminal reheat and five thermal zones\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Icons.Example"
+                    }
+                  },
+                  {
+                    "extends_clause": {
+                      "name": "Buildings.Examples.VAVReheat.BaseClasses.PartialOpenLoop",
+                      "class_modification": {
+                        "modifications": [
+                          {
+                            "name": "heaCoi",
+                            "variable_modification": {
+                              "modification": {
+                                "modifications": [
+                                  {
+                                    "name": "show_T",
+                                    "value": "true"
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "name": "cooCoi",
+                            "variable_modification": {
+                              "modification": {
+                                "modifications": [
+                                  {
+                                    "name": "show_T",
+                                    "value": "true"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TSupSetHea",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "y",
+                                    "variable_modification": {
+                                      "modification": {
+                                        "modifications": [
+                                          {
+                                            "prefix": "final",
+                                            "name": "quantity",
+                                            "value": "\"ThermodynamicTemperature\""
+                                          },
+                                          {
+                                            "prefix": "final",
+                                            "name": "unit",
+                                            "value": "\"K\""
+                                          },
+                                          {
+                                            "name": "displayUnit",
+                                            "value": "\"degC\""
+                                          },
+                                          {
+                                            "name": "min",
+                                            "value": "0"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "name": "k",
+                                    "value": "273.15 + 10"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Supply air temperature setpoint for heating\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -180,
+                                        "y": -172
+                                      },
+                                      {
+                                        "x": -160,
+                                        "y": -152
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Controls.FanVFD",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "conFanSup",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "xSet_nominal",
+                                    "value": "410",
+                                    "variable_modification": {
+                                      "modification": {
+                                        "modifications": [
+                                          {
+                                            "name": "displayUnit",
+                                            "value": "\"Pa\""
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "name": "r_N_min",
+                                    "value": "yFanMin"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Controller for fan\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 240,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 260,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Controls.ModeSelector",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "modeSelector"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -200,
+                                        "y": -320
+                                      },
+                                      {
+                                        "x": -180,
+                                        "y": -300
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Controls.ControlBus",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "controlBus"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -250,
+                                        "y": -352
+                                      },
+                                      {
+                                        "x": -230,
+                                        "y": -332
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Controls.Economizer",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "conEco",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "dT",
+                                    "value": "1"
+                                  },
+                                  {
+                                    "name": "VOut_flow_min",
+                                    "value": "0.3*m_flow_nominal/1.2"
+                                  },
+                                  {
+                                    "name": "Ti",
+                                    "value": "600"
+                                  },
+                                  {
+                                    "name": "k",
+                                    "value": "0.1"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Controller for economizer\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": 140
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": 160
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Controls.RoomTemperatureSetpoint",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TSetRoo",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "final",
+                                    "name": "THeaOn",
+                                    "value": "THeaOn"
+                                  },
+                                  {
+                                    "prefix": "final",
+                                    "name": "THeaOff",
+                                    "value": "THeaOff"
+                                  },
+                                  {
+                                    "prefix": "final",
+                                    "name": "TCooOn",
+                                    "value": "TCooOn"
+                                  },
+                                  {
+                                    "prefix": "final",
+                                    "name": "TCooOff",
+                                    "value": "TCooOff"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -300,
+                                        "y": -358
+                                      },
+                                      {
+                                        "x": -280,
+                                        "y": -338
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Controls.DuctStaticPressureSetpoint",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "pSetDuc",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "nin",
+                                    "value": "5"
+                                  },
+                                  {
+                                    "name": "pMin",
+                                    "value": "50"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Duct static pressure setpoint\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 160,
+                                        "y": -16
+                                      },
+                                      {
+                                        "x": 180,
+                                        "y": 4
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Controls.CoolingCoilTemperatureSetpoint",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TSetCoo"
+                            },
+                            "comment": {
+                              "string_comment": "\"Setpoint for cooling coil\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -130,
+                                        "y": -212
+                                      },
+                                      {
+                                        "x": -110,
+                                        "y": -192
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Controls.RoomVAV",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "conVAVCor"
+                            },
+                            "comment": {
+                              "string_comment": "\"Controller for terminal unit corridor\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 530,
+                                        "y": 32
+                                      },
+                                      {
+                                        "x": 550,
+                                        "y": 52
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Controls.RoomVAV",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "conVAVSou"
+                            },
+                            "comment": {
+                              "string_comment": "\"Controller for terminal unit south\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 700,
+                                        "y": 30
+                                      },
+                                      {
+                                        "x": 720,
+                                        "y": 50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Controls.RoomVAV",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "conVAVEas"
+                            },
+                            "comment": {
+                              "string_comment": "\"Controller for terminal unit east\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 880,
+                                        "y": 30
+                                      },
+                                      {
+                                        "x": 900,
+                                        "y": 50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Controls.RoomVAV",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "conVAVNor"
+                            },
+                            "comment": {
+                              "string_comment": "\"Controller for terminal unit north\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 1040,
+                                        "y": 30
+                                      },
+                                      {
+                                        "x": 1060,
+                                        "y": 50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Controls.RoomVAV",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "conVAVWes"
+                            },
+                            "comment": {
+                              "string_comment": "\"Controller for terminal unit west\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 1240,
+                                        "y": 28
+                                      },
+                                      {
+                                        "x": 1260,
+                                        "y": 48
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.Continuous.LimPID",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "heaCoiCon",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "yMax",
+                                    "value": "1"
+                                  },
+                                  {
+                                    "name": "yMin",
+                                    "value": "0"
+                                  },
+                                  {
+                                    "name": "Td",
+                                    "value": "60"
+                                  },
+                                  {
+                                    "name": "initType",
+                                    "value": "Modelica.Blocks.Types.InitPID.InitialState"
+                                  },
+                                  {
+                                    "name": "k",
+                                    "value": "0.02"
+                                  },
+                                  {
+                                    "name": "Ti",
+                                    "value": "300"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Controller for heating coil\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": -212
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": -192
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.Continuous.LimPID",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "cooCoiCon",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "reverseActing",
+                                    "value": "false"
+                                  },
+                                  {
+                                    "name": "Td",
+                                    "value": "60"
+                                  },
+                                  {
+                                    "name": "initType",
+                                    "value": "Modelica.Blocks.Types.InitPID.InitialState"
+                                  },
+                                  {
+                                    "name": "yMax",
+                                    "value": "1"
+                                  },
+                                  {
+                                    "name": "yMin",
+                                    "value": "0"
+                                  },
+                                  {
+                                    "name": "Ti",
+                                    "value": "600"
+                                  },
+                                  {
+                                    "name": "k",
+                                    "value": "0.1"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Controller for cooling coil\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": -250
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": -230
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Logical.Switch",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "swiHeaCoi"
+                            },
+                            "comment": {
+                              "string_comment": "\"Switch to switch off heating coil\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 60,
+                                        "y": -220
+                                      },
+                                      {
+                                        "x": 80,
+                                        "y": -200
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Logical.Switch",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "swiCooCoi"
+                            },
+                            "comment": {
+                              "string_comment": "\"Switch to switch off cooling coil\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 60,
+                                        "y": -258
+                                      },
+                                      {
+                                        "x": 80,
+                                        "y": -238
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Continuous.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "coiOff",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "0"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Signal to switch water flow through coils off\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -60,
+                                        "y": -172
+                                      },
+                                      {
+                                        "x": -40,
+                                        "y": -152
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Logical.Or",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "or2"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 0,
+                                        "y": -180
+                                      },
+                                      {
+                                        "x": 20,
+                                        "y": -160
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TSupSetHea",
+                          "y"
+                        ],
+                        "component2": [
+                          "heaCoiCon",
+                          "u_s"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -159,
+                                "y": -162
+                              },
+                              {
+                                "x": -96,
+                                "y": -162
+                              },
+                              {
+                                "x": -96,
+                                "y": -202
+                              },
+                              {
+                                "x": -82,
+                                "y": -202
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "fanSup",
+                          "port_b"
+                        ],
+                        "component2": [
+                          "dpDisSupFan",
+                          "port_a"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 320,
+                                "y": -40
+                              },
+                              {
+                                "x": 320,
+                                "y": 0
+                              },
+                              {
+                                "x": 320,
+                                "y": -10
+                              },
+                              {
+                                "x": 320,
+                                "y": -10
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "pattern": "LinePattern.Dot",
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "controlBus"
+                        ],
+                        "component2": [
+                          "modeSelector",
+                          "cb"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -240,
+                                "y": -342
+                              },
+                              {
+                                "x": -152,
+                                "y": -342
+                              },
+                              {
+                                "x": -152,
+                                "y": -303.182
+                              },
+                              {
+                                "x": -196.818,
+                                "y": -303.182
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%first\" ,index =-1 ,extent ={{-6,3},{-6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "min",
+                          "y"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TRooMin"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1221,
+                                "y": 450
+                              },
+                              {
+                                "x": 1400,
+                                "y": 450
+                              },
+                              {
+                                "x": 1400,
+                                "y": -342
+                              },
+                              {
+                                "x": -240,
+                                "y": -342
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash",
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%second\" ,index =1 ,extent ={{6,3},{6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "ave",
+                          "y"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TRooAve"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1221,
+                                "y": 420
+                              },
+                              {
+                                "x": 1400,
+                                "y": 420
+                              },
+                              {
+                                "x": 1400,
+                                "y": -342
+                              },
+                              {
+                                "x": -240,
+                                "y": -342
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash",
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%second\" ,index =1 ,extent ={{6,3},{6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TRet",
+                          "T"
+                        ],
+                        "component2": [
+                          "conEco",
+                          "TRet"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 100,
+                                "y": 151
+                              },
+                              {
+                                "x": 100,
+                                "y": 172
+                              },
+                              {
+                                "x": -92,
+                                "y": 172
+                              },
+                              {
+                                "x": -92,
+                                "y": 157.333
+                              },
+                              {
+                                "x": -81.3333,
+                                "y": 157.333
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash",
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TMix",
+                          "T"
+                        ],
+                        "component2": [
+                          "conEco",
+                          "TMix"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 40,
+                                "y": -29
+                              },
+                              {
+                                "x": 40,
+                                "y": 168
+                              },
+                              {
+                                "x": -90,
+                                "y": 168
+                              },
+                              {
+                                "x": -90,
+                                "y": 153.333
+                              },
+                              {
+                                "x": -81.3333,
+                                "y": 153.333
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash",
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conEco",
+                          "TSupHeaSet"
+                        ],
+                        "component2": [
+                          "TSupSetHea",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -81.3333,
+                                "y": 145.333
+                              },
+                              {
+                                "x": -156,
+                                "y": 145.333
+                              },
+                              {
+                                "x": -156,
+                                "y": -120
+                              },
+                              {
+                                "x": -140,
+                                "y": -120
+                              },
+                              {
+                                "x": -140,
+                                "y": -162
+                              },
+                              {
+                                "x": -159,
+                                "y": -162
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash",
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TSetRoo",
+                          "controlBus"
+                        ],
+                        "component2": [
+                          "controlBus"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -288,
+                                "y": -342
+                              },
+                              {
+                                "x": -240,
+                                "y": -342
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "dpDisSupFan",
+                          "p_rel"
+                        ],
+                        "component2": [
+                          "conFanSup",
+                          "u_m"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 311,
+                                "y": 4.44089e-16
+                              },
+                              {
+                                "x": 304,
+                                "y": 4.44089e-16
+                              },
+                              {
+                                "x": 304,
+                                "y": -16
+                              },
+                              {
+                                "x": 250,
+                                "y": -16
+                              },
+                              {
+                                "x": 250,
+                                "y": -12
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash",
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "pSetDuc",
+                          "y"
+                        ],
+                        "component2": [
+                          "conFanSup",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 181,
+                                "y": -6
+                              },
+                              {
+                                "x": 210,
+                                "y": -6
+                              },
+                              {
+                                "x": 210,
+                                "y": 0
+                              },
+                              {
+                                "x": 238,
+                                "y": 0
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash",
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TSetCoo",
+                          "TSet"
+                        ],
+                        "component2": [
+                          "cooCoiCon",
+                          "u_s"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -109,
+                                "y": -202
+                              },
+                              {
+                                "x": -96,
+                                "y": -202
+                              },
+                              {
+                                "x": -96,
+                                "y": -240
+                              },
+                              {
+                                "x": -82,
+                                "y": -240
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "pattern": "LinePattern.Dash",
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TSetCoo",
+                          "TSet"
+                        ],
+                        "component2": [
+                          "conEco",
+                          "TSupCooSet"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -109,
+                                "y": -202
+                              },
+                              {
+                                "x": -100,
+                                "y": -202
+                              },
+                              {
+                                "x": -100,
+                                "y": -114
+                              },
+                              {
+                                "x": -150,
+                                "y": -114
+                              },
+                              {
+                                "x": -150,
+                                "y": 141.333
+                              },
+                              {
+                                "x": -81.3333,
+                                "y": 141.333
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash",
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TSupSetHea",
+                          "y"
+                        ],
+                        "component2": [
+                          "TSetCoo",
+                          "TSetHea"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -159,
+                                "y": -162
+                              },
+                              {
+                                "x": -140,
+                                "y": -162
+                              },
+                              {
+                                "x": -140,
+                                "y": -202
+                              },
+                              {
+                                "x": -132,
+                                "y": -202
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "pattern": "LinePattern.Dash",
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "modeSelector",
+                          "cb"
+                        ],
+                        "component2": [
+                          "TSetCoo",
+                          "controlBus"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -196.818,
+                                "y": -303.182
+                              },
+                              {
+                                "x": -152,
+                                "y": -303.182
+                              },
+                              {
+                                "x": -152,
+                                "y": -210
+                              },
+                              {
+                                "x": -121.8,
+                                "y": -210
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conEco",
+                          "VOut_flow"
+                        ],
+                        "component2": [
+                          "VOut1",
+                          "V_flow"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -81.3333,
+                                "y": 149.333
+                              },
+                              {
+                                "x": -90,
+                                "y": 149.333
+                              },
+                              {
+                                "x": -90,
+                                "y": 80
+                              },
+                              {
+                                "x": -61,
+                                "y": 80
+                              },
+                              {
+                                "x": -61,
+                                "y": -20.9
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash",
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conEco",
+                          "yOA"
+                        ],
+                        "component2": [
+                          "eco",
+                          "yOut"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -59.3333,
+                                "y": 152
+                              },
+                              {
+                                "x": -10,
+                                "y": 152
+                              },
+                              {
+                                "x": -10,
+                                "y": -34
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash",
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conVAVCor",
+                          "TRoo"
+                        ],
+                        "component2": [
+                          "TRooAir",
+                          "y5[1]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 529,
+                                "y": 35
+                              },
+                              {
+                                "x": 520,
+                                "y": 35
+                              },
+                              {
+                                "x": 520,
+                                "y": 162
+                              },
+                              {
+                                "x": 511,
+                                "y": 162
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conVAVSou",
+                          "TRoo"
+                        ],
+                        "component2": [
+                          "TRooAir",
+                          "y1[1]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 699,
+                                "y": 33
+                              },
+                              {
+                                "x": 690,
+                                "y": 33
+                              },
+                              {
+                                "x": 690,
+                                "y": 36
+                              },
+                              {
+                                "x": 680,
+                                "y": 36
+                              },
+                              {
+                                "x": 680,
+                                "y": 178
+                              },
+                              {
+                                "x": 511,
+                                "y": 178
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TRooAir",
+                          "y2[1]"
+                        ],
+                        "component2": [
+                          "conVAVEas",
+                          "TRoo"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 511,
+                                "y": 174
+                              },
+                              {
+                                "x": 868,
+                                "y": 174
+                              },
+                              {
+                                "x": 868,
+                                "y": 33
+                              },
+                              {
+                                "x": 879,
+                                "y": 33
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TRooAir",
+                          "y3[1]"
+                        ],
+                        "component2": [
+                          "conVAVNor",
+                          "TRoo"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 511,
+                                "y": 170
+                              },
+                              {
+                                "x": 1028,
+                                "y": 170
+                              },
+                              {
+                                "x": 1028,
+                                "y": 33
+                              },
+                              {
+                                "x": 1039,
+                                "y": 33
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TRooAir",
+                          "y4[1]"
+                        ],
+                        "component2": [
+                          "conVAVWes",
+                          "TRoo"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 511,
+                                "y": 166
+                              },
+                              {
+                                "x": 1220,
+                                "y": 166
+                              },
+                              {
+                                "x": 1220,
+                                "y": 31
+                              },
+                              {
+                                "x": 1239,
+                                "y": 31
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "cor",
+                          "yVAV"
+                        ],
+                        "component2": [
+                          "conVAVCor",
+                          "yDam"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 566,
+                                "y": 50
+                              },
+                              {
+                                "x": 556,
+                                "y": 50
+                              },
+                              {
+                                "x": 556,
+                                "y": 46.8
+                              },
+                              {
+                                "x": 551,
+                                "y": 46.8
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "cor",
+                          "yVal"
+                        ],
+                        "component2": [
+                          "conVAVCor",
+                          "yVal"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 566,
+                                "y": 34
+                              },
+                              {
+                                "x": 560,
+                                "y": 34
+                              },
+                              {
+                                "x": 560,
+                                "y": 37
+                              },
+                              {
+                                "x": 551,
+                                "y": 37
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conVAVSou",
+                          "yDam"
+                        ],
+                        "component2": [
+                          "sou",
+                          "yVAV"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 721,
+                                "y": 44.8
+                              },
+                              {
+                                "x": 730,
+                                "y": 44.8
+                              },
+                              {
+                                "x": 730,
+                                "y": 48
+                              },
+                              {
+                                "x": 746,
+                                "y": 48
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conVAVSou",
+                          "yVal"
+                        ],
+                        "component2": [
+                          "sou",
+                          "yVal"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 721,
+                                "y": 35
+                              },
+                              {
+                                "x": 732.5,
+                                "y": 35
+                              },
+                              {
+                                "x": 732.5,
+                                "y": 32
+                              },
+                              {
+                                "x": 746,
+                                "y": 32
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conVAVEas",
+                          "yVal"
+                        ],
+                        "component2": [
+                          "eas",
+                          "yVal"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 901,
+                                "y": 35
+                              },
+                              {
+                                "x": 912.5,
+                                "y": 35
+                              },
+                              {
+                                "x": 912.5,
+                                "y": 32
+                              },
+                              {
+                                "x": 926,
+                                "y": 32
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conVAVEas",
+                          "yDam"
+                        ],
+                        "component2": [
+                          "eas",
+                          "yVAV"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 901,
+                                "y": 44.8
+                              },
+                              {
+                                "x": 910,
+                                "y": 44.8
+                              },
+                              {
+                                "x": 910,
+                                "y": 48
+                              },
+                              {
+                                "x": 926,
+                                "y": 48
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conVAVNor",
+                          "yDam"
+                        ],
+                        "component2": [
+                          "nor",
+                          "yVAV"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1061,
+                                "y": 44.8
+                              },
+                              {
+                                "x": 1072.5,
+                                "y": 44.8
+                              },
+                              {
+                                "x": 1072.5,
+                                "y": 48
+                              },
+                              {
+                                "x": 1086,
+                                "y": 48
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conVAVNor",
+                          "yVal"
+                        ],
+                        "component2": [
+                          "nor",
+                          "yVal"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1061,
+                                "y": 35
+                              },
+                              {
+                                "x": 1072.5,
+                                "y": 35
+                              },
+                              {
+                                "x": 1072.5,
+                                "y": 32
+                              },
+                              {
+                                "x": 1086,
+                                "y": 32
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conVAVCor",
+                          "TRooHeaSet"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TRooSetHea"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 528,
+                                "y": 49
+                              },
+                              {
+                                "x": 480,
+                                "y": 49
+                              },
+                              {
+                                "x": 480,
+                                "y": -342
+                              },
+                              {
+                                "x": -240,
+                                "y": -342
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conVAVCor",
+                          "TRooCooSet"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TRooSetCoo"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 528,
+                                "y": 42
+                              },
+                              {
+                                "x": 480,
+                                "y": 42
+                              },
+                              {
+                                "x": 480,
+                                "y": -342
+                              },
+                              {
+                                "x": -240,
+                                "y": -342
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conVAVSou",
+                          "TRooHeaSet"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TRooSetHea"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 698,
+                                "y": 47
+                              },
+                              {
+                                "x": 660,
+                                "y": 47
+                              },
+                              {
+                                "x": 660,
+                                "y": -342
+                              },
+                              {
+                                "x": -240,
+                                "y": -342
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conVAVSou",
+                          "TRooCooSet"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TRooSetCoo"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 698,
+                                "y": 40
+                              },
+                              {
+                                "x": 660,
+                                "y": 40
+                              },
+                              {
+                                "x": 660,
+                                "y": -342
+                              },
+                              {
+                                "x": -240,
+                                "y": -342
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conVAVEas",
+                          "TRooHeaSet"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TRooSetHea"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 878,
+                                "y": 47
+                              },
+                              {
+                                "x": 850,
+                                "y": 47
+                              },
+                              {
+                                "x": 850,
+                                "y": -342
+                              },
+                              {
+                                "x": -240,
+                                "y": -342
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conVAVEas",
+                          "TRooCooSet"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TRooSetCoo"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 878,
+                                "y": 40
+                              },
+                              {
+                                "x": 850,
+                                "y": 40
+                              },
+                              {
+                                "x": 850,
+                                "y": -342
+                              },
+                              {
+                                "x": -240,
+                                "y": -342
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conVAVNor",
+                          "TRooHeaSet"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TRooSetHea"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1038,
+                                "y": 47
+                              },
+                              {
+                                "x": 1020,
+                                "y": 47
+                              },
+                              {
+                                "x": 1020,
+                                "y": -342
+                              },
+                              {
+                                "x": -240,
+                                "y": -342
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conVAVNor",
+                          "TRooCooSet"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TRooSetCoo"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1038,
+                                "y": 40
+                              },
+                              {
+                                "x": 1020,
+                                "y": 40
+                              },
+                              {
+                                "x": 1020,
+                                "y": -342
+                              },
+                              {
+                                "x": -240,
+                                "y": -342
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conVAVWes",
+                          "TRooHeaSet"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TRooSetHea"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1238,
+                                "y": 45
+                              },
+                              {
+                                "x": 1202,
+                                "y": 45
+                              },
+                              {
+                                "x": 1202,
+                                "y": -342
+                              },
+                              {
+                                "x": -240,
+                                "y": -342
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conVAVWes",
+                          "TRooCooSet"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TRooSetCoo"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1238,
+                                "y": 38
+                              },
+                              {
+                                "x": 1202,
+                                "y": 38
+                              },
+                              {
+                                "x": 1202,
+                                "y": -342
+                              },
+                              {
+                                "x": -240,
+                                "y": -342
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conVAVWes",
+                          "yVal"
+                        ],
+                        "component2": [
+                          "wes",
+                          "yVal"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1261,
+                                "y": 33
+                              },
+                              {
+                                "x": 1272.5,
+                                "y": 33
+                              },
+                              {
+                                "x": 1272.5,
+                                "y": 32
+                              },
+                              {
+                                "x": 1286,
+                                "y": 32
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "wes",
+                          "yVAV"
+                        ],
+                        "component2": [
+                          "conVAVWes",
+                          "yDam"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1286,
+                                "y": 48
+                              },
+                              {
+                                "x": 1274,
+                                "y": 48
+                              },
+                              {
+                                "x": 1274,
+                                "y": 42.8
+                              },
+                              {
+                                "x": 1261,
+                                "y": 42.8
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "occSch",
+                          "tNexOcc"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "dTNexOcc"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -297,
+                                "y": -204
+                              },
+                              {
+                                "x": -240,
+                                "y": -204
+                              },
+                              {
+                                "x": -240,
+                                "y": -342
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%second\" ,index =1 ,extent ={{6,3},{6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "occSch",
+                          "occupied"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "occupied"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -297,
+                                "y": -216
+                              },
+                              {
+                                "x": -240,
+                                "y": -216
+                              },
+                              {
+                                "x": -240,
+                                "y": -342
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%second\" ,index =1 ,extent ={{6,3},{6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "pSetDuc",
+                          "TOut"
+                        ],
+                        "component2": [
+                          "TOut",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 158,
+                                "y": 2
+                              },
+                              {
+                                "x": 32,
+                                "y": 2
+                              },
+                              {
+                                "x": 32,
+                                "y": 130
+                              },
+                              {
+                                "x": -160,
+                                "y": 130
+                              },
+                              {
+                                "x": -160,
+                                "y": 180
+                              },
+                              {
+                                "x": -279,
+                                "y": 180
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TOut",
+                          "y"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TOut"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -279,
+                                "y": 180
+                              },
+                              {
+                                "x": -240,
+                                "y": 180
+                              },
+                              {
+                                "x": -240,
+                                "y": -342
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          },
+                          "text": "textString =\"%second\" ,index =1 ,extent ={{6,3},{6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conEco",
+                          "controlBus"
+                        ],
+                        "component2": [
+                          "controlBus"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -76,
+                                "y": 150.667
+                              },
+                              {
+                                "x": -76,
+                                "y": 120
+                              },
+                              {
+                                "x": -240,
+                                "y": 120
+                              },
+                              {
+                                "x": -240,
+                                "y": -342
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "modeSelector",
+                          "yFan"
+                        ],
+                        "component2": [
+                          "conFanSup",
+                          "uFan"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -179.545,
+                                "y": -310
+                              },
+                              {
+                                "x": 260,
+                                "y": -310
+                              },
+                              {
+                                "x": 260,
+                                "y": -30
+                              },
+                              {
+                                "x": 226,
+                                "y": -30
+                              },
+                              {
+                                "x": 226,
+                                "y": 6
+                              },
+                              {
+                                "x": 238,
+                                "y": 6
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "conFanSup",
+                          "y"
+                        ],
+                        "component2": [
+                          "fanSup",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 261,
+                                "y": 0
+                              },
+                              {
+                                "x": 280,
+                                "y": 0
+                              },
+                              {
+                                "x": 280,
+                                "y": -20
+                              },
+                              {
+                                "x": 310,
+                                "y": -20
+                              },
+                              {
+                                "x": 310,
+                                "y": -28
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "modeSelector",
+                          "yFan"
+                        ],
+                        "component2": [
+                          "swiCooCoi",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -179.545,
+                                "y": -310
+                              },
+                              {
+                                "x": -20,
+                                "y": -310
+                              },
+                              {
+                                "x": -20,
+                                "y": -248
+                              },
+                              {
+                                "x": 58,
+                                "y": -248
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "swiCooCoi",
+                          "u1"
+                        ],
+                        "component2": [
+                          "cooCoiCon",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 58,
+                                "y": -240
+                              },
+                              {
+                                "x": -20,
+                                "y": -240
+                              },
+                              {
+                                "x": -59,
+                                "y": -240
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "swiHeaCoi",
+                          "u1"
+                        ],
+                        "component2": [
+                          "heaCoiCon",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 58,
+                                "y": -202
+                              },
+                              {
+                                "x": -59,
+                                "y": -202
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "coiOff",
+                          "y"
+                        ],
+                        "component2": [
+                          "swiCooCoi",
+                          "u3"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -38,
+                                "y": -162
+                              },
+                              {
+                                "x": -28,
+                                "y": -162
+                              },
+                              {
+                                "x": -28,
+                                "y": -256
+                              },
+                              {
+                                "x": 58,
+                                "y": -256
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "coiOff",
+                          "y"
+                        ],
+                        "component2": [
+                          "swiHeaCoi",
+                          "u3"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -38,
+                                "y": -162
+                              },
+                              {
+                                "x": -28,
+                                "y": -162
+                              },
+                              {
+                                "x": -28,
+                                "y": -218
+                              },
+                              {
+                                "x": 58,
+                                "y": -218
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TSup",
+                          "T"
+                        ],
+                        "component2": [
+                          "cooCoiCon",
+                          "u_m"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 340,
+                                "y": -29
+                              },
+                              {
+                                "x": 340,
+                                "y": -12
+                              },
+                              {
+                                "x": 372,
+                                "y": -12
+                              },
+                              {
+                                "x": 372,
+                                "y": -268
+                              },
+                              {
+                                "x": -70,
+                                "y": -268
+                              },
+                              {
+                                "x": -70,
+                                "y": -252
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TSup",
+                          "T"
+                        ],
+                        "component2": [
+                          "heaCoiCon",
+                          "u_m"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 340,
+                                "y": -29
+                              },
+                              {
+                                "x": 340,
+                                "y": -12
+                              },
+                              {
+                                "x": 372,
+                                "y": -12
+                              },
+                              {
+                                "x": 372,
+                                "y": -268
+                              },
+                              {
+                                "x": -88,
+                                "y": -268
+                              },
+                              {
+                                "x": -88,
+                                "y": -222
+                              },
+                              {
+                                "x": -70,
+                                "y": -222
+                              },
+                              {
+                                "x": -70,
+                                "y": -214
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "gaiHeaCoi",
+                          "u"
+                        ],
+                        "component2": [
+                          "swiHeaCoi",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 98,
+                                "y": -210
+                              },
+                              {
+                                "x": 82,
+                                "y": -210
+                              },
+                              {
+                                "x": 82,
+                                "y": -210
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "gaiCooCoi",
+                          "u"
+                        ],
+                        "component2": [
+                          "swiCooCoi",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 98,
+                                "y": -248
+                              },
+                              {
+                                "x": 88,
+                                "y": -248
+                              },
+                              {
+                                "x": 88,
+                                "y": -248
+                              },
+                              {
+                                "x": 82,
+                                "y": -248
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "eco",
+                          "yExh"
+                        ],
+                        "component2": [
+                          "conEco",
+                          "yOA"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -3,
+                                "y": -34
+                              },
+                              {
+                                "x": -2,
+                                "y": -34
+                              },
+                              {
+                                "x": -2,
+                                "y": 152
+                              },
+                              {
+                                "x": -59.3333,
+                                "y": 152
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "eco",
+                          "yRet"
+                        ],
+                        "component2": [
+                          "conEco",
+                          "yRet"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -16.8,
+                                "y": -34
+                              },
+                              {
+                                "x": -16.8,
+                                "y": 146.667
+                              },
+                              {
+                                "x": -59.3333,
+                                "y": 146.667
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "pattern": "LinePattern.Dash"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "freSta",
+                          "y"
+                        ],
+                        "component2": [
+                          "or2",
+                          "u1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 22,
+                                "y": -92
+                              },
+                              {
+                                "x": 22,
+                                "y": -92
+                              },
+                              {
+                                "x": 40,
+                                "y": -92
+                              },
+                              {
+                                "x": 40,
+                                "y": -150
+                              },
+                              {
+                                "x": -20,
+                                "y": -150
+                              },
+                              {
+                                "x": -20,
+                                "y": -170
+                              },
+                              {
+                                "x": -2,
+                                "y": -170
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "or2",
+                          "u2"
+                        ],
+                        "component2": [
+                          "modeSelector",
+                          "yFan"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -2,
+                                "y": -178
+                              },
+                              {
+                                "x": -20,
+                                "y": -178
+                              },
+                              {
+                                "x": -20,
+                                "y": -310
+                              },
+                              {
+                                "x": -179.545,
+                                "y": -310
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "or2",
+                          "y"
+                        ],
+                        "component2": [
+                          "swiHeaCoi",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 22,
+                                "y": -170
+                              },
+                              {
+                                "x": 40,
+                                "y": -170
+                              },
+                              {
+                                "x": 40,
+                                "y": -190
+                              },
+                              {
+                                "x": 40,
+                                "y": -190
+                              },
+                              {
+                                "x": 40,
+                                "y": -210
+                              },
+                              {
+                                "x": 58,
+                                "y": -210
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "cor",
+                          "y_actual"
+                        ],
+                        "component2": [
+                          "pSetDuc",
+                          "u[1]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 612,
+                                "y": 58
+                              },
+                              {
+                                "x": 620,
+                                "y": 58
+                              },
+                              {
+                                "x": 620,
+                                "y": 74
+                              },
+                              {
+                                "x": 140,
+                                "y": 74
+                              },
+                              {
+                                "x": 140,
+                                "y": -7.6
+                              },
+                              {
+                                "x": 158,
+                                "y": -7.6
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "sou",
+                          "y_actual"
+                        ],
+                        "component2": [
+                          "pSetDuc",
+                          "u[2]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 792,
+                                "y": 56
+                              },
+                              {
+                                "x": 800,
+                                "y": 56
+                              },
+                              {
+                                "x": 800,
+                                "y": 74
+                              },
+                              {
+                                "x": 140,
+                                "y": 74
+                              },
+                              {
+                                "x": 140,
+                                "y": -6.8
+                              },
+                              {
+                                "x": 158,
+                                "y": -6.8
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "eas",
+                          "y_actual"
+                        ],
+                        "component2": [
+                          "pSetDuc",
+                          "u[3]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 972,
+                                "y": 56
+                              },
+                              {
+                                "x": 980,
+                                "y": 56
+                              },
+                              {
+                                "x": 980,
+                                "y": 74
+                              },
+                              {
+                                "x": 140,
+                                "y": 74
+                              },
+                              {
+                                "x": 140,
+                                "y": -6
+                              },
+                              {
+                                "x": 158,
+                                "y": -6
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "nor",
+                          "y_actual"
+                        ],
+                        "component2": [
+                          "pSetDuc",
+                          "u[4]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1132,
+                                "y": 56
+                              },
+                              {
+                                "x": 1140,
+                                "y": 56
+                              },
+                              {
+                                "x": 1140,
+                                "y": 74
+                              },
+                              {
+                                "x": 140,
+                                "y": 74
+                              },
+                              {
+                                "x": 140,
+                                "y": -5.2
+                              },
+                              {
+                                "x": 158,
+                                "y": -5.2
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "wes",
+                          "y_actual"
+                        ],
+                        "component2": [
+                          "pSetDuc",
+                          "u[5]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1332,
+                                "y": 56
+                              },
+                              {
+                                "x": 1338,
+                                "y": 56
+                              },
+                              {
+                                "x": 1338,
+                                "y": 74
+                              },
+                              {
+                                "x": 140,
+                                "y": 74
+                              },
+                              {
+                                "x": 140,
+                                "y": -4.4
+                              },
+                              {
+                                "x": 158,
+                                "y": -4.4
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "comp_annotation": {
+                "othAnns": "nul"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/ASHRAE2006.mo"
+  }
+]

@@ -1,0 +1,2247 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat.Controls"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "block",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "Economizer",
+            "comment": "\"Controller for economizer\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "import_clause": {
+                      "prefix": "import",
+                      "name": "Buildings.Examples.VAVReheat.Controls.OperationModes"
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Temperature",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TFreSet",
+                              "value": "277.15"
+                            },
+                            "comment": {
+                              "string_comment": "\"Lower limit for mixed air temperature for freeze protection\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.TemperatureDifference",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "dT",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "min",
+                                    "value": "0.1"
+                                  }
+                                ]
+                              },
+                              "value": "1"
+                            },
+                            "comment": {
+                              "string_comment": "\"Temperture offset to activate economizer\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.VolumeFlowRate",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "VOut_flow_min",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "min",
+                                    "value": "0"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Minimum outside air volume flow rate\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TSupHeaSet"
+                            },
+                            "comment": {
+                              "string_comment": "\"Supply temperature setpoint for heating\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": -40
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 0
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": -40
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 0
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TSupCooSet"
+                            },
+                            "comment": {
+                              "string_comment": "\"Supply temperature setpoint for cooling\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": -100
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": -60
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TMix"
+                            },
+                            "comment": {
+                              "string_comment": "\"Measured mixed air temperature\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": 80
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 120
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": 80
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 120
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "ControlBus",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "controlBus"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -50,
+                                        "y": 50
+                                      },
+                                      {
+                                        "x": -30,
+                                        "y": 70
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "VOut_flow"
+                            },
+                            "comment": {
+                              "string_comment": "\"Measured outside air flow rate\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": 20
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 60
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": 20
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 60
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TRet"
+                            },
+                            "comment": {
+                              "string_comment": "\"Return air temperature\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": 140
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 180
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": 140
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 180
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Math.Gain",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "gain",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "1/VOut_flow_min"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Normalize mass flow rate\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -60,
+                                        "y": -60
+                                      },
+                                      {
+                                        "x": -40,
+                                        "y": -40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.Continuous.LimPID",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "conV_flow",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "k"
+                                  },
+                                  {
+                                    "name": "Ti",
+                                    "value": "Ti"
+                                  },
+                                  {
+                                    "name": "yMax",
+                                    "value": "0.995"
+                                  },
+                                  {
+                                    "name": "yMin",
+                                    "value": "0.005"
+                                  },
+                                  {
+                                    "name": "Td",
+                                    "value": "60"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Controller for outside air flow rate\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -22,
+                                        "y": -20
+                                      },
+                                      {
+                                        "x": -2,
+                                        "y": 0
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "uni",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "1"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Unity signal\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -60,
+                                        "y": -20
+                                      },
+                                      {
+                                        "x": -40,
+                                        "y": 0
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Real",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "k",
+                              "value": "1"
+                            },
+                            "comment": {
+                              "string_comment": "\"Gain of controller\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Time",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "Ti"
+                            },
+                            "comment": {
+                              "string_comment": "\"Time constant of integrator block\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealOutput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "yOA"
+                            },
+                            "comment": {
+                              "string_comment": "\"Control signal for outside air damper\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 200,
+                                        "y": 70
+                                      },
+                                      {
+                                        "x": 220,
+                                        "y": 90
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": 200,
+                                        "y": 70
+                                      },
+                                      {
+                                        "x": 220,
+                                        "y": 90
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Routing.Extractor",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "extractor",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "nin",
+                                    "value": "6"
+                                  },
+                                  {
+                                    "name": "index",
+                                    "variable_modification": {
+                                      "modification": {
+                                        "modifications": [
+                                          {
+                                            "name": "start",
+                                            "value": "1"
+                                          },
+                                          {
+                                            "name": "fixed",
+                                            "value": "true"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Extractor for control signal\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 120,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 140,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "closed",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "0"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Signal to close OA damper\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 60,
+                                        "y": -90
+                                      },
+                                      {
+                                        "x": 80,
+                                        "y": -70
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Math.Max",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "max"
+                            },
+                            "comment": {
+                              "string_comment": "\"Takes bigger signal (OA damper opens for temp. control or for minimum outside air)\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 80,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 100,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "MixedAirTemperatureSetpoint",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TSetMix"
+                            },
+                            "comment": {
+                              "string_comment": "\"Mixed air temperature setpoint\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": 64
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": 84
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "EconomizerTemperatureControl",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "yOATMix",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "Ti",
+                                    "value": "Ti"
+                                  },
+                                  {
+                                    "name": "k",
+                                    "value": "k"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Control signal for outdoor damper to track mixed air temperature setpoint\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 20,
+                                        "y": 160
+                                      },
+                                      {
+                                        "x": 40,
+                                        "y": 180
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.Continuous.LimPID",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "yOATFre",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "k"
+                                  },
+                                  {
+                                    "name": "Ti",
+                                    "value": "Ti"
+                                  },
+                                  {
+                                    "name": "Td",
+                                    "value": "60"
+                                  },
+                                  {
+                                    "name": "yMax",
+                                    "value": "1"
+                                  },
+                                  {
+                                    "name": "yMin",
+                                    "value": "0"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Control signal for outdoor damper to track freeze temperature setpoint\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 20,
+                                        "y": 120
+                                      },
+                                      {
+                                        "x": 40,
+                                        "y": 140
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Math.Min",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "min"
+                            },
+                            "comment": {
+                              "string_comment": "\"Takes bigger signal (OA damper opens for temp. control or for minimum outside air)\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 20,
+                                        "y": -20
+                                      },
+                                      {
+                                        "x": 40,
+                                        "y": 0
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TFre",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "TFreSet"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Setpoint for freeze protection\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": 100
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": 120
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealOutput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "yRet"
+                            },
+                            "comment": {
+                              "string_comment": "\"Control signal for return air damper\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 200,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 220,
+                                        "y": 10
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": 200,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 220,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Continuous.AddParameter",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "invSig",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "p",
+                                    "value": "1"
+                                  },
+                                  {
+                                    "name": "k",
+                                    "value": "-1"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Invert control signal for interlocked damper\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 170,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 190,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "VOut_flow"
+                        ],
+                        "component2": [
+                          "gain",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -120,
+                                "y": 40
+                              },
+                              {
+                                "x": -92,
+                                "y": 40
+                              },
+                              {
+                                "x": -92,
+                                "y": -50
+                              },
+                              {
+                                "x": -62,
+                                "y": -50
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "gain",
+                          "y"
+                        ],
+                        "component2": [
+                          "conV_flow",
+                          "u_m"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -39,
+                                "y": -50
+                              },
+                              {
+                                "x": -12,
+                                "y": -50
+                              },
+                              {
+                                "x": -12,
+                                "y": -22
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "uni",
+                          "y"
+                        ],
+                        "component2": [
+                          "conV_flow",
+                          "u_s"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -39,
+                                "y": -10
+                              },
+                              {
+                                "x": -24,
+                                "y": -10
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "controlBus",
+                          "controlMode"
+                        ],
+                        "component2": [
+                          "extractor",
+                          "index"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -40,
+                                "y": 60
+                              },
+                              {
+                                "x": -40,
+                                "y": 30
+                              },
+                              {
+                                "x": 60,
+                                "y": 30
+                              },
+                              {
+                                "x": 60,
+                                "y": -30
+                              },
+                              {
+                                "x": 130,
+                                "y": -30
+                              },
+                              {
+                                "x": 130,
+                                "y": -12
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%first\" ,index =-1 ,extent ={{-6,3},{-6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "max",
+                          "y"
+                        ],
+                        "component2": [
+                          "extractor",
+                          "u[Integer(OperationModes",
+                          "occupied)]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 101,
+                                "y": 0
+                              },
+                              {
+                                "x": 118,
+                                "y": 0
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "closed",
+                          "y"
+                        ],
+                        "component2": [
+                          "extractor",
+                          "u[Integer(OperationModes",
+                          "unoccupiedOff)]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 81,
+                                "y": -80
+                              },
+                              {
+                                "x": 110,
+                                "y": -80
+                              },
+                              {
+                                "x": 110,
+                                "y": 0
+                              },
+                              {
+                                "x": 118,
+                                "y": 0
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "closed",
+                          "y"
+                        ],
+                        "component2": [
+                          "extractor",
+                          "u[Integer(OperationModes",
+                          "unoccupiedNightSetBack)]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 81,
+                                "y": -80
+                              },
+                              {
+                                "x": 110,
+                                "y": -80
+                              },
+                              {
+                                "x": 110,
+                                "y": 0
+                              },
+                              {
+                                "x": 118,
+                                "y": 0
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "max",
+                          "y"
+                        ],
+                        "component2": [
+                          "extractor",
+                          "u[Integer(OperationModes",
+                          "unoccupiedWarmUp)]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 101,
+                                "y": 0
+                              },
+                              {
+                                "x": 118,
+                                "y": 0
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "max",
+                          "y"
+                        ],
+                        "component2": [
+                          "extractor",
+                          "u[Integer(OperationModes",
+                          "unoccupiedPreCool)]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 101,
+                                "y": 0
+                              },
+                              {
+                                "x": 118,
+                                "y": 0
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "closed",
+                          "y"
+                        ],
+                        "component2": [
+                          "extractor",
+                          "u[Integer(OperationModes",
+                          "safety)]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 81,
+                                "y": -80
+                              },
+                              {
+                                "x": 110,
+                                "y": -80
+                              },
+                              {
+                                "x": 110,
+                                "y": 0
+                              },
+                              {
+                                "x": 118,
+                                "y": 0
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TSupHeaSet"
+                        ],
+                        "component2": [
+                          "TSetMix",
+                          "TSupHeaSet"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -120,
+                                "y": -20
+                              },
+                              {
+                                "x": -80,
+                                "y": -20
+                              },
+                              {
+                                "x": -80,
+                                "y": 80
+                              },
+                              {
+                                "x": -22,
+                                "y": 80
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TSupCooSet"
+                        ],
+                        "component2": [
+                          "TSetMix",
+                          "TSupCooSet"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -120,
+                                "y": -80
+                              },
+                              {
+                                "x": -72,
+                                "y": -80
+                              },
+                              {
+                                "x": -72,
+                                "y": 68
+                              },
+                              {
+                                "x": -22,
+                                "y": 68
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "controlBus"
+                        ],
+                        "component2": [
+                          "TSetMix",
+                          "controlBus"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -40,
+                                "y": 60
+                              },
+                              {
+                                "x": -13,
+                                "y": 60
+                              },
+                              {
+                                "x": -13,
+                                "y": 81
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%first\" ,index =-1 ,extent ={{-6,3},{-6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "yOATMix",
+                          "TRet"
+                        ],
+                        "component2": [
+                          "TRet"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 18,
+                                "y": 176
+                              },
+                              {
+                                "x": -90,
+                                "y": 176
+                              },
+                              {
+                                "x": -90,
+                                "y": 160
+                              },
+                              {
+                                "x": -120,
+                                "y": 160
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "controlBus",
+                          "TOut"
+                        ],
+                        "component2": [
+                          "yOATMix",
+                          "TOut"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -40,
+                                "y": 60
+                              },
+                              {
+                                "x": -40,
+                                "y": 172
+                              },
+                              {
+                                "x": 18,
+                                "y": 172
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 204,
+                              "b": 51
+                            },
+                            "thickness": 0.5,
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%first\" ,index =-1 ,extent ={{-6,3},{-6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "yOATMix",
+                          "TMix"
+                        ],
+                        "component2": [
+                          "TMix"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 18,
+                                "y": 168
+                              },
+                              {
+                                "x": -80,
+                                "y": 168
+                              },
+                              {
+                                "x": -80,
+                                "y": 100
+                              },
+                              {
+                                "x": -120,
+                                "y": 100
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "yOATMix",
+                          "TMixSet"
+                        ],
+                        "component2": [
+                          "TSetMix",
+                          "TSet"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 18,
+                                "y": 164
+                              },
+                              {
+                                "x": 6,
+                                "y": 164
+                              },
+                              {
+                                "x": 6,
+                                "y": 75
+                              },
+                              {
+                                "x": 1,
+                                "y": 75
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "yOATMix",
+                          "yOA"
+                        ],
+                        "component2": [
+                          "max",
+                          "u1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 41,
+                                "y": 170
+                              },
+                              {
+                                "x": 74,
+                                "y": 170
+                              },
+                              {
+                                "x": 74,
+                                "y": 6
+                              },
+                              {
+                                "x": 78,
+                                "y": 6
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "min",
+                          "u2"
+                        ],
+                        "component2": [
+                          "conV_flow",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 18,
+                                "y": -16
+                              },
+                              {
+                                "x": 10,
+                                "y": -16
+                              },
+                              {
+                                "x": 10,
+                                "y": -10
+                              },
+                              {
+                                "x": -1,
+                                "y": -10
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "min",
+                          "y"
+                        ],
+                        "component2": [
+                          "max",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 41,
+                                "y": -10
+                              },
+                              {
+                                "x": 60,
+                                "y": -10
+                              },
+                              {
+                                "x": 60,
+                                "y": -6
+                              },
+                              {
+                                "x": 78,
+                                "y": -6
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "yOATFre",
+                          "u_s"
+                        ],
+                        "component2": [
+                          "TMix"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 18,
+                                "y": 130
+                              },
+                              {
+                                "x": -32,
+                                "y": 130
+                              },
+                              {
+                                "x": -80,
+                                "y": 130
+                              },
+                              {
+                                "x": -80,
+                                "y": 100
+                              },
+                              {
+                                "x": -120,
+                                "y": 100
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TFre",
+                          "y"
+                        ],
+                        "component2": [
+                          "yOATFre",
+                          "u_m"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1,
+                                "y": 110
+                              },
+                              {
+                                "x": 14,
+                                "y": 110
+                              },
+                              {
+                                "x": 30,
+                                "y": 110
+                              },
+                              {
+                                "x": 30,
+                                "y": 118
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "yOATFre",
+                          "y"
+                        ],
+                        "component2": [
+                          "min",
+                          "u1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 41,
+                                "y": 130
+                              },
+                              {
+                                "x": 48,
+                                "y": 130
+                              },
+                              {
+                                "x": 48,
+                                "y": 20
+                              },
+                              {
+                                "x": 10,
+                                "y": 20
+                              },
+                              {
+                                "x": 10,
+                                "y": -4
+                              },
+                              {
+                                "x": 18,
+                                "y": -4
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "yRet"
+                        ],
+                        "component2": [
+                          "invSig",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 210,
+                                "y": 0
+                              },
+                              {
+                                "x": 191,
+                                "y": 0
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "extractor",
+                          "y"
+                        ],
+                        "component2": [
+                          "invSig",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 141,
+                                "y": 0
+                              },
+                              {
+                                "x": 168,
+                                "y": 0
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "extractor",
+                          "y"
+                        ],
+                        "component2": [
+                          "yOA"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 141,
+                                "y": 0
+                              },
+                              {
+                                "x": 160,
+                                "y": 0
+                              },
+                              {
+                                "x": 160,
+                                "y": 80
+                              },
+                              {
+                                "x": 210,
+                                "y": 80
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "comp_annotation": {
+                "diagram": {
+                  "coordinateSystem": {
+                    "extent": [
+                      {
+                        "x": -100,
+                        "y": -100
+                      },
+                      {
+                        "x": 200,
+                        "y": 200
+                      }
+                    ],
+                    "preserveAspectRatio": true
+                  }
+                },
+                "icon": {
+                  "coordinateSystem": {
+                    "extent": [
+                      {
+                        "x": -100,
+                        "y": -100
+                      },
+                      {
+                        "x": 200,
+                        "y": 200
+                      }
+                    ],
+                    "preserveAspectRatio": true
+                  },
+                  "graphics": {
+                    "rectangle": [
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 255,
+                          "g": 255,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.Solid",
+                        "extent": [
+                          {
+                            "x": -100,
+                            "y": 200
+                          },
+                          {
+                            "x": 200,
+                            "y": -100
+                          }
+                        ]
+                      }
+                    ],
+                    "text": [
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "extent": [
+                          {
+                            "x": -90,
+                            "y": 170
+                          },
+                          {
+                            "x": -50,
+                            "y": 150
+                          }
+                        ],
+                        "textString": "\"TRet\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "extent": [
+                          {
+                            "x": -86,
+                            "y": 104
+                          },
+                          {
+                            "x": -46,
+                            "y": 84
+                          }
+                        ],
+                        "textString": "\"TMix\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "extent": [
+                          {
+                            "x": -90,
+                            "y": 60
+                          },
+                          {
+                            "x": -22,
+                            "y": 12
+                          }
+                        ],
+                        "textString": "\"VOut_flow\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "extent": [
+                          {
+                            "x": -90,
+                            "y": -2
+                          },
+                          {
+                            "x": -28,
+                            "y": -40
+                          }
+                        ],
+                        "textString": "\"TSupHeaSet\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "extent": [
+                          {
+                            "x": -86,
+                            "y": -58
+                          },
+                          {
+                            "x": -24,
+                            "y": -96
+                          }
+                        ],
+                        "textString": "\"TSupCooSet\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "extent": [
+                          {
+                            "x": 138,
+                            "y": 96
+                          },
+                          {
+                            "x": 184,
+                            "y": 62
+                          }
+                        ],
+                        "textString": "\"yOA\""
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "extent": [
+                          {
+                            "x": 140,
+                            "y": 20
+                          },
+                          {
+                            "x": 186,
+                            "y": -14
+                          }
+                        ],
+                        "textString": "\"yRet\""
+                      }
+                    ]
+                  }
+                },
+                "documentation": {
+                  "info": "\"<html>\n<p>\nThis is a controller for an economizer with\nthat adjust the outside air dampers to meet the set point\nfor the mixing air, taking into account the minimum outside\nair requirement and an override for freeze protection.\n</p>\n</html>\"",
+                  "revisions": "\"<html>\n<ul>\n<li>\nDecember 20, 2016, by Michael Wetter:<br/>\nAdded type conversion for enumeration when used as an array index.<br/>\nThis is for\n<a href=\\\"https://github.com/lbl-srg/modelica-buildings/issues/602\\\">#602</a>.\n</li>\n<li>\nApril 26, 2016, by Michael Wetter:<br/>\nChanged controller for freeze protection as the old implementation closed\nthe outdoor air damper during summer.\nThis is\nfor <a href=\\\"https://github.com/ibpsa/modelica-ibpsa/issues/511\\\">#511</a>.\n</li>\n</ul>\n</html>\""
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/Controls/Economizer.mo"
+  }
+]

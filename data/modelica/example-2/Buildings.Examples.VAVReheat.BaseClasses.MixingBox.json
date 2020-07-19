@@ -1,0 +1,2374 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.VAVReheat.BaseClasses"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "model",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "MixingBox",
+            "comment": "\"Outside air mixing box with non-interlocked air dampers\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "replaceable": "replaceable",
+                    "replaceable_class_definition": {
+                      "class_prefixes": "package",
+                      "class_specifier": {
+                        "short_class_specifier": {
+                          "className": "Medium",
+                          "inputName": "Modelica.Media.Interfaces.PartialMedium",
+                          "comment": {
+                            "string_comment": "\"Medium in the component\"",
+                            "annotation": {
+                              "others": [
+                                {
+                                  "name": "choicesAllMatching",
+                                  "value": "true"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "import_clause": {
+                      "prefix": "import",
+                      "name": "Modelica.Constants"
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Boolean",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "allowFlowReversal",
+                              "value": "true"
+                            },
+                            "comment": {
+                              "string_comment": "\"= false to simplify equations, assuming, but not enforcing, no flow reversal\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "tab",
+                                    "value": "\"Assumptions\""
+                                  }
+                                ],
+                                "others": [
+                                  {
+                                    "name": "Evaluate",
+                                    "value": "true"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Boolean",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "use_deltaM",
+                              "value": "true"
+                            },
+                            "comment": {
+                              "string_comment": "\"Set to true to use deltaM for turbulent transition, else ReC is used\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Real",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "deltaM",
+                              "value": "0.3"
+                            },
+                            "comment": {
+                              "string_comment": "\"Fraction of nominal mass flow rate where transition to turbulent occurs\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "enable",
+                                    "value": "use_deltaM"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Velocity",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "v_nominal",
+                              "value": "1"
+                            },
+                            "comment": {
+                              "string_comment": "\"Nominal face velocity\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Boolean",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "roundDuct",
+                              "value": "false"
+                            },
+                            "comment": {
+                              "string_comment": "\"Set to true for round duct, false for square cross section\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "enable",
+                                    "value": "not use_deltaM"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Real",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "ReC",
+                              "value": "4000"
+                            },
+                            "comment": {
+                              "string_comment": "\"Reynolds number where transition to turbulent starts\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "enable",
+                                    "value": "not use_deltaM"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Boolean",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "dp_nominalIncludesDamper",
+                              "value": "false"
+                            },
+                            "comment": {
+                              "string_comment": "\"set to true if dp_nominal includes the pressure loss of the open damper\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "group",
+                                    "value": "\"Nominal condition\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.MassFlowRate",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "mOut_flow_nominal"
+                            },
+                            "comment": {
+                              "string_comment": "\"Mass flow rate outside air damper\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "group",
+                                    "value": "\"Nominal condition\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.PressureDifference",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "dpOut_nominal",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "min",
+                                    "value": "0"
+                                  },
+                                  {
+                                    "name": "displayUnit",
+                                    "value": "\"Pa\""
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Pressure drop outside air leg\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "group",
+                                    "value": "\"Nominal condition\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.MassFlowRate",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "mRec_flow_nominal"
+                            },
+                            "comment": {
+                              "string_comment": "\"Mass flow rate recirculation air damper\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "group",
+                                    "value": "\"Nominal condition\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.PressureDifference",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "dpRec_nominal",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "min",
+                                    "value": "0"
+                                  },
+                                  {
+                                    "name": "displayUnit",
+                                    "value": "\"Pa\""
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Pressure drop recirculation air leg\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "group",
+                                    "value": "\"Nominal condition\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.MassFlowRate",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "mExh_flow_nominal"
+                            },
+                            "comment": {
+                              "string_comment": "\"Mass flow rate exhaust air damper\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "group",
+                                    "value": "\"Nominal condition\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.PressureDifference",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "dpExh_nominal",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "min",
+                                    "value": "0"
+                                  },
+                                  {
+                                    "name": "displayUnit",
+                                    "value": "\"Pa\""
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Pressure drop exhaust air leg\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "group",
+                                    "value": "\"Nominal condition\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Boolean",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "from_dp",
+                              "value": "true"
+                            },
+                            "comment": {
+                              "string_comment": "\"= true, use m_flow = f(dp) else dp = f(m_flow)\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "tab",
+                                    "value": "\"Advanced\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Boolean",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "linearized",
+                              "value": "false"
+                            },
+                            "comment": {
+                              "string_comment": "\"= true, use linear relation between m_flow and dp for any flow rate\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "tab",
+                                    "value": "\"Advanced\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Boolean",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "use_constant_density",
+                              "value": "true"
+                            },
+                            "comment": {
+                              "string_comment": "\"Set to true to use constant density for flow friction\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "tab",
+                                    "value": "\"Advanced\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Real",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "a",
+                              "value": "-1.51"
+                            },
+                            "comment": {
+                              "string_comment": "\"Coefficient a for damper characteristics\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "tab",
+                                    "value": "\"Damper coefficients\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Real",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "b",
+                              "value": "0.105*90"
+                            },
+                            "comment": {
+                              "string_comment": "\"Coefficient b for damper characteristics\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "tab",
+                                    "value": "\"Damper coefficients\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Real",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "yL",
+                              "value": "15/90"
+                            },
+                            "comment": {
+                              "string_comment": "\"Lower value for damper curve\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "tab",
+                                    "value": "\"Damper coefficients\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Real",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "yU",
+                              "value": "55/90"
+                            },
+                            "comment": {
+                              "string_comment": "\"Upper value for damper curve\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "tab",
+                                    "value": "\"Damper coefficients\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Real",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "k1",
+                              "value": "0.45"
+                            },
+                            "comment": {
+                              "string_comment": "\"Flow coefficient for y=1, k1 = pressure drop divided by dynamic pressure\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "tab",
+                                    "value": "\"Damper coefficients\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Time",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "riseTime",
+                              "value": "15"
+                            },
+                            "comment": {
+                              "string_comment": "\"Rise time of the filter (time to reach 99.6 % of an opening step)\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "tab",
+                                    "value": "\"Dynamics\""
+                                  },
+                                  {
+                                    "name": "group",
+                                    "value": "\"Filtered opening\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.Blocks.Types.Init",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "init",
+                              "value": "Modelica.Blocks.Types.Init.InitialOutput"
+                            },
+                            "comment": {
+                              "string_comment": "\"Type of initialization (no init/steady state/initial state/initial output)\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "tab",
+                                    "value": "\"Dynamics\""
+                                  },
+                                  {
+                                    "name": "group",
+                                    "value": "\"Filtered opening\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Real",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "y_start",
+                              "value": "1"
+                            },
+                            "comment": {
+                              "string_comment": "\"Initial value of output\"",
+                              "annotation": {
+                                "dialog": [
+                                  {
+                                    "name": "tab",
+                                    "value": "\"Dynamics\""
+                                  },
+                                  {
+                                    "name": "group",
+                                    "value": "\"Filtered opening\""
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "yRet",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "min",
+                                    "value": "0"
+                                  },
+                                  {
+                                    "name": "max",
+                                    "value": "1"
+                                  },
+                                  {
+                                    "prefix": "final",
+                                    "name": "unit",
+                                    "value": "\"1\""
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Return damper position (0: closed, 1: open)\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": -20
+                                      },
+                                      {
+                                        "x": 20,
+                                        "y": 20
+                                      }
+                                    ],
+                                    "rotation": 270,
+                                    "origin": {
+                                      "x": -68,
+                                      "y": 120
+                                    }
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": -20
+                                      },
+                                      {
+                                        "x": 20,
+                                        "y": 20
+                                      }
+                                    ],
+                                    "rotation": 270,
+                                    "origin": {
+                                      "x": -68,
+                                      "y": 120
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "yOut",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "min",
+                                    "value": "0"
+                                  },
+                                  {
+                                    "name": "max",
+                                    "value": "1"
+                                  },
+                                  {
+                                    "prefix": "final",
+                                    "name": "unit",
+                                    "value": "\"1\""
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Outdoor air damper signal (0: closed, 1: open)\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": -20
+                                      },
+                                      {
+                                        "x": 20,
+                                        "y": 20
+                                      }
+                                    ],
+                                    "rotation": 270,
+                                    "origin": {
+                                      "x": 0,
+                                      "y": 120
+                                    }
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": -20
+                                      },
+                                      {
+                                        "x": 20,
+                                        "y": 20
+                                      }
+                                    ],
+                                    "rotation": 270,
+                                    "origin": {
+                                      "x": 0,
+                                      "y": 120
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "yExh",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "min",
+                                    "value": "0"
+                                  },
+                                  {
+                                    "name": "max",
+                                    "value": "1"
+                                  },
+                                  {
+                                    "prefix": "final",
+                                    "name": "unit",
+                                    "value": "\"1\""
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Exhaust air damper signal (0: closed, 1: open)\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": -20
+                                      },
+                                      {
+                                        "x": 20,
+                                        "y": 20
+                                      }
+                                    ],
+                                    "rotation": 270,
+                                    "origin": {
+                                      "x": 60,
+                                      "y": 120
+                                    }
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": -20
+                                      },
+                                      {
+                                        "x": 20,
+                                        "y": 20
+                                      }
+                                    ],
+                                    "rotation": 270,
+                                    "origin": {
+                                      "x": 70,
+                                      "y": 120
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Fluid.Interfaces.FluidPort_a",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "port_Out",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "Medium"
+                                  },
+                                  {
+                                    "name": "m_flow",
+                                    "variable_modification": {
+                                      "modification": {
+                                        "modifications": [
+                                          {
+                                            "name": "start",
+                                            "value": "0"
+                                          },
+                                          {
+                                            "name": "min",
+                                            "value": "if allowFlowReversal then -Constants.inf else\n                0"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Fluid connector a (positive design flow direction is from port_a to port_b)\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -110,
+                                        "y": 50
+                                      },
+                                      {
+                                        "x": -90,
+                                        "y": 70
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Fluid.Interfaces.FluidPort_b",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "port_Exh",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "Medium"
+                                  },
+                                  {
+                                    "name": "m_flow",
+                                    "variable_modification": {
+                                      "modification": {
+                                        "modifications": [
+                                          {
+                                            "name": "start",
+                                            "value": "0"
+                                          },
+                                          {
+                                            "name": "max",
+                                            "value": "if allowFlowReversal then +Constants.inf else\n                0"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Fluid connector b (positive design flow direction is from port_a to port_b)\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -90,
+                                        "y": -70
+                                      },
+                                      {
+                                        "x": -110,
+                                        "y": -50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Fluid.Interfaces.FluidPort_a",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "port_Ret",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "Medium"
+                                  },
+                                  {
+                                    "name": "m_flow",
+                                    "variable_modification": {
+                                      "modification": {
+                                        "modifications": [
+                                          {
+                                            "name": "start",
+                                            "value": "0"
+                                          },
+                                          {
+                                            "name": "min",
+                                            "value": "if allowFlowReversal then -Constants.inf else\n                0"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Fluid connector a (positive design flow direction is from port_a to port_b)\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 110,
+                                        "y": -70
+                                      },
+                                      {
+                                        "x": 90,
+                                        "y": -50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Fluid.Interfaces.FluidPort_b",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "port_Sup",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "Medium"
+                                  },
+                                  {
+                                    "name": "m_flow",
+                                    "variable_modification": {
+                                      "modification": {
+                                        "modifications": [
+                                          {
+                                            "name": "start",
+                                            "value": "0"
+                                          },
+                                          {
+                                            "name": "max",
+                                            "value": "if allowFlowReversal then +Constants.inf else\n                0"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Fluid connector b (positive design flow direction is from port_a to port_b)\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 110,
+                                        "y": 50
+                                      },
+                                      {
+                                        "x": 90,
+                                        "y": 70
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Fluid.Actuators.Dampers.Exponential",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "damOut",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "Medium "
+                                  },
+                                  {
+                                    "name": "from_dp",
+                                    "value": "from_dp"
+                                  },
+                                  {
+                                    "name": "linearized",
+                                    "value": "linearized"
+                                  },
+                                  {
+                                    "name": "use_deltaM",
+                                    "value": "use_deltaM"
+                                  },
+                                  {
+                                    "name": "deltaM",
+                                    "value": "deltaM"
+                                  },
+                                  {
+                                    "name": "roundDuct",
+                                    "value": "roundDuct"
+                                  },
+                                  {
+                                    "name": "ReC",
+                                    "value": "ReC"
+                                  },
+                                  {
+                                    "name": "a",
+                                    "value": "a"
+                                  },
+                                  {
+                                    "name": "b",
+                                    "value": "b"
+                                  },
+                                  {
+                                    "name": "yL",
+                                    "value": "yL"
+                                  },
+                                  {
+                                    "name": "yU",
+                                    "value": "yU"
+                                  },
+                                  {
+                                    "name": "use_constant_density",
+                                    "value": "use_constant_density"
+                                  },
+                                  {
+                                    "name": "allowFlowReversal",
+                                    "value": "allowFlowReversal"
+                                  },
+                                  {
+                                    "name": "m_flow_nominal",
+                                    "value": "mOut_flow_nominal"
+                                  },
+                                  {
+                                    "name": "use_inputFilter",
+                                    "value": "true"
+                                  },
+                                  {
+                                    "prefix": "final",
+                                    "name": "riseTime",
+                                    "value": "riseTime"
+                                  },
+                                  {
+                                    "prefix": "final",
+                                    "name": "init",
+                                    "value": "init"
+                                  },
+                                  {
+                                    "name": "y_start",
+                                    "value": "y_start"
+                                  },
+                                  {
+                                    "name": "dpDamper_nominal",
+                                    "value": "(k1)*1.2*(1)^2/2"
+                                  },
+                                  {
+                                    "name": "dpFixed_nominal",
+                                    "value": "if (dp_nominalIncludesDamper) then (dpOut_nominal) - (k1)*\n        1.2*(1)^2/2 else (dpOut_nominal)"
+                                  },
+                                  {
+                                    "name": "k1",
+                                    "value": "k1"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Outdoor air damper\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -10,
+                                        "y": 50
+                                      },
+                                      {
+                                        "x": 10,
+                                        "y": 70
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Fluid.Actuators.Dampers.Exponential",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "damExh",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "Medium "
+                                  },
+                                  {
+                                    "name": "m_flow_nominal",
+                                    "value": "mExh_flow_nominal"
+                                  },
+                                  {
+                                    "name": "from_dp",
+                                    "value": "from_dp"
+                                  },
+                                  {
+                                    "name": "linearized",
+                                    "value": "linearized"
+                                  },
+                                  {
+                                    "name": "use_deltaM",
+                                    "value": "use_deltaM"
+                                  },
+                                  {
+                                    "name": "deltaM",
+                                    "value": "deltaM"
+                                  },
+                                  {
+                                    "name": "roundDuct",
+                                    "value": "roundDuct"
+                                  },
+                                  {
+                                    "name": "ReC",
+                                    "value": "ReC"
+                                  },
+                                  {
+                                    "name": "a",
+                                    "value": "a"
+                                  },
+                                  {
+                                    "name": "b",
+                                    "value": "b"
+                                  },
+                                  {
+                                    "name": "yL",
+                                    "value": "yL"
+                                  },
+                                  {
+                                    "name": "yU",
+                                    "value": "yU"
+                                  },
+                                  {
+                                    "name": "use_constant_density",
+                                    "value": "use_constant_density"
+                                  },
+                                  {
+                                    "name": "allowFlowReversal",
+                                    "value": "allowFlowReversal"
+                                  },
+                                  {
+                                    "name": "use_inputFilter",
+                                    "value": "true"
+                                  },
+                                  {
+                                    "prefix": "final",
+                                    "name": "riseTime",
+                                    "value": "riseTime"
+                                  },
+                                  {
+                                    "prefix": "final",
+                                    "name": "init",
+                                    "value": "init"
+                                  },
+                                  {
+                                    "name": "y_start",
+                                    "value": "y_start"
+                                  },
+                                  {
+                                    "name": "dpDamper_nominal",
+                                    "value": "(k1)*1.2*(1)^2/2"
+                                  },
+                                  {
+                                    "name": "dpFixed_nominal",
+                                    "value": "if (dp_nominalIncludesDamper) then (dpExh_nominal) - (k1)*\n        1.2*(1)^2/2 else (dpExh_nominal)"
+                                  },
+                                  {
+                                    "name": "k1",
+                                    "value": "k1"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Exhaust air damper\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": -70
+                                      },
+                                      {
+                                        "x": -40,
+                                        "y": -50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Fluid.Actuators.Dampers.Exponential",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "damRet",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "Medium "
+                                  },
+                                  {
+                                    "name": "m_flow_nominal",
+                                    "value": "mRec_flow_nominal"
+                                  },
+                                  {
+                                    "name": "from_dp",
+                                    "value": "from_dp"
+                                  },
+                                  {
+                                    "name": "linearized",
+                                    "value": "linearized"
+                                  },
+                                  {
+                                    "name": "use_deltaM",
+                                    "value": "use_deltaM"
+                                  },
+                                  {
+                                    "name": "deltaM",
+                                    "value": "deltaM"
+                                  },
+                                  {
+                                    "name": "roundDuct",
+                                    "value": "roundDuct"
+                                  },
+                                  {
+                                    "name": "ReC",
+                                    "value": "ReC"
+                                  },
+                                  {
+                                    "name": "a",
+                                    "value": "a"
+                                  },
+                                  {
+                                    "name": "b",
+                                    "value": "b"
+                                  },
+                                  {
+                                    "name": "yL",
+                                    "value": "yL"
+                                  },
+                                  {
+                                    "name": "yU",
+                                    "value": "yU"
+                                  },
+                                  {
+                                    "name": "use_constant_density",
+                                    "value": "use_constant_density"
+                                  },
+                                  {
+                                    "name": "allowFlowReversal",
+                                    "value": "allowFlowReversal"
+                                  },
+                                  {
+                                    "name": "use_inputFilter",
+                                    "value": "true"
+                                  },
+                                  {
+                                    "prefix": "final",
+                                    "name": "riseTime",
+                                    "value": "riseTime"
+                                  },
+                                  {
+                                    "prefix": "final",
+                                    "name": "init",
+                                    "value": "init"
+                                  },
+                                  {
+                                    "name": "y_start",
+                                    "value": "y_start"
+                                  },
+                                  {
+                                    "name": "dpDamper_nominal",
+                                    "value": "(k1)*1.2*(1)^2/2"
+                                  },
+                                  {
+                                    "name": "dpFixed_nominal",
+                                    "value": "if (dp_nominalIncludesDamper) then (dpRec_nominal) - (k1)*\n        1.2*(1)^2/2 else (dpRec_nominal)"
+                                  },
+                                  {
+                                    "name": "k1",
+                                    "value": "k1"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Return air damper\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -10,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 10,
+                                        "y": 10
+                                      }
+                                    ],
+                                    "rotation": 90,
+                                    "origin": {
+                                      "x": 80,
+                                      "y": 0
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "prefix_protect": [
+                "protected"
+              ],
+              "prefixed_element": [
+                {
+                  "element": [
+                    {
+                      "component_clause": {
+                        "type_prefix": "parameter",
+                        "type_specifier": "Medium.Density",
+                        "component_list": {
+                          "component_declaration": [
+                            {
+                              "declaration": {
+                                "name": "rho_default",
+                                "value": "Medium.density(sta_default)"
+                              },
+                              "comment": {
+                                "string_comment": "\"Density, used to compute fluid volume\""
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "component_clause": {
+                        "type_prefix": "parameter",
+                        "type_specifier": "Medium.ThermodynamicState",
+                        "component_list": {
+                          "component_declaration": [
+                            {
+                              "declaration": {
+                                "name": "sta_default",
+                                "value": "Medium.setState_pTX(T=Medium.T_default, p=Medium.p_default, X=Medium.X_default)"
+                              },
+                              "comment": {
+                                "string_comment": "\"Default medium state\""
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "damOut",
+                          "port_a"
+                        ],
+                        "component2": [
+                          "port_Out"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -10,
+                                "y": 60
+                              },
+                              {
+                                "x": -100,
+                                "y": 60
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "damExh",
+                          "port_b"
+                        ],
+                        "component2": [
+                          "port_Exh"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -40,
+                                "y": -60
+                              },
+                              {
+                                "x": -100,
+                                "y": -60
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "port_Sup"
+                        ],
+                        "component2": [
+                          "damOut",
+                          "port_b"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 100,
+                                "y": 60
+                              },
+                              {
+                                "x": 10,
+                                "y": 60
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "damRet",
+                          "port_b"
+                        ],
+                        "component2": [
+                          "port_Sup"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 80,
+                                "y": 10
+                              },
+                              {
+                                "x": 80,
+                                "y": 60
+                              },
+                              {
+                                "x": 100,
+                                "y": 60
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "port_Ret"
+                        ],
+                        "component2": [
+                          "damExh",
+                          "port_a"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 100,
+                                "y": -60
+                              },
+                              {
+                                "x": -20,
+                                "y": -60
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "port_Ret"
+                        ],
+                        "component2": [
+                          "damRet",
+                          " port_a"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 100,
+                                "y": -60
+                              },
+                              {
+                                "x": 80,
+                                "y": -60
+                              },
+                              {
+                                "x": 80,
+                                "y": -10
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "damRet",
+                          "y"
+                        ],
+                        "component2": [
+                          "yRet"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 68,
+                                "y": 8.88178e-16
+                              },
+                              {
+                                "x": -68,
+                                "y": 8.88178e-16
+                              },
+                              {
+                                "x": -68,
+                                "y": 120
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "yOut"
+                        ],
+                        "component2": [
+                          "damOut",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 0,
+                                "y": 120
+                              },
+                              {
+                                "x": 0,
+                                "y": 72
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "yExh"
+                        ],
+                        "component2": [
+                          "damExh",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 60,
+                                "y": 120
+                              },
+                              {
+                                "x": 60,
+                                "y": 20
+                              },
+                              {
+                                "x": -30,
+                                "y": 20
+                              },
+                              {
+                                "x": -30,
+                                "y": -48
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "comp_annotation": {
+                "defaultName": "\"eco\"",
+                "icon": {
+                  "coordinateSystem": {
+                    "extent": [
+                      {
+                        "x": -100,
+                        "y": -100
+                      },
+                      {
+                        "x": 100,
+                        "y": 100
+                      }
+                    ],
+                    "preserveAspectRatio": true
+                  },
+                  "graphics": {
+                    "line": [
+                      {
+                        "points": [
+                          {
+                            "x": 0,
+                            "y": 100
+                          },
+                          {
+                            "x": 0,
+                            "y": 60
+                          },
+                          {
+                            "x": -54,
+                            "y": 60
+                          },
+                          {
+                            "x": -54,
+                            "y": 24
+                          }
+                        ],
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        }
+                      },
+                      {
+                        "points": [
+                          {
+                            "x": -68,
+                            "y": 100
+                          },
+                          {
+                            "x": -68,
+                            "y": 80
+                          },
+                          {
+                            "x": -20,
+                            "y": 80
+                          },
+                          {
+                            "x": -20,
+                            "y": -22
+                          }
+                        ],
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        }
+                      },
+                      {
+                        "points": [
+                          {
+                            "x": 70,
+                            "y": 100
+                          },
+                          {
+                            "x": 70,
+                            "y": -84
+                          },
+                          {
+                            "x": -60,
+                            "y": -84
+                          }
+                        ],
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        }
+                      }
+                    ],
+                    "polygon": [
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillPattern": "FillPattern.Solid",
+                        "points": [
+                          {
+                            "x": -86,
+                            "y": -12
+                          },
+                          {
+                            "x": -64,
+                            "y": 24
+                          },
+                          {
+                            "x": -46,
+                            "y": 24
+                          },
+                          {
+                            "x": -70,
+                            "y": -12
+                          },
+                          {
+                            "x": -86,
+                            "y": -12
+                          }
+                        ]
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 255,
+                          "g": 255,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.Solid",
+                        "points": [
+                          {
+                            "x": 48,
+                            "y": 12
+                          },
+                          {
+                            "x": 70,
+                            "y": 6
+                          },
+                          {
+                            "x": 48,
+                            "y": 0
+                          },
+                          {
+                            "x": 48,
+                            "y": 12
+                          }
+                        ]
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 255,
+                          "g": 255,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.Solid",
+                        "points": [
+                          {
+                            "x": 72,
+                            "y": -54
+                          },
+                          {
+                            "x": 48,
+                            "y": -60
+                          },
+                          {
+                            "x": 72,
+                            "y": -66
+                          },
+                          {
+                            "x": 72,
+                            "y": -54
+                          }
+                        ]
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillPattern": "FillPattern.Solid",
+                        "points": [
+                          {
+                            "x": -74,
+                            "y": -76
+                          },
+                          {
+                            "x": -52,
+                            "y": -40
+                          },
+                          {
+                            "x": -34,
+                            "y": -40
+                          },
+                          {
+                            "x": -58,
+                            "y": -76
+                          },
+                          {
+                            "x": -74,
+                            "y": -76
+                          }
+                        ]
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillPattern": "FillPattern.Solid",
+                        "points": [
+                          {
+                            "x": -20,
+                            "y": -40
+                          },
+                          {
+                            "x": 2,
+                            "y": -4
+                          },
+                          {
+                            "x": 20,
+                            "y": -4
+                          },
+                          {
+                            "x": -4,
+                            "y": -40
+                          },
+                          {
+                            "x": -20,
+                            "y": -40
+                          }
+                        ]
+                      }
+                    ],
+                    "rectangle": [
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.Solid",
+                        "extent": [
+                          {
+                            "x": -94,
+                            "y": 12
+                          },
+                          {
+                            "x": 90,
+                            "y": 0
+                          }
+                        ]
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.Solid",
+                        "extent": [
+                          {
+                            "x": -94,
+                            "y": -54
+                          },
+                          {
+                            "x": 96,
+                            "y": -66
+                          }
+                        ]
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.Solid",
+                        "extent": [
+                          {
+                            "x": -4,
+                            "y": 6
+                          },
+                          {
+                            "x": 6,
+                            "y": -56
+                          }
+                        ]
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 255,
+                          "g": 255,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.Solid",
+                        "extent": [
+                          {
+                            "x": 72,
+                            "y": -58
+                          },
+                          {
+                            "x": 92,
+                            "y": -62
+                          }
+                        ]
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 255,
+                          "g": 255,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.Solid",
+                        "extent": [
+                          {
+                            "x": 28,
+                            "y": 8
+                          },
+                          {
+                            "x": 48,
+                            "y": 4
+                          }
+                        ]
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.Solid",
+                        "extent": [
+                          {
+                            "x": 78,
+                            "y": 66
+                          },
+                          {
+                            "x": 90,
+                            "y": 10
+                          }
+                        ]
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.Solid",
+                        "extent": [
+                          {
+                            "x": -94,
+                            "y": 66
+                          },
+                          {
+                            "x": -82,
+                            "y": 8
+                          }
+                        ]
+                      }
+                    ],
+                    "text": [
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "extent": [
+                          {
+                            "x": -50,
+                            "y": -84
+                          },
+                          {
+                            "x": 48,
+                            "y": -132
+                          }
+                        ],
+                        "textString": "\"%name\""
+                      }
+                    ]
+                  }
+                },
+                "documentation": {
+                  "info": "\"<html>\n<p>\nModel of an outside air mixing box with air dampers.\nSet <code>y=0</code> to close the outside air and exhast air dampers.\n</p>\n<p>\nIf <code>dp_nominalIncludesDamper=true</code>, then the parameter <code>dp_nominal</code>\nis equal to the pressure drop of the damper plus the fixed flow resistance at the nominal\nflow rate.\nIf <code>dp_nominalIncludesDamper=false</code>, then <code>dp_nominal</code>\ndoes not include the flow resistance of the air damper.\n</p>\n</html>\"",
+                  "revisions": "\"<html>\n<ul>\n<li>\nNovember 10, 2017, by Michael Wetter:<br/>\nChanged default of <code>raiseTime</code> as air damper motors, such as from JCI\nhave a travel time of about 30 seconds.\nShorter travel time also makes control loops more stable.\n</li>\n<li>\nMarch 24, 2017, by Michael Wetter:<br/>\nRenamed <code>filteredInput</code> to <code>use_inputFilter</code>.<br/>\nThis is for\n<a href=\\\"https://github.com/ibpsa/modelica-ibpsa/issues/665\\\">#665</a>.\n</li>\n<li>\nMarch 22, 2017, by Michael Wetter:<br/>\nRemoved the assignments of <code>AOut</code>, <code>AExh</code> and <code>ARec</code> as these are done in the damper instance using\na final assignment of the parameter.\nThis allows scaling the model with <code>m_flow_nominal</code>,\nwhich is generally known in the flow leg,\nand <code>v_nominal</code>, for which a default value can be specified.<br/>\nThis is for\n<a href=\\\"https://github.com/ibpsa/modelica-ibpsa/issues/544\\\">#544</a>.\n</li>\n<li>\nJanuary 22, 2016, by Michael Wetter:<br/>\nCorrected type declaration of pressure difference.\nThis is\nfor <a href=\\\"https://github.com/ibpsa/modelica-ibpsa/issues/404\\\">#404</a>.\n</li>\n<li>\nDecember 14, 2012 by Michael Wetter:<br/>\nRenamed protected parameters for consistency with the naming conventions.\n</li>\n<li>\nFebruary 14, 2012 by Michael Wetter:<br/>\nAdded filter to approximate the travel time of the actuator.\n</li>\n<li>\nFebruary 3, 2012, by Michael Wetter:<br/>\nRemoved assignment of <code>m_flow_small</code> as it is no\nlonger used in its base class.\n</li>\n<li>\nFebruary 23, 2010 by Michael Wetter:<br/>\nFirst implementation.\n</li>\n</ul>\n</html>\""
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Buildings/Examples/VAVReheat/BaseClasses/MixingBox.mo"
+  }
+]
