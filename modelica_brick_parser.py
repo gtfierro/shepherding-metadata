@@ -261,7 +261,12 @@ class Modelica_Brick_Parser:
                 comp2_df = self.elements_df.loc[self.elements_df.element_name == parent_element+'.'+equation.get('connected_to').split('[')[0]]
                 if comp2_df.empty:
                     comp2_df = self.elements_df.loc[self.elements_df.element_name == equation.get('connected_to').split('[')[0]]
-                new_equation = {'connected_to': comp2_df.element_name.values[0], 'connect_clause_obj': {'component1': ['vav', 'port_b'], 'component2': ['senMasFlo', 'port_a']}, 'comp1_interface': 'port_b', 'comp2_interface': 'port_a'}
+                new_equation = {'connected_to': comp2_df.element_name.values[0], 'connect_clause_obj': equation['connect_clause_obj']}
+
+                if 'comp1_interface' in equation: 
+                    new_equation['comp1_interface']= equation['comp1_interface']
+                if 'comp2_interface' in equation: 
+                    new_equation['comp2_interface']= equation['comp2_interface']
 
                 if not element_name in self.model_equations:
                     self.model_equations[element_name] = [new_equation]
@@ -308,6 +313,12 @@ class Modelica_Brick_Parser:
             comp1_port = equation.get('comp1_interface')
 
             connected_element_df = self.elements_df.loc[self.elements_df.element_name == connected_to_element]
+            
+            if "port" in element and comp1_port is None:
+                comp2_port = equation.get('comp2_interface')
+                if not comp2_port is None and (comp2_port.startswith("port_b") or comp2_port.startswith("port_2")):
+                    continue
+
             if connected_element_df.empty:
                 print('cant find element '+connected_to_element)
             elif not comp1_port is None and (comp1_port.startswith("port_a") or comp1_port.startswith("port_1")):
