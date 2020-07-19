@@ -1,4 +1,3 @@
-import hashlib
 import driver
 from datetime import datetime
 import time
