@@ -37,6 +37,7 @@ class ModelicaJSONDriver(driver.Driver):
             brick_relationships = parser.get_brick_relationships()
 
             records = defaultdict(list)
+            sources = {}
             for rel in brick_relationships:
 
                 triple = [
@@ -44,11 +45,23 @@ class ModelicaJSONDriver(driver.Driver):
                    rel['relationship'] if isinstance(rel['relationship'], URIRef) else BLDG[rel['relationship']],
                    rel['obj2'] if isinstance(rel['obj2'], URIRef) else BLDG[rel['obj2']],
                 ]
+                triple = [str(t) for t in triple]
 
                 records[rel['obj1']].append(triple)
 
             for ent, triples in records.items():
-                self.add_record(ent, triples)
+                rec = {
+                    'id': ent,
+                    'source': type(self).__name__,
+                    'record': {
+                        'encoding': 'JSON',
+                        # TODO: get some JSON for the entity?
+                        # 'content': row,
+                    },
+                    'triples': triples,
+                    'timestamp': timestamp
+                }
+                self.add_record(ent, rec)
             self.app.logger.info(f"Loaded {len(self._records)} records")
         # start thread
         t = threading.Thread(target=do_load_file)
