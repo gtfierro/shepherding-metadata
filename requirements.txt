@@ -4,3 +4,4 @@ reasonable
 jsonschema
 lxml
 pandas
+recordlinkage
