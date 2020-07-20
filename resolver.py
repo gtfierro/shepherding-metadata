@@ -4,7 +4,7 @@ import pandas as pd
 from scipy import stats
 import numpy as np
 from rdflib import Namespace, Literal
-from brickschema.namespaces import BRICK, A, RDF, RDFS
+from brickschema.namespaces import BRICK, A, RDF, RDFS, OWL
 from brickschema.inference import BrickInferenceSession
 from brickschema.graph import Graph
 
@@ -158,3 +158,16 @@ clusters.extend(cluster_on_type_alignment(graphs))
 
 for cluster in clusters:
     print([str(x) for x in cluster])
+
+all_triples = [t for triples in records.values() for t in triples]
+graph = graph_from_triples(all_triples)
+print(len(graph))
+for cluster in clusters:
+    pairs = zip(cluster[:-1], cluster[1:])
+    triples = [(a, OWL.sameAs, b) for (a, b) in pairs]
+    print(triples)
+    graph.add(*triples)
+    sess = BrickInferenceSession()
+    graph = sess.expand(graph)
+
+    print(len(graph))
