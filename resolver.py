@@ -138,6 +138,37 @@ def cluster_on_type_alignment(graphs):
 
     return clusters
 
+def merge_triples(triples, clusters):
+    graph = graph_from_triples(all_triples)
+    print(len(graph))
+    for cluster in clusters:
+        pairs = zip(cluster[:-1], cluster[1:])
+        triples = [(a, OWL.sameAs, b) for (a, b) in pairs]
+        graph.add(*triples)
+
+    sess = BrickInferenceSession()
+    graph = sess.expand(graph)
+
+
+    # check the inferred classes
+    # TODO: forward reasonable errors up to Python
+    res = graph.query("SELECT ?ent ?type WHERE { \
+                        ?ent rdf:type ?type .\
+                        ?type rdfs:subClassOf+ brick:Class .\
+                        ?ent brick:sourcelabel ?lab }")
+
+    entity_types = defaultdict(set)
+    for row in res:
+        ent, brickclass = str(row[0]), str(row[1])
+        entity_types[ent].add(brickclass)
+    print(entity_types)
+    for ent, classlist in entity_types.items():
+        classlist = list(classlist)
+        for (c1, c2) in zip(classlist[:-1], classlist[1:]):
+            if not compatible_classes(graph, c1, c2):
+                print("PROBLEM", c1, c2, ent)
+    return graph
+
 BLDG = Namespace("http://building#")
 
 records = {
@@ -158,8 +189,8 @@ records = {
         (BLDG['bsync-ahu2'], BRICK.sourcelabel, Literal("AHU-2")),
         (BLDG['bsync-site'], A, BRICK['Site']),
         (BLDG['bsync-site'], BRICK.sourcelabel, Literal("my-cool-building")),
-        (BLDG['BADENT'], A, BRICK['Room']),
-        (BLDG['BADENT'], BRICK.sourcelabel, Literal("my-cool-building RTU 2 Fan")),
+        # (BLDG['BADENT'], A, BRICK['Room']),
+        # (BLDG['BADENT'], BRICK.sourcelabel, Literal("my-cool-building RTU 2 Fan")),
     ],
 }
 
@@ -174,31 +205,5 @@ for cluster in clusters:
     print([str(x) for x in cluster])
 
 all_triples = [t for triples in records.values() for t in triples]
-graph = graph_from_triples(all_triples)
+graph = merge_triples(all_triples, clusters)
 print(len(graph))
-for cluster in clusters:
-    pairs = zip(cluster[:-1], cluster[1:])
-    triples = [(a, OWL.sameAs, b) for (a, b) in pairs]
-    graph.add(*triples)
-
-sess = BrickInferenceSession()
-graph = sess.expand(graph)
-
-
-# check the inferred classes
-# TODO: forward reasonable errors up to Python
-res = graph.query("SELECT ?ent ?type WHERE { \
-                    ?ent rdf:type ?type .\
-                    ?type rdfs:subClassOf+ brick:Class .\
-                    ?ent brick:sourcelabel ?lab }")
-
-entity_types = defaultdict(set)
-for row in res:
-    ent, brickclass = str(row[0]), str(row[1])
-    entity_types[ent].add(brickclass)
-print(entity_types)
-for ent, classlist in entity_types.items():
-    classlist = list(classlist)
-    for (c1, c2) in zip(classlist[:-1], classlist[1:]):
-        if not compatible_classes(graph, c1, c2):
-            print("PROBLEM", c1, c2, ent)
