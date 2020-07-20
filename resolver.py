@@ -23,10 +23,22 @@ def tokenize_string(s):
     s = re.split(r'-| |_|#|/', s)
     return s
 
+def compatible_classes(graph, c1, c2):
+    """
+    Returns true if the two classes are compatible (equal, or one is a subclass
+    of another), false otherwise
+    """
+    q1 = f"ASK {{ <{c1}> rdfs:subClassOf* <{c2}> }}"
+    q2 = f"ASK {{ <{c2}> rdfs:subClassOf* <{c1}> }}"
+    q3 = f"ASK {{ <{c2}> owl:equivalentClass <{c1}> }}"
+    return graph.query(q1)[0] or graph.query(q2)[0] or graph.query(q3)[0]
+
 
 class VectorLevenshteinCompare(BaseCompareFeature):
     def _compute_vectorized(self, s1, s2):
         # calculate pair-wise levenshtein
+        s1 = list(s1)
+        s2 = list(s2)
         sim = np.array([-distance.levenshtein(list(s1[i]), list(s2[i])) \
                     for i in range(len(s1))])
         # normalize to [0, 1]
@@ -146,6 +158,8 @@ records = {
         (BLDG['bsync-ahu2'], BRICK.sourcelabel, Literal("AHU-2")),
         (BLDG['bsync-site'], A, BRICK['Site']),
         (BLDG['bsync-site'], BRICK.sourcelabel, Literal("my-cool-building")),
+        (BLDG['BADENT'], A, BRICK['Room']),
+        (BLDG['BADENT'], BRICK.sourcelabel, Literal("my-cool-building RTU 2 Fan")),
     ],
 }
 
@@ -165,9 +179,26 @@ print(len(graph))
 for cluster in clusters:
     pairs = zip(cluster[:-1], cluster[1:])
     triples = [(a, OWL.sameAs, b) for (a, b) in pairs]
-    print(triples)
     graph.add(*triples)
-    sess = BrickInferenceSession()
-    graph = sess.expand(graph)
 
-    print(len(graph))
+sess = BrickInferenceSession()
+graph = sess.expand(graph)
+
+
+# check the inferred classes
+# TODO: forward reasonable errors up to Python
+res = graph.query("SELECT ?ent ?type WHERE { \
+                    ?ent rdf:type ?type .\
+                    ?type rdfs:subClassOf+ brick:Class .\
+                    ?ent brick:sourcelabel ?lab }")
+
+entity_types = defaultdict(set)
+for row in res:
+    ent, brickclass = str(row[0]), str(row[1])
+    entity_types[ent].add(brickclass)
+print(entity_types)
+for ent, classlist in entity_types.items():
+    classlist = list(classlist)
+    for (c1, c2) in zip(classlist[:-1], classlist[1:]):
+        if not compatible_classes(graph, c1, c2):
+            print("PROBLEM", c1, c2, ent)
