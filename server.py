@@ -74,52 +74,6 @@ def preprocess(column):
         column = None
     return column
 
-class Resolver:
-    def __init__(self):
-        self.records = []
-
-    def add_record(self, rec):
-        if rec['id'] not in self.ids:
-            self.records.append(rec)
-
-    def resolve(self):
-
-        # string suffixing
-        for rec1 in self.records:
-            for rec2 in self.records:
-                id1 = preprocess(rec1['id'])
-                id2 = preprocess(rec2['id'])
-                if id1 == id2:
-                    continue
-                conditions = [
-                    # id1 in id2,
-                    # id2 in id1,
-                    id1.endswith(id2),
-                    id2.endswith(id1)
-                ]
-                # if any(conditions):
-                #     print(id1, id2)
-
-        # count instances by class by source
-        # enumerate the "superclasses" for each ID; this can help in aligning
-        counts = defaultdict(dict)
-        for rec in self.records:
-            brickclasses = [t[2] for t in rec['triples'] if t[1] == str(RDF.type)]
-            # print("class", brickclass)
-            src = rec['source']
-            for bc in brickclasses:
-                counts[bc][src] = counts[bc].get(src, 0) + 1
-        for bc, c in counts.items():
-            for source, count in c.items():
-                print(f"{bc} - {source}: {count}")
-
-
-    @property
-    def ids(self):
-        return set([r['id'] for r in self.records])
-
-resolver = Resolver()
-
 def fix_term(term):
     if ' ' in term:
         return rdflib.Literal(term)
@@ -146,7 +100,6 @@ def add_triples():
     for rec in msg:
         if len(rec['triples']) == 0:
             continue
-        resolver.add_record(rec)
         triples = list(map(tuple, rec['triples']))
         r.load_triples(triples)
         triplestore.add_triples(rec['source'], rec['timestamp'], triples)
@@ -159,8 +112,6 @@ def add_triples():
     print(f"Graph now contains {len(graph)} triples (updated in {t1-t0:.2f} sec)")
     graph.serialize('output.ttl', format='ttl')
 
-    # print(resolver.ids)
-    # print(resolver.resolve())
     return "ok"
 
 

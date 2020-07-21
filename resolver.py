@@ -86,6 +86,7 @@ def cluster_on_labels(graphs):
     features = comp.compute(candidate_links, *datasets)
     # use metric of '>=.9' because there's just one feature for now and it scales
     # [0, 1]
+
     matches = features[features.sum(axis=1) >= .9]
     for idx_list in matches.index:
         pairs = zip(datasets, idx_list)
@@ -167,6 +168,7 @@ def merge_triples(triples, clusters):
         for (c1, c2) in zip(classlist[:-1], classlist[1:]):
             if not compatible_classes(graph, c1, c2):
                 print("PROBLEM", c1, c2, ent)
+    # TODO: if any exception is thrown, need to recluster
     return graph
 
 BLDG = Namespace("http://building#")
