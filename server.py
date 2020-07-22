@@ -1,14 +1,46 @@
-from flask import Flask, request, json
+from flask import Flask, request, json, jsonify
 from jsonschema import validate
 from collections import defaultdict
-from brickschema.namespaces import RDF
+from brickschema.namespaces import RDF, RDFS, BRICK
 import reasonable
+import resolver
 import logging
 import rdflib
 import re
 import time
 from contextlib import contextmanager
 import sqlite3
+
+def preprocess(column):
+    column = re.sub('  +', ' ', column)
+    column = re.sub('\n', ' ', column)
+    column = re.sub('-', ' ', column)
+    column = column.strip().strip('"').strip("'").lower().strip()
+    if not column :
+        column = None
+    return column
+
+def fix_term(term):
+    if ' ' in term or term == 'unknown':
+        return rdflib.Literal(term)
+    if 'http' in term:
+        return rdflib.URIRef(term)
+    return rdflib.BNode(term)
+
+def fix_triple(t):
+    return (fix_term(t[0]), fix_term(t[1]), fix_term(t[2]))
+
+def update_graph(triples):
+    for t in triples:
+        t = tuple(map(fix_term, t))
+        graph.add(t)
+
+def rewrite_labels(triples):
+    for t in triples:
+        if t[1] == RDFS.label:
+            yield (t[0], BRICK.sourcelabel, t[2])
+        yield t
+
 
 class Triplestore:
     def __init__(self, path):
@@ -47,6 +79,14 @@ class Triplestore:
             values = ((s, p, o, src, ts) for (s, p, o) in triples)
             cur.executemany("INSERT INTO triples(s, p, o, sourcename, timestamp) VALUES (?, ?, ?, ?, ?)", values)
 
+    def to_records(self):
+        records = defaultdict(list)
+        with self.cursor() as cur:
+            cur.execute("SELECT src, s, p, o FROM latest_triples")
+            for row in cur:
+                records[row[0]].append((fix_term(row[1]), fix_term(row[2]), fix_term(row[3])))
+        return records
+
     def dump(self):
         with self.cursor() as cur:
             cur.execute("SELECT s, p, o FROM latest_triples")
@@ -65,29 +105,6 @@ graph.parse("ttl/Brick.ttl", format="ttl")
 r = reasonable.PyReasoner()
 r.from_graph(graph)
 
-def preprocess(column):
-    column = re.sub('  +', ' ', column)
-    column = re.sub('\n', ' ', column)
-    column = re.sub('-', ' ', column)
-    column = column.strip().strip('"').strip("'").lower().strip()
-    if not column :
-        column = None
-    return column
-
-def fix_term(term):
-    if ' ' in term:
-        return rdflib.Literal(term)
-    if 'http' in term:
-        return rdflib.URIRef(term)
-    return rdflib.BNode(term)
-
-def update_graph(triples):
-    for t in triples:
-        t = tuple(map(fix_term, t))
-        graph.add(t)
-
-
-
 @app.route('/add_record', methods=['POST'])
 def add_triples():
     try:
@@ -100,7 +117,13 @@ def add_triples():
     for rec in msg:
         if len(rec['triples']) == 0:
             continue
-        triples = list(map(tuple, rec['triples']))
+        # triples = map(tuple, rec['triples'])
+        triples = map(fix_triple, rec['triples'])
+        triples = rewrite_labels(triples)
+        triples = list(triples)
+        for t in triples:
+            print(t)
+
         r.load_triples(triples)
         triplestore.add_triples(rec['source'], rec['timestamp'], triples)
         num_added += len(triples)
@@ -114,6 +137,14 @@ def add_triples():
 
     return "ok"
 
+@app.route('/resolve', methods=['GET'])
+def resolve():
+    records = triplestore.to_records()
+    t0 = time.time()
+    graph = resolver.resolve(records)
+    t1 = time.time()
+    print(f"Resolve took {t1-t0:.2f} seconds, had {len(graph)} triples")
+    return jsonify({'size': len(graph)})
 
 if __name__ == '__main__':
     app.run(host='localhost', port='6483')

@@ -1,4 +1,4 @@
-brickschema[reasonable]>=0.1.7a4
+brickschema[reasonable]>=0.1.7a5
 Flask
 reasonable
 jsonschema
