@@ -184,6 +184,16 @@ def cluster_on_type_alignment(graphs, clustered):
     return clusters, clustered
 
 def merge_triples(triples, clusters):
+    # choose arbitrary entity as the canonical name
+    canonical = [([str(u) for u in c], list(c)[0]) for c in clusters]
+    def fix_triple(t):
+        for cluster, ent in canonical:
+            if t[0] in cluster:
+                return (ent, t[1], t[2])
+        return t
+    replace = lambda x: [ent for (cluster, ent) in canonical if x in cluster][0]
+    triples = list(map(fix_triple, triples))
+
     graph = graph_from_triples(triples)
     print(len(graph))
     for cluster in clusters:
@@ -213,7 +223,7 @@ def merge_triples(triples, clusters):
             if not compatible_classes(graph, c1, c2):
                 print("PROBLEM", c1, c2, ent)
     # TODO: if any exception is thrown, need to recluster
-    return graph
+    return graph, canonical
 
 def resolve(records):
     """
@@ -234,9 +244,8 @@ def resolve(records):
         print([str(x) for x in cluster])
 
     all_triples = [t for triples in records.values() for t in triples]
-    graph = merge_triples(all_triples, clusters)
-    # print(len(graph))
-    return graph
+    # graph, canonical
+    return merge_triples(all_triples, clusters)
 
 if __name__ == '__main__':
     BLDG = Namespace("http://building#")
