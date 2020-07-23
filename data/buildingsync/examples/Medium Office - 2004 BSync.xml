@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <auc:BuildingSync xmlns:auc="http://buildingsync.net/schemas/bedes-auc/2019" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://buildingsync.net/schemas/bedes-auc/2019 https://raw.githubusercontent.com/BuildingSync/schema/feat/original-occupancy-classification/BuildingSync.xsd" version="2.0.0">
   <auc:Facilities>
-    <auc:Facility ID="Facility-1">
+    <auc:Facility ID="Fac-1">
       <auc:Sites>
         <auc:Site ID="Site-1">
           <auc:Buildings>
-            <auc:Building ID="Building-1">
-              <auc:PremisesName>Carytown</auc:PremisesName>
-              <auc:PremisesIdentifiers>
-                <auc:PremisesIdentifier>
-                  <auc:IdentifierCustomName>Haystack ID</auc:IdentifierCustomName>
-                  <auc:IdentifierValue>r:p:demo:r:23a44701-a89a6c66 Carytown</auc:IdentifierValue>
-                </auc:PremisesIdentifier>
-              </auc:PremisesIdentifiers>
+            <auc:Building ID="Building1">
+              <auc:PremisesName>Medium Office Building in Chicago</auc:PremisesName>
               <auc:Address>
                 <auc:StreetAddressDetail>
                   <auc:Simplified>
-                    <auc:StreetAddress>3504 W Cary St</auc:StreetAddress>
+                    <auc:StreetAddress>111 S Wacker Dr Suite 1800</auc:StreetAddress>
                   </auc:Simplified>
                 </auc:StreetAddressDetail>
-                <auc:City>Richmond</auc:City>
-                <auc:State>VA</auc:State>
-                <auc:PostalCode>23221</auc:PostalCode>
-                <auc:Country>US</auc:Country>
+                <auc:City>Chicago</auc:City>
+                <auc:State>IL</auc:State>
+                <auc:PostalCode>60606</auc:PostalCode>
+                <auc:Country>USA</auc:Country>
               </auc:Address>
+              <auc:ClimateZoneType>
+                <auc:ASHRAE>
+                  <auc:ClimateZone>5A</auc:ClimateZone>
+                </auc:ASHRAE>
+              </auc:ClimateZoneType>
               <auc:BuildingClassification>Commercial</auc:BuildingClassification>
-              <auc:OccupancyClassification>Retail</auc:OccupancyClassification>
+              <auc:OccupancyClassification>Office</auc:OccupancyClassification>
               <auc:PrimaryContactID IDref="Building-Owner"/>
               <auc:FloorsAboveGrade>1</auc:FloorsAboveGrade>
               <auc:FloorsBelowGrade>0</auc:FloorsBelowGrade>
@@ -36,20 +35,20 @@
               <auc:FloorAreas>
                 <auc:FloorArea>
                   <auc:FloorAreaType>Gross</auc:FloorAreaType>
-                  <auc:FloorAreaValue>3149</auc:FloorAreaValue>
+                  <auc:FloorAreaValue>17876</auc:FloorAreaValue>
                 </auc:FloorArea>
                 <auc:FloorArea>
                   <auc:FloorAreaType>Conditioned</auc:FloorAreaType>
-                  <auc:FloorAreaValue>3149</auc:FloorAreaValue>
+                  <auc:FloorAreaValue>17876</auc:FloorAreaValue>
                 </auc:FloorArea>
               </auc:FloorAreas>
-              <auc:YearOfConstruction>1996</auc:YearOfConstruction>
+              <auc:YearOfConstruction>2004</auc:YearOfConstruction>
               <auc:YearOfLastEnergyAudit>2015</auc:YearOfLastEnergyAudit>
-              <auc:YearOfLatestRetrofit>2010</auc:YearOfLatestRetrofit>
+              <auc:YearOfLatestRetrofit>2004</auc:YearOfLatestRetrofit>
               <auc:Sections>
-                <auc:Section ID="Section-1">
+                <auc:Section ID="Section-First-Floor">
                   <auc:SectionType>Space function</auc:SectionType>
-                  <auc:OccupancyClassification>Retail</auc:OccupancyClassification>
+                  <auc:OccupancyClassification>Office</auc:OccupancyClassification>
                   <auc:OriginalOccupancyClassification>Office</auc:OriginalOccupancyClassification>
                   <auc:OccupancyLevels>
                     <auc:OccupancyLevel>
@@ -70,11 +69,11 @@
                   <auc:FloorAreas>
                     <auc:FloorArea>
                       <auc:FloorAreaType>Gross</auc:FloorAreaType>
-                      <auc:FloorAreaValue>3149</auc:FloorAreaValue>
+                      <auc:FloorAreaValue>17876</auc:FloorAreaValue>
                     </auc:FloorArea>
                     <auc:FloorArea>
                       <auc:FloorAreaType>Conditioned</auc:FloorAreaType>
-                      <auc:FloorAreaValue>3149</auc:FloorAreaValue>
+                      <auc:FloorAreaValue>17876</auc:FloorAreaValue>
                     </auc:FloorArea>
                   </auc:FloorAreas>
                 </auc:Section>
@@ -86,28 +85,30 @@
       <auc:Systems>
         <auc:HVACSystems>
           <auc:HVACSystem ID="HVAC-1">
-            <auc:PrimaryHVACSystemType>Packaged Rooftop Air Conditioner</auc:PrimaryHVACSystemType>
+            <auc:PrimaryHVACSystemType>Packaged Rooftop VAV with Hot Water Reheat</auc:PrimaryHVACSystemType>
             <auc:LinkedPremises>
               <auc:Building>
-                <auc:LinkedBuildingID IDref="Building-1"></auc:LinkedBuildingID>
+                <auc:LinkedBuildingID IDref="Building1"/>
               </auc:Building>
               <auc:Section>
-                <auc:LinkedSectionID IDref="Section-1"></auc:LinkedSectionID>
+                <auc:LinkedSectionID IDref="Section-First-Floor"/>
               </auc:Section>
             </auc:LinkedPremises>
           </auc:HVACSystem>
         </auc:HVACSystems>
         <auc:LightingSystems>
-          <auc:LightingSystem ID="Main-Lights">
+          <auc:LightingSystem ID="Lights-1">
             <auc:LampType>
-              <auc:Halogen/>
+              <auc:LinearFluorescent>
+                <auc:LampLabel>T8</auc:LampLabel>
+              </auc:LinearFluorescent>
             </auc:LampType>
             <auc:LinkedPremises>
               <auc:Building>
-                <auc:LinkedBuildingID IDref="Building-1"></auc:LinkedBuildingID>
+                <auc:LinkedBuildingID IDref="Building1"/>
               </auc:Building>
               <auc:Section>
-                <auc:LinkedSectionID IDref="Section-1"></auc:LinkedSectionID>
+                <auc:LinkedSectionID IDref="Section-First-Floor"/>
               </auc:Section>
             </auc:LinkedPremises>
           </auc:LightingSystem>
@@ -117,10 +118,10 @@
             <auc:WeightedAverageLoad>0.75</auc:WeightedAverageLoad>
             <auc:LinkedPremises>
               <auc:Building>
-                <auc:LinkedBuildingID IDref="Building-1"/>
+                <auc:LinkedBuildingID IDref="Building1"/>
               </auc:Building>
               <auc:Section>
-                <auc:LinkedSectionID IDref="Section-1"/>
+                <auc:LinkedSectionID IDref="Section-First-Floor"/>
               </auc:Section>
             </auc:LinkedPremises>
           </auc:PlugLoad>
@@ -147,6 +148,15 @@
                   <auc:AnnualPeakNativeUnits>302.08</auc:AnnualPeakNativeUnits>
                   <auc:UtilityIDs>
                     <auc:UtilityID IDref="Elec-Utility"/>
+                  </auc:UtilityIDs>
+                </auc:ResourceUse>
+                <auc:ResourceUse ID="NG">
+                  <auc:EnergyResource>Natural gas</auc:EnergyResource>
+                  <auc:ResourceUnits>MMBtu</auc:ResourceUnits>
+                  <auc:EndUse>All end uses</auc:EndUse>
+                  <auc:AnnualFuelUseNativeUnits>460.24</auc:AnnualFuelUseNativeUnits>
+                  <auc:UtilityIDs>
+                    <auc:UtilityID IDref="NG-Utility"/>
                   </auc:UtilityIDs>
                 </auc:ResourceUse>
               </auc:ResourceUses>
@@ -247,10 +257,106 @@
                   <auc:IntervalReading>73227.73</auc:IntervalReading>
                   <auc:ResourceUseID IDref="Elec"/>
                 </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Jan">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-01-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-02-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>104.2</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Feb">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-02-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-03-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>81.86</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Mar">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-03-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-04-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>40.65</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Apr">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-04-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-05-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>22.73</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-May">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-05-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-06-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>11.75</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Jun">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-06-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-07-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>10.89</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Jul">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-07-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-08-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>10.72</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Aug">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-08-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-09-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>10.92</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Sep">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-09-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-10-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>10.52</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Oct">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-10-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-11-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>13.12</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Nov">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-11-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-12-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>45.41</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Dec">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-12-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2020-01-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>97.47</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
               </auc:TimeSeriesData>
               <auc:LinkedPremises>
                 <auc:Building>
-                  <auc:LinkedBuildingID IDref="Building-1"></auc:LinkedBuildingID>
+                  <auc:LinkedBuildingID IDref="Building1"></auc:LinkedBuildingID>
                 </auc:Building>
               </auc:LinkedPremises>
             </auc:Scenario>
@@ -277,6 +383,21 @@
                 <auc:UtilityMeterNumber>1235-abce</auc:UtilityMeterNumber>
               </auc:UtilityMeterNumbers>
               <auc:UtilityAccountNumber>An-Account-Number</auc:UtilityAccountNumber>
+            </auc:Utility>
+            <auc:Utility ID="NG-Utility">
+              <auc:RateSchedules>
+                <auc:RateSchedule ID="NG-Rate-Schedule">
+                  <auc:TypeOfRateStructure>
+                    <auc:FlatRate/>
+                  </auc:TypeOfRateStructure>
+                </auc:RateSchedule>
+              </auc:RateSchedules>
+              <auc:MeteringConfiguration>Direct metering</auc:MeteringConfiguration>
+              <auc:UtilityName>ComEd</auc:UtilityName>
+              <auc:UtilityMeterNumbers>
+                <auc:UtilityMeterNumber>ng-1235-abce</auc:UtilityMeterNumber>
+              </auc:UtilityMeterNumbers>
+              <auc:UtilityAccountNumber>A-NG-Account-Number</auc:UtilityAccountNumber>
             </auc:Utility>
           </auc:Utilities>
         </auc:Report>
