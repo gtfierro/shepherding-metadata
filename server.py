@@ -141,7 +141,7 @@ def add_triples():
 def resolve():
     records = triplestore.to_records()
     t0 = time.time()
-    graph = resolver.resolve(records)
+    graph, _ = resolver.resolve(records)
     t1 = time.time()
     print(f"Resolve took {t1-t0:.2f} seconds, had {len(graph)} triples")
     return jsonify({'size': len(graph)})
