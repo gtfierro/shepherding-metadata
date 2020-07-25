@@ -72,7 +72,5 @@ class ModelicaJSONDriver(driver.Driver):
         t.start()
 
 if __name__ == '__main__':
-    # srv = ModelicaJSONDriver(8082, ["http://localhost:6483"], "http://example.com/building#")
-    # srv.serve()
     import sys
     ModelicaJSONDriver.start_from_config(sys.argv[1])

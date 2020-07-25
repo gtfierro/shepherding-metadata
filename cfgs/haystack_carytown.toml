@@ -2,6 +2,7 @@
 port = 8080
 servers = ['http://localhost:6483']
 ns = 'http://example.com/building#'
+driver = 'haystack_json_driver.HaystackJSONDriver'
 
 [driver]
 file = 'data/haystack/carytown.json'

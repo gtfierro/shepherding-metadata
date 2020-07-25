@@ -53,5 +53,3 @@ class HaystackJSONDriver(driver.Driver):
 if __name__ == '__main__':
     import sys
     HaystackJSONDriver.start_from_config(sys.argv[1])
-    # srv = HaystackJSONDriver(8080, ["http://localhost:6483"], "http://example.com/building#", "data/haystack/carytown.json")
-    # srv.serve()

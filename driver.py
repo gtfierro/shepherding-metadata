@@ -95,11 +95,17 @@ class Driver:
     def serve(self):
         self.app.run(host='localhost', port=str(self._port))
 
-    @classmethod
-    def start_from_config(cls, filename):
+    @staticmethod
+    def start_from_config(filename):
+        from importlib import import_module
+
         cfg = toml.load(open(filename))
         srv_cfg = cfg.get('server')
         if srv_cfg is None:
             raise Exception("Need 'server' section")
-        srv = cls(srv_cfg['port'], srv_cfg['servers'], srv_cfg['ns'], cfg.get('driver'))
+        mod_name = srv_cfg['driver'].split('.')
+        class_name = mod_name[-1]
+        module = '.'.join(mod_name[:-1])
+        mod = getattr(import_module(module), class_name)
+        srv = mod(srv_cfg['port'], srv_cfg['servers'], srv_cfg['ns'], cfg.get('driver'))
         srv.serve()
