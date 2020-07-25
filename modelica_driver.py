@@ -73,4 +73,4 @@ class ModelicaJSONDriver(driver.Driver):
 
 if __name__ == '__main__':
     import sys
-    ModelicaJSONDriver.start_from_config(sys.argv[1])
+    ModelicaJSONDriver.start_from_configfile(sys.argv[1])

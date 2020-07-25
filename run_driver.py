@@ -1,3 +1,3 @@
 from driver import Driver
 import sys
-Driver.start_from_config(sys.argv[1])
+Driver.start_from_configfile(sys.argv[1])

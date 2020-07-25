@@ -104,7 +104,20 @@ class Driver:
         return 'Shutting down...'
 
     @staticmethod
-    def start_from_config(filename):
+    def start_from_config(cfg):
+        from importlib import import_module
+        srv_cfg = cfg.get('server')
+        if srv_cfg is None:
+            raise Exception("Need 'server' section")
+        mod_name = srv_cfg['driver'].split('.')
+        class_name = mod_name[-1]
+        module = '.'.join(mod_name[:-1])
+        mod = getattr(import_module(module), class_name)
+        srv = mod(srv_cfg['port'], srv_cfg['servers'], srv_cfg['ns'], cfg.get('driver'))
+        srv.serve()
+
+    @staticmethod
+    def start_from_configfile(filename):
         from importlib import import_module
 
         cfg = toml.load(open(filename))

@@ -52,4 +52,4 @@ class HaystackJSONDriver(driver.Driver):
 
 if __name__ == '__main__':
     import sys
-    HaystackJSONDriver.start_from_config(sys.argv[1])
+    HaystackJSONDriver.start_from_configfile(sys.argv[1])
