@@ -7,16 +7,13 @@ from datetime import datetime
 from modelica_brick_parser import Modelica_Brick_Parser
 
 class ModelicaJSONDriver(driver.Driver):
-    def __init__(self, port, servers, bldg_ns,
-                 lib_path='Buildings.Examples.VAVReheat',
-                 modelica_json_file='Guideline36',
-                 path='data/modelica/example-2'):
-        self._lib_path = lib_path
-        self._modelica_json_file = modelica_json_file
-        self._path = path
+    def __init__(self, port, servers, bldg_ns, opts):
+        self._lib_path = opts.get('lib_path')
+        self._modelica_json_file = opts.get('modelica_json_file')
+        self._path = opts.get('path')
         super().__init__(port, servers, bldg_ns)
 
-        t = threading.Thread(target=self._check_source)
+        t = threading.Thread(target=self._check_source, daemon=True)
         t.start()
 
     def _check_source(self):
@@ -71,9 +68,11 @@ class ModelicaJSONDriver(driver.Driver):
                 self.add_record(ent, rec)
             self.app.logger.info(f"Loaded {len(self._records)} records")
         # start thread
-        t = threading.Thread(target=do_load_file)
+        t = threading.Thread(target=do_load_file, daemon=True)
         t.start()
 
 if __name__ == '__main__':
-    srv = ModelicaJSONDriver(8082, ["http://localhost:6483"], "http://example.com/building#")
-    srv.serve()
+    # srv = ModelicaJSONDriver(8082, ["http://localhost:6483"], "http://example.com/building#")
+    # srv.serve()
+    import sys
+    ModelicaJSONDriver.start_from_config(sys.argv[1])

@@ -1,5 +1,6 @@
 from flask import Flask, request, json
 from datetime import datetime
+import toml
 import logging
 import requests
 import threading
@@ -25,7 +26,7 @@ class Driver:
 
         self.app.logger.info("INITIALIZED")
         # start thread
-        t = threading.Thread(target=self._monitor_push)
+        t = threading.Thread(target=self._monitor_push, daemon=True)
         t.start()
 
     def _compute_changed(self):
@@ -93,3 +94,12 @@ class Driver:
 
     def serve(self):
         self.app.run(host='localhost', port=str(self._port))
+
+    @classmethod
+    def start_from_config(cls, filename):
+        cfg = toml.load(open(filename))
+        srv_cfg = cfg.get('server')
+        if srv_cfg is None:
+            raise Exception("Need 'server' section")
+        srv = cls(srv_cfg['port'], srv_cfg['servers'], srv_cfg['ns'], cfg.get('driver'))
+        srv.serve()

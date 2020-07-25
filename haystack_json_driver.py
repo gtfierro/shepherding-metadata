@@ -7,11 +7,11 @@ from brickschema.inference import HaystackInferenceSession
 import json
 
 class HaystackJSONDriver(driver.Driver):
-    def __init__(self, port, servers, bldg_ns, haystack_file):
-        self._haystack_file = haystack_file
+    def __init__(self, port, servers, bldg_ns, opts):
+        self._haystack_file = opts['file']
         super().__init__(port, servers, bldg_ns)
 
-        t = threading.Thread(target=self._check_source)
+        t = threading.Thread(target=self._check_source, daemon=True)
         t.start()
 
 
@@ -47,9 +47,11 @@ class HaystackJSONDriver(driver.Driver):
             self.app.logger.info(f"Loaded {len(self._records)} records")
             self._compute_changed()
         # start thread
-        t = threading.Thread(target=do_load_file)
+        t = threading.Thread(target=do_load_file, daemon=True)
         t.start()
 
 if __name__ == '__main__':
-    srv = HaystackJSONDriver(8080, ["http://localhost:6483"], "http://example.com/building#", "data/haystack/carytown.json")
-    srv.serve()
+    import sys
+    HaystackJSONDriver.start_from_config(sys.argv[1])
+    # srv = HaystackJSONDriver(8080, ["http://localhost:6483"], "http://example.com/building#", "data/haystack/carytown.json")
+    # srv.serve()

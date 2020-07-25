@@ -11,12 +11,12 @@ from sys import stdout
 import csv
 
 class BuildingSyncDriver(driver.Driver):
-    def __init__(self, port, servers, bldg_ns, buildingsync_file):
-        self._filename = buildingsync_file
+    def __init__(self, port, servers, bldg_ns, opts):
+        self._filename = opts.get('bsync_file')
         super().__init__(port, servers, bldg_ns)
 
         self.mappings = {}
-        with open('data/buildingsync/BSync-to-Brick.csv') as f:
+        with open(opts.get('mapping_file')) as f:
             lines = csv.reader(f)
             next(lines)
             for line in lines:
@@ -28,7 +28,7 @@ class BuildingSyncDriver(driver.Driver):
             "auc": "http://buildingsync.net/schemas/bedes-auc/2019"
         }
 
-        t = threading.Thread(target=self._check_source)
+        t = threading.Thread(target=self._check_source, daemon=True)
         t.start()
 
     def _check_source(self):
@@ -107,6 +107,5 @@ class BuildingSyncDriver(driver.Driver):
 
 
 if __name__ == '__main__':
-    # srv = BuildingSyncDriver(8081, ["http://localhost:6483"], "http://example.com/haystack#", "data/buildingsync/examples/AT_example_SF_audit_report.xml")
-    srv = BuildingSyncDriver(8081, ["http://localhost:6483"], "http://example.com/building#", "data/buildingsync/examples/bsync-carytown.xml")
-    srv.serve()
+    import sys
+    BuildingSyncDriver.start_from_config(sys.argv[1])
