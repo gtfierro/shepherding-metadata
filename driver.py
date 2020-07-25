@@ -23,6 +23,7 @@ class Driver:
         self.app.add_url_rule('/', view_func=self.http_resources)
         self.app.add_url_rule('/ids', view_func=self.http_ids)
         self.app.add_url_rule('/id/<ident>', view_func=self.http_record)
+        self.app.add_url_rule('/shutdown', methods=['POST'], view_func=self.shutdown_server)
 
         self.app.logger.info("INITIALIZED")
         # start thread
@@ -94,6 +95,13 @@ class Driver:
 
     def serve(self):
         self.app.run(host='localhost', port=str(self._port))
+
+    def shutdown_server(self):
+        func = request.environ.get('werkzeug.server.shutdown')
+        if func is None:
+            raise RuntimeError('Not running with the Werkzeug Server')
+        func()
+        return 'Shutting down...'
 
     @staticmethod
     def start_from_config(filename):
