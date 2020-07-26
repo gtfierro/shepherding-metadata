@@ -1,5 +1,5 @@
 [server]
-port = 8080
+port = 8081
 servers = ['http://localhost:6483']
 ns = 'http://example.com/building#'
 driver = 'bsync_driver.BuildingSyncDriver'
