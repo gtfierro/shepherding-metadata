@@ -1,0 +1,102 @@
+bsync,ASHRAE 211 Export,1005.732536315918,22,46
+bsync,ASHRAE 211 Export,2090.3666019439697,22,46
+bsync,ASHRAE 211 Export,3153.8448333740234,22,46
+bsync,ASHRAE 211 Export,4205.798864364624,22,46
+bsync,ASHRAE 211 Export,5279.865980148315,22,46
+bsync,ASHRAE 211 Export,6334.5184326171875,22,46
+bsync,Golden Test File,1002.9685497283936,9,22
+bsync,Golden Test File,2025.766372680664,9,22
+bsync,Golden Test File,3065.305709838867,9,22
+bsync,Golden Test File,4121.474504470825,9,22
+bsync,Golden Test File,5149.370193481445,9,22
+bsync,Golden Test File,6178.334474563599,9,22
+bsync,NIST Gaithersburg Campus,1003.8111209869385,2,4
+bsync,NIST Gaithersburg Campus,2012.2625827789307,2,4
+bsync,NIST Gaithersburg Campus,3022.453546524048,2,4
+bsync,NIST Gaithersburg Campus,4032.2327613830566,2,4
+bsync,NIST Gaithersburg Campus,5042.127847671509,2,4
+bsync,NIST Gaithersburg Campus,6053.605556488037,2,4
+bsync,Richmond Federal Building,1003.7577152252197,2,4
+bsync,Richmond Federal Building,2012.5133991241455,2,4
+bsync,Richmond Federal Building,3022.256374359131,2,4
+bsync,Richmond Federal Building,4053.6460876464844,2,4
+bsync,Richmond Federal Building,5063.138961791992,2,4
+bsync,Richmond Federal Building,6072.993516921997,2,4
+bsync,bsync-carytown,1003.5145282745361,4,10
+bsync,bsync-carytown,2018.1779861450195,4,10
+bsync,bsync-carytown,3038.9678478240967,4,10
+bsync,bsync-carytown,4051.837682723999,4,10
+bsync,bsync-carytown,5066.557168960571,4,10
+bsync,bsync-carytown,6079.89239692688,4,10
+bsync,BuildingSync Website Valid Schema,1003.4482479095459,2,4
+bsync,BuildingSync Website Valid Schema,2011.9967460632324,2,4
+bsync,BuildingSync Website Valid Schema,3021.8257904052734,2,4
+bsync,BuildingSync Website Valid Schema,4031.9149494171143,2,4
+bsync,BuildingSync Website Valid Schema,5040.5824184417725,2,4
+bsync,BuildingSync Website Valid Schema,6049.125671386719,2,4
+bsync,Norfolk Federal Building,1003.6635398864746,8,16
+bsync,Norfolk Federal Building,2029.627799987793,8,16
+bsync,Norfolk Federal Building,3054.8975467681885,8,16
+bsync,Norfolk Federal Building,4081.8662643432617,8,16
+bsync,Norfolk Federal Building,5118.89123916626,8,16
+bsync,Norfolk Federal Building,6143.952369689941,8,16
+bsync,CMS Woodlawn Campus,1003.7612915039062,2,4
+bsync,CMS Woodlawn Campus,2011.030673980713,2,4
+bsync,CMS Woodlawn Campus,3019.8934078216553,2,4
+bsync,CMS Woodlawn Campus,4030.322790145874,2,4
+bsync,CMS Woodlawn Campus,5037.5330448150635,2,4
+bsync,CMS Woodlawn Campus,6046.9605922698975,2,4
+bsync,DC GSA Headquarters,1005.1662921905518,2,6
+bsync,DC GSA Headquarters,2014.3439769744873,2,6
+bsync,DC GSA Headquarters,3023.4270095825195,2,6
+bsync,DC GSA Headquarters,4034.2230796813965,2,6
+bsync,DC GSA Headquarters,5042.968273162842,2,6
+bsync,DC GSA Headquarters,6051.496505737305,2,6
+bsync,AT_example_NYC_audit_report_property,1003.0398368835449,33,79
+bsync,AT_example_NYC_audit_report_property,2092.066526412964,33,79
+bsync,AT_example_NYC_audit_report_property,3168.0243015289307,33,79
+bsync,AT_example_NYC_audit_report_property,4282.949209213257,33,79
+bsync,AT_example_NYC_audit_report_property,5368.467330932617,33,79
+bsync,AT_example_NYC_audit_report_property,6454.3616771698,33,79
+bsync,Medium Office - 2004 BSync,1003.3910274505615,4,10
+bsync,Medium Office - 2004 BSync,2015.2580738067627,4,10
+bsync,Medium Office - 2004 BSync,3026.1716842651367,4,10
+bsync,Medium Office - 2004 BSync,4041.088342666626,4,10
+bsync,Medium Office - 2004 BSync,5056.615591049194,4,10
+bsync,Medium Office - 2004 BSync,6070.662498474121,4,10
+bsync,AT_BRICR_audit_report,1003.7345886230469,22,52
+bsync,AT_BRICR_audit_report,2068.653345108032,22,52
+bsync,AT_BRICR_audit_report,3122.7056980133057,22,52
+bsync,AT_BRICR_audit_report,4185.097455978394,22,52
+bsync,AT_BRICR_audit_report,5240.857362747192,22,52
+bsync,AT_BRICR_audit_report,6299.18360710144,22,52
+bsync,MultitenantBySubsections,1004.2166709899902,2,4
+bsync,MultitenantBySubsections,2010.404348373413,2,4
+bsync,MultitenantBySubsections,3018.4073448181152,2,4
+bsync,MultitenantBySubsections,4026.1270999908447,2,4
+bsync,MultitenantBySubsections,5036.502361297607,2,4
+bsync,MultitenantBySubsections,6047.128200531006,2,4
+bsync,LL87,1003.9799213409424,11,26
+bsync,LL87,2035.4952812194824,11,26
+bsync,LL87,3063.2967948913574,11,26
+bsync,LL87,4098.465204238892,11,26
+bsync,LL87,5131.45637512207,11,26
+bsync,LL87,6159.082412719727,11,26
+bsync,Multi-Facility Shared Systems,1004.5630931854248,9,18
+bsync,Multi-Facility Shared Systems,2025.7248878479004,9,18
+bsync,Multi-Facility Shared Systems,3052.1979331970215,9,18
+bsync,Multi-Facility Shared Systems,4095.957040786743,9,18
+bsync,Multi-Facility Shared Systems,5126.319885253906,9,18
+bsync,Multi-Facility Shared Systems,6149.168014526367,9,18
+bsync,Reference Building - Primary School,1003.8638114929199,80,221
+bsync,Reference Building - Primary School,2226.6156673431396,80,221
+bsync,Reference Building - Primary School,3462.691307067871,80,221
+bsync,Reference Building - Primary School,4690.707683563232,80,221
+bsync,Reference Building - Primary School,5916.193723678589,80,221
+bsync,Reference Building - Primary School,7127.318382263184,80,221
+bsync,AT_example_SF_audit_report,1002.9268264770508,22,52
+bsync,AT_example_SF_audit_report,2053.57027053833,22,52
+bsync,AT_example_SF_audit_report,3109.6060276031494,22,52
+bsync,AT_example_SF_audit_report,4185.637474060059,22,52
+bsync,AT_example_SF_audit_report,5232.688426971436,22,52
+bsync,AT_example_SF_audit_report,6291.091203689575,22,52
