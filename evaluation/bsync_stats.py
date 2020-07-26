@@ -52,6 +52,8 @@ for filename in glob.glob(f"{file_dir}/*.xml"):
             num_triples = 0
             for ident in resp.json():
                 num_triples += len(get(f"http://localhost:8081/id/{ident}")['triples'])
+            if num_triples == 0:
+                continue
             records.append(("bsync", bldg, elapsed, len(resp.json()), num_triples))
             if num_triples != size_output:
                 size_output = num_triples
