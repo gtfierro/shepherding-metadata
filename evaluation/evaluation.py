@@ -59,8 +59,6 @@ res = [t for t in res if not isinstance(t[2], rdflib.BNode)]
 # filter out tags
 res = [t for t in res if t[1] != BRICK.hasTag]
 res = [t for t in res if 'building#' in str(t)]
-for t in res:
-    print(t)
 # TODO: do not "double count" triples when the entities are the same
 
 

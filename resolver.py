@@ -3,9 +3,10 @@ from collections import defaultdict
 import pandas as pd
 from scipy import stats
 import numpy as np
-from rdflib import Namespace, Literal, URIRef
+from rdflib import Namespace, Literal, URIRef, BNode
 from brickschema.namespaces import BRICK, A, OWL
-from brickschema.inference import BrickInferenceSession
+# from brickschema.inference import BrickInferenceSession
+from brickschema.inference import OWLRLAllegroInferenceSession
 from brickschema.graph import Graph
 import resolve_ui as ui
 
@@ -19,7 +20,7 @@ def graph_from_triples(triples):
     g = Graph(load_brick=True)
     # g.load_file("ttl/owl.ttl")
     g.add(*triples)
-    sess = BrickInferenceSession()
+    sess = OWLRLAllegroInferenceSession()
     return sess.expand(g)
 
 
@@ -110,7 +111,6 @@ def cluster_on_labels(graphs):
                             UNION \
                             { ?ent rdf:type/rdfs:subClassOf* brick:Location } \
                             ?ent brick:sourcelabel ?lab }")
-        # print(res)
         # TODO: remove common prefix from labels?
         labels = [tokenize_string(str(row[1])) for row in res
                   if isinstance(row[1], Literal)]
@@ -227,9 +227,10 @@ def merge_triples(triples, clusters):
         triples = [(a, OWL.sameAs, b) for (a, b) in pairs]
         graph.add(*triples)
 
-    sess = BrickInferenceSession()
-    graph = sess.expand(graph)
+    graph.g.serialize("before_inference.ttl", format="ttl")
 
+    sess = OWLRLAllegroInferenceSession()
+    graph = sess.expand(graph)
 
     # check the inferred classes
     # TODO: forward reasonable errors up to Python
@@ -245,9 +246,9 @@ def merge_triples(triples, clusters):
 
     dis = ui.UserDisambiguation(graph)
 
+
     entity_types = defaultdict(set)
     for row in res:
-        # print(">", row)
         ent, brickclass = row[0], row[1]
         entity_types[ent].add(brickclass)
 
@@ -269,34 +270,22 @@ def merge_triples(triples, clusters):
             if c1 == c2:
                 continue
             if not compatible_classes(graph, c1, c2):
-                # print(clusters[0], ent, type(ent))
                 badcluster = cluster_for_entity(ent)
-                if badcluster is not None:
+                if badcluster is not None and dis.do_recluster(badcluster):
                     print("bad cluster", badcluster)
                     new_clusters = dis.recluster(badcluster)
-                    print(new_clusters)
                     redo_clusters.extend(new_clusters)
                 else:
-                    print("INCOMPATIBLE BUT NO CLUSTER?", ent, c1, c2)
+                    # print("INCOMPATIBLE BUT NO CLUSTER?", ent, c1, c2)
                     # choose class and remove old triple
                     chosen = dis.ask([c1, c2], ent)
                     for c in [c1, c2]:
                         graph.g.remove((ent, A, c))
                     graph.g.add((ent, A, chosen))
-                # for c in clusters:
-                #     print(ent, c, ent in c)
                 break
-                # chosen = dis.ask([c1, c2], ent)
-                # for c in [c1, c2]:
-                #     graph.g.remove((ent, A, c))
-                # graph.g.add((ent, A, chosen))
-                # print(chosen, ent)
-                # print("PROBLEM", S(c1), S(c2), S(ent))
     # TODO: if any exception is thrown, need to recluster
     if len(redo_clusters) > 0:
         new_graph, new_canonical = merge_triples(triples, redo_clusters)
-        print(new_canonical)
-        print(canonical)
         return new_graph + graph.g, new_canonical + canonical
     else:
         return graph.g, canonical
@@ -324,6 +313,9 @@ def resolve(records):
     #     print([str(x) for x in cluster])
 
     all_triples = [t for triples in records.values() for t in triples]
+    # for t in all_triples:
+    #     print(t)
+    # return
     # graph, canonical
     return merge_triples(all_triples, clusters)
 
