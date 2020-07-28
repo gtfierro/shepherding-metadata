@@ -16,7 +16,7 @@ with ts.cursor() as cur:
 graphs = {}
 
 full_graph, canonical = resolver.resolve(ts.to_records())
-full_graph.g.serialize('eval.ttl', format='ttl')
+full_graph.serialize('eval.ttl', format='ttl')
 
 # canonicalize
 def canonicalize_ent(t):

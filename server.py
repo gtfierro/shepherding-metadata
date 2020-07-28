@@ -25,7 +25,7 @@ def fix_term(term):
         return rdflib.Literal(term)
     if 'http' in term:
         return rdflib.URIRef(term)
-    return rdflib.BNode(term)
+    return rdflib.Literal(term)
 
 def fix_triple(t):
     return (fix_term(t[0]), fix_term(t[1]), fix_term(t[2]))

@@ -3,34 +3,41 @@ from collections import defaultdict
 import pandas as pd
 from scipy import stats
 import numpy as np
-from rdflib import Namespace, Literal
-from brickschema.namespaces import BRICK, A, RDF, RDFS, OWL
+from rdflib import Namespace, Literal, URIRef
+from brickschema.namespaces import BRICK, A, OWL
 from brickschema.inference import BrickInferenceSession
 from brickschema.graph import Graph
+import resolve_ui as ui
 
 import distance
 import recordlinkage
 from recordlinkage.base import BaseCompareFeature
 
+
+
 def graph_from_triples(triples):
     g = Graph(load_brick=True)
+    # g.load_file("ttl/owl.ttl")
     g.add(*triples)
     sess = BrickInferenceSession()
     return sess.expand(g)
+
 
 def tokenize_string(s):
     s = s.lower()
     s = re.split(r'-| |_|#|/|:', s)
     return s
 
+
 def compatible_classes(graph, c1, c2):
     """
     Returns true if the two classes are compatible (equal, or one is a subclass
     of another), false otherwise
     """
-    q1 = f"ASK {{ <{c1}> rdfs:subClassOf*/owl:equivalentClass? <{c2}> }}"
-    q2 = f"ASK {{ <{c2}> rdfs:subClassOf*/owl:equivalentClass? <{c1}> }}"
+    q1 = f"ASK {{ <{c1}> owl:equivalentClass?/rdfs:subClassOf*/owl:equivalentClass? <{c2}> }}"
+    q2 = f"ASK {{ <{c2}> owl:equivalentClass?/rdfs:subClassOf*/owl:equivalentClass? <{c1}> }}"
     return graph.query(q1)[0] or graph.query(q2)[0]
+
 
 def trim_prefix_tokenized(names):
     if len(names) <= 1:
@@ -68,7 +75,7 @@ class VectorJaccardCompare(BaseCompareFeature):
     def _compute_vectorized(self, s1, s2):
         s1 = list(s1)
         s2 = list(s2)
-        sim = np.array([1-distance.jaccard(s1[i], s2[i]) \
+        sim = np.array([1-distance.jaccard(s1[i], s2[i])
                        for i in range(len(s1))])
         return sim
 
@@ -78,16 +85,16 @@ class MaxLevenshteinMatch(BaseCompareFeature):
         # calculate pair-wise levenshtein
         s1 = list(s1)
         s2 = list(s2)
-        sim = np.array([distance.jaccard(s1[i], s2[i]) for i in range(len(s1))])
-        # sim = np.array([distance.levenshtein(s1[i], s2[i]) for i in range(len(s1))])
+        sim = np.array([distance.jaccard(s1[i], s2[i])
+                       for i in range(len(s1))])
         min_dist = np.min(sim)
         sim = np.array([1 if x == min_dist and x > .8 else 0 for x in sim])
         return sim
 
 
 def cluster_on_labels(graphs):
-    # populates the following list; contains lists of URIs that are linked to be
-    # the same entity
+    # populates the following list; contains lists of URIs that are linked to
+    # be the same entity
     clusters = []
     # list of clustered entities
     clustered = set()
@@ -97,14 +104,18 @@ def cluster_on_labels(graphs):
         df = pd.DataFrame(columns=['label', 'uris'])
         print(f"{'-'*5} {source} {'-'*5}")
         res = graph.query("SELECT ?ent ?lab WHERE { \
-                            ?ent rdf:type/rdfs:subClassOf brick:Class .\
+                            ?ent rdf:type ?type .\
+                            { ?type rdfs:subClassOf* brick:Equipment } \
+                            UNION \
+                            { ?type rdfs:subClassOf* brick:Point } \
+                            UNION \
+                            { ?type rdfs:subClassOf* brick:Location } \
                             ?ent brick:sourcelabel ?lab }")
         # TODO: remove common prefix from labels?
-        labels = [tokenize_string(str(row[1])) for row in res \
-                    if isinstance(row[1], Literal)]
+        labels = [tokenize_string(str(row[1])) for row in res
+                  if isinstance(row[1], Literal)]
         # labels = [l for l in labels if l != ["unknown"]]
         labels = trim_prefix_tokenized(labels)
-        print(labels)
         uris = [row[0] for row in res if isinstance(row[1], Literal)]
         df['label'] = labels
         df['uris'] = uris
@@ -115,15 +126,14 @@ def cluster_on_labels(graphs):
     if len(datasets) <= 1:
         return clusters, clustered
 
-
     indexer = recordlinkage.Index()
     indexer.full()
     candidate_links = indexer.index(*datasets)
     comp = recordlinkage.Compare()
     comp.add(VectorJaccardCompare('label', 'label', label='y_label'))
     features = comp.compute(candidate_links, *datasets)
-    # use metric of '>=.9' because there's just one feature for now and it scales
-    # [0, 1]
+    # use metric of '>=.9' because there's just one feature for now and it
+    # scales [0, 1]
 
     matches = features[features.sum(axis=1) >= .9]
     for idx_list in matches.index:
@@ -135,6 +145,7 @@ def cluster_on_labels(graphs):
 
     return clusters, clustered
 
+
 def cluster_on_type_alignment(graphs, clustered):
     clusters = []
     counts = defaultdict(lambda: defaultdict(set))
@@ -142,7 +153,11 @@ def cluster_on_type_alignment(graphs, clustered):
     for source, graph in graphs.items():
         res = graph.query("SELECT ?ent ?type ?lab WHERE { \
                 ?ent rdf:type ?type .\
-                ?type rdfs:subClassOf+ brick:Class .\
+                { ?type rdfs:subClassOf: brick:Equipment } \
+                UNION \
+                { ?type rdfs:subClassOf+ brick:Point } \
+                UNION \
+                { ?type rdfs:subClassOf+ brick:Location } \
                 ?ent brick:sourcelabel ?lab }")
         for row in res:
             entity, brickclass, label = row
@@ -152,7 +167,8 @@ def cluster_on_type_alignment(graphs, clustered):
             uris[str(label)] = entity
     for bc, c in counts.items():
         mode_count = stats.mode([len(x) for x in c.values()]).mode[0]
-        candidates = [(src, list(ents)) for src, ents in c.items() if len(ents) == mode_count]
+        candidates = [(src, list(ents)) for src, ents in c.items()
+                      if len(ents) == mode_count]
         if len(candidates) <= 1:
             continue
         print(f"class {bc} has {len(c)} sources with {mode_count} candidates each")
@@ -183,15 +199,25 @@ def cluster_on_type_alignment(graphs, clustered):
 
     return clusters, clustered
 
+
 def merge_triples(triples, clusters):
     # choose arbitrary entity as the canonical name
     canonical = [([str(u) for u in c], list(c)[0]) for c in clusters]
+
     def fix_triple(t):
         for cluster, ent in canonical:
             if t[0] in cluster:
                 return (ent, t[1], t[2])
         return t
-    replace = lambda x: [ent for (cluster, ent) in canonical if x in cluster][0]
+
+    def cluster_for_entity(ent):
+        candidates = [c for c in clusters if ent in c]
+        # ent should be in at most one
+        if len(candidates) > 0:
+            return candidates[0]
+        return None
+
+    # replace = lambda x: [ent for (cluster, ent) in canonical if x in cluster][0]
     triples = list(map(fix_triple, triples))
 
     graph = graph_from_triples(triples)
@@ -209,21 +235,71 @@ def merge_triples(triples, clusters):
     # TODO: forward reasonable errors up to Python
     res = graph.query("SELECT ?ent ?type WHERE { \
                         ?ent rdf:type ?type .\
-                        ?type rdfs:subClassOf+ brick:Class .\
+                        { ?type rdfs:subClassOf+ brick:Equipment } \
+                        UNION \
+                        { ?type rdfs:subClassOf+ brick:Point } \
+                        UNION \
+                        { ?type rdfs:subClassOf+ brick:Location } \
                         ?ent brick:sourcelabel ?lab }")
+
+
+    dis = ui.UserDisambiguation(graph)
 
     entity_types = defaultdict(set)
     for row in res:
-        ent, brickclass = str(row[0]), str(row[1])
+        # print(">", row)
+        ent, brickclass = row[0], row[1]
         entity_types[ent].add(brickclass)
-    print(entity_types)
+
+    # TODO: handle this
+    """
+    How to identify "bad" clusters:
+    1) if the types are incompatible
+
+    How to fix bad clusters:
+    - easy way: ask user to manually partition the bad clusters and recall the
+      merge_triples method (this method) with the new clusters
+    """
+
+    # TODO: remove quantity kinds from this??
+    redo_clusters = []
     for ent, classlist in entity_types.items():
         classlist = list(classlist)
         for (c1, c2) in zip(classlist[:-1], classlist[1:]):
+            if c1 == c2:
+                continue
             if not compatible_classes(graph, c1, c2):
-                print("PROBLEM", c1, c2, ent)
+                # print(clusters[0], ent, type(ent))
+                badcluster = cluster_for_entity(ent)
+                if badcluster is not None:
+                    print("bad cluster", badcluster)
+                    new_clusters = dis.recluster(badcluster)
+                    print(new_clusters)
+                    redo_clusters.extend(new_clusters)
+                else:
+                    print("INCOMPATIBLE BUT NO CLUSTER?", ent, c1, c2)
+                    # choose class and remove old triple
+                    chosen = dis.ask([c1, c2], ent)
+                    for c in [c1, c2]:
+                        graph.g.remove((ent, A, c))
+                    graph.g.add((ent, A, chosen))
+                # for c in clusters:
+                #     print(ent, c, ent in c)
+                break
+                # chosen = dis.ask([c1, c2], ent)
+                # for c in [c1, c2]:
+                #     graph.g.remove((ent, A, c))
+                # graph.g.add((ent, A, chosen))
+                # print(chosen, ent)
+                # print("PROBLEM", S(c1), S(c2), S(ent))
     # TODO: if any exception is thrown, need to recluster
-    return graph, canonical
+    if len(redo_clusters) > 0:
+        new_graph, new_canonical = merge_triples(triples, redo_clusters)
+        print(new_canonical)
+        print(canonical)
+        return new_graph + graph.g, new_canonical + canonical
+    else:
+        return graph.g, canonical
 
 def resolve(records):
     """
@@ -236,12 +312,16 @@ def resolve(records):
 
     new_clusters, clustered = cluster_on_labels(graphs)
     clusters.extend(new_clusters)
+    for c in new_clusters:
+        print(f"Label cluster: {c}")
 
     new_clusters, clustered = cluster_on_type_alignment(graphs, clustered)
     clusters.extend(new_clusters)
+    for c in new_clusters:
+        print(f"Type cluster: {c}")
 
-    for cluster in clusters:
-        print([str(x) for x in cluster])
+    # for cluster in clusters:
+    #     print([str(x) for x in cluster])
 
     all_triples = [t for triples in records.values() for t in triples]
     # graph, canonical
