@@ -3,7 +3,7 @@
 "Location","//auc:ThermalZones/auc:ThermalZone","https://brickschema.org/schema/1.1/Brick#HVAC_Zone",
 "Location","//auc:Sites/auc:Site","https://brickschema.org/schema/1.1/Brick#Site",
 "Equipment","//auc:CoolingPlants/auc:CoolingPlant/auc:Chiller[auc:ChillerType/text()='Absorption']","https://brickschema.org/schema/1.1/Brick#Absorption_Chiller",
-"Equipment","//auc:Deliveries/auc:Delivery[auc:DeliveryType/auc:CentralAirDistribution/auc:AirDeliveryType/text()='Central fan']","https://brickschema.org/schema/1.1/Brick#AHU",
+"Equipment","//auc:Deliveries/auc:Delivery[auc:DeliveryType/auc:CentralAirDistribution/auc:AirDeliveryType/text()='Central fan']","https://brickschema.org/schema/1.1/Brick#Air_Handler_Unit",
 "Equipment","//auc:HeatingPlants/auc:HeatingPlant/auc:Boiler","https://brickschema.org/schema/1.1/Brick#Boiler",
 "Equipment","//auc:CoolingPlants/auc:CoolingPlant/auc:Chiller[auc:ChillerType/text()='Vapor compression' and auc:ChillerCompressorType/text()='Centrifugal']","https://brickschema.org/schema/1.1/Brick#Centrifugal_Chiller",
 "Equipment","//auc:PumpSystems/auc:PumpSystem[auc:PumpApplication/text()='Chilled Water']","https://brickschema.org/schema/1.1/Brick#Chilled_Water_Pump",

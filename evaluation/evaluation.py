@@ -24,6 +24,7 @@ def canonicalize_ent(t):
         if t[0] in cluster:
             return (ent, t[1], t[2])
     return t
+
 # get one "authoritative" ID per cluster
 # clusters = []
 # res = full_graph.query("SELECT ?e1 ?e2 WHERE { \
@@ -56,13 +57,16 @@ res = full_graph.query("SELECT ?s ?p ?o WHERE { \
 # filter out blank nodes
 res = [t for t in res if not isinstance(t[2], rdflib.BNode)]
 # filter out tags
-# res = [t for t in res if t[1] != BRICK.hasTag]
+res = [t for t in res if t[1] != BRICK.hasTag]
+res = [t for t in res if 'building#' in str(t)]
+for t in res:
+    print(t)
 # TODO: do not "double count" triples when the entities are the same
 
 
 for site in sites:
     with ts.cursor() as cur:
-        triples = cur.execute("SELECT s, p, o FROM latest_triples where src = ?", (site, ))
+        triples = cur.execute("SELECT s, p, o FROM latest_triples where src = ?", (site, ))#  and (s LIKE '%building#%' or o LIKE '%building#%')", (site, ))
         triples = list(map(canonicalize_ent, triples))
         graphs[site] = triples
 

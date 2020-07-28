@@ -110,6 +110,7 @@ def cluster_on_labels(graphs):
                             UNION \
                             { ?ent rdf:type/rdfs:subClassOf* brick:Location } \
                             ?ent brick:sourcelabel ?lab }")
+        # print(res)
         # TODO: remove common prefix from labels?
         labels = [tokenize_string(str(row[1])) for row in res
                   if isinstance(row[1], Literal)]
