@@ -104,12 +104,11 @@ def cluster_on_labels(graphs):
         df = pd.DataFrame(columns=['label', 'uris'])
         print(f"{'-'*5} {source} {'-'*5}")
         res = graph.query("SELECT ?ent ?lab WHERE { \
-                            ?ent rdf:type ?type .\
-                            { ?type rdfs:subClassOf* brick:Equipment } \
+                            { ?ent rdf:type/rdfs:subClassOf* brick:Equipment } \
                             UNION \
-                            { ?type rdfs:subClassOf* brick:Point } \
+                            { ?ent rdf:type/rdfs:subClassOf* brick:Point } \
                             UNION \
-                            { ?type rdfs:subClassOf* brick:Location } \
+                            { ?ent rdf:type/rdfs:subClassOf* brick:Location } \
                             ?ent brick:sourcelabel ?lab }")
         # TODO: remove common prefix from labels?
         labels = [tokenize_string(str(row[1])) for row in res
