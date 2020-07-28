@@ -1,0 +1,35 @@
+[
+  {
+    "within": [
+      "Buildings.Examples"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "package",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "HydronicHeating",
+            "comment": "\"Hydronic heating system with storage, two rooms and thermostatic radiator valves\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Icons.ExamplesPackage"
+                    }
+                  }
+                ]
+              },
+              "comp_annotation": {
+                "documentation": {
+                  "info": "\"<html>\n<p>\nThis package demonstrates the implementation of a hydronic heating system.\n</p>\n</html>\""
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Examples/HydronicHeating/package.mo"
+  }
+]

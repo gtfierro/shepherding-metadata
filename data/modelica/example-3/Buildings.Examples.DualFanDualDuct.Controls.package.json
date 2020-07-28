@@ -1,0 +1,30 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.DualFanDualDuct"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "package",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "Controls",
+            "comment": "\"Package with controller models\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Icons.VariantsPackage"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Examples/DualFanDualDuct/Controls/package.mo"
+  }
+]

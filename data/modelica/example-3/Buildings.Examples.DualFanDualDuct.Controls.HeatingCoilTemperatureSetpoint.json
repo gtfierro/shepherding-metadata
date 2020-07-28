@@ -1,0 +1,53 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.DualFanDualDuct.Controls"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "block",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "HeatingCoilTemperatureSetpoint",
+            "comment": "\"Set point scheduler for heating coil\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "import_clause": {
+                      "prefix": "import",
+                      "name": "Buildings.Examples.VAVReheat.Controls.OperationModes"
+                    }
+                  },
+                  {
+                    "extends_clause": {
+                      "name": "CoolingCoilTemperatureSetpoint",
+                      "class_modification": {
+                        "modifications": [
+                          {
+                            "name": "TSetPoi",
+                            "variable_modification": {
+                              "modification": {
+                                "modifications": [
+                                  {
+                                    "name": "y",
+                                    "value": "if (mode.y == Integer(OperationModes.unoccupiedOff)) then TOff else TOn"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Examples/DualFanDualDuct/Controls/HeatingCoilTemperatureSetpoint.mo"
+  }
+]

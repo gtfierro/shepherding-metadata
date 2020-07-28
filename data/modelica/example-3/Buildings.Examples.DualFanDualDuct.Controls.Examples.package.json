@@ -1,0 +1,30 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.DualFanDualDuct.Controls"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "package",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "Examples",
+            "comment": "\"Example models to test the components\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Icons.ExamplesPackage"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Examples/DualFanDualDuct/Controls/Examples/package.mo"
+  }
+]

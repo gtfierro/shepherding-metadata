@@ -1,0 +1,2374 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.DualFanDualDuct.ThermalZones"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "model",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "SupplyBranch",
+            "comment": "\"Supply branch of a dual duct system\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "replaceable": "replaceable",
+                    "replaceable_class_definition": {
+                      "class_prefixes": "package",
+                      "class_specifier": {
+                        "short_class_specifier": {
+                          "className": "MediumA",
+                          "inputName": "Modelica.Media.Interfaces.PartialMedium",
+                          "comment": {
+                            "string_comment": "\"Medium model for air\"",
+                            "annotation": {
+                              "others": [
+                                {
+                                  "name": "choicesAllMatching",
+                                  "value": "true"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Fluid.Interfaces.FluidPort_a",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "port_aHot",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "MediumA "
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Connector for hot deck\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -10,
+                                        "y": -110
+                                      },
+                                      {
+                                        "x": 10,
+                                        "y": -90
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": -12,
+                                        "y": -110
+                                      },
+                                      {
+                                        "x": 8,
+                                        "y": -90
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Fluid.Interfaces.FluidPort_a",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "port_aCol",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "MediumA "
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Connector for cold deck\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 90,
+                                        "y": -110
+                                      },
+                                      {
+                                        "x": 110,
+                                        "y": -90
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": 92,
+                                        "y": -110
+                                      },
+                                      {
+                                        "x": 112,
+                                        "y": -90
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Fluid.Interfaces.FluidPort_a",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "port_b",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "MediumA "
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Fluid connector b (positive design flow direction is from port_a1 to port_b1)\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 40,
+                                        "y": 190
+                                      },
+                                      {
+                                        "x": 60,
+                                        "y": 210
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": 40,
+                                        "y": 190
+                                      },
+                                      {
+                                        "x": 60,
+                                        "y": 210
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Boolean",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "from_dp",
+                              "value": "false"
+                            },
+                            "comment": {
+                              "string_comment": "\"= true, use m_flow = f(dp) else dp = f(m_flow)\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Boolean",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "linearizeFlowResistance",
+                              "value": "false"
+                            },
+                            "comment": {
+                              "string_comment": "\"= true, use linear relation between m_flow and dp for any flow rate\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.MassFlowRate",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "m_flow_nominal"
+                            },
+                            "comment": {
+                              "string_comment": "\"Mass flow rate cold air deck\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.MassFlowRate",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "mAirHot_flow_nominal",
+                              "value": "0.3*m_flow_nominal"
+                            },
+                            "comment": {
+                              "string_comment": "\"Mass flow rate hot air deck\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.MassFlowRate",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "mAirCol_flow_nominal",
+                              "value": "m_flow_nominal"
+                            },
+                            "comment": {
+                              "string_comment": "\"Mass flow rate cold air deck\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_prefix": "parameter",
+                      "type_specifier": "Modelica.SIunits.Volume",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "VRoo"
+                            },
+                            "comment": {
+                              "string_comment": "\"Room volume\""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Controls.RoomMixingBox",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "con",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "m_flow_min",
+                                    "value": "VRoo*3*1.2/3600"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Room temperature controller\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -40,
+                                        "y": 0
+                                      },
+                                      {
+                                        "x": -20,
+                                        "y": 20
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "VAVReheat.Controls.ControlBus",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "controlBus"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -110,
+                                        "y": -50
+                                      },
+                                      {
+                                        "x": -90,
+                                        "y": -30
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": -110,
+                                        "y": -38
+                                      },
+                                      {
+                                        "x": -90,
+                                        "y": -18
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Fluid.Actuators.Dampers.Exponential",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "vavHot",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "MediumA "
+                                  },
+                                  {
+                                    "name": "m_flow_nominal",
+                                    "value": "mAirHot_flow_nominal"
+                                  },
+                                  {
+                                    "name": "from_dp",
+                                    "value": "from_dp"
+                                  },
+                                  {
+                                    "name": "linearized",
+                                    "value": "linearizeFlowResistance"
+                                  },
+                                  {
+                                    "name": "y_start",
+                                    "value": "0"
+                                  },
+                                  {
+                                    "name": "dpDamper_nominal",
+                                    "value": "0.27"
+                                  },
+                                  {
+                                    "name": "dpFixed_nominal",
+                                    "value": "40 - 0.27"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"VAV damper for hot deck\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -10,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 10,
+                                        "y": 10
+                                      }
+                                    ],
+                                    "rotation": 90,
+                                    "origin": {
+                                      "x": 0,
+                                      "y": -30
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Fluid.Actuators.Dampers.Exponential",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "vavCol",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "MediumA "
+                                  },
+                                  {
+                                    "name": "m_flow_nominal",
+                                    "value": "mAirCol_flow_nominal"
+                                  },
+                                  {
+                                    "name": "from_dp",
+                                    "value": "from_dp"
+                                  },
+                                  {
+                                    "name": "linearized",
+                                    "value": "linearizeFlowResistance"
+                                  },
+                                  {
+                                    "name": "y_start",
+                                    "value": "0"
+                                  },
+                                  {
+                                    "name": "dpDamper_nominal",
+                                    "value": "0.27"
+                                  },
+                                  {
+                                    "name": "dpFixed_nominal",
+                                    "value": "40 - 0.27"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"VAV damper for cold deck\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -10,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 10,
+                                        "y": 10
+                                      }
+                                    ],
+                                    "rotation": 90,
+                                    "origin": {
+                                      "x": 100,
+                                      "y": -30
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Fluid.Sensors.MassFlowRate",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "senMasFlo",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "MediumA "
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Sensor for mass flow rate\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -10,
+                                        "y": 10
+                                      },
+                                      {
+                                        "x": 10,
+                                        "y": -10
+                                      }
+                                    ],
+                                    "rotation": 90,
+                                    "origin": {
+                                      "x": 50,
+                                      "y": 134
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Math.Gain",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "fraMasFlo",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "1/m_flow_nominal"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Fraction of mass flow rate, relative to nominal flow\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 102,
+                                        "y": 134
+                                      },
+                                      {
+                                        "x": 122,
+                                        "y": 154
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Math.Gain",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "ACH",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "1/VRoo/1.2*3600"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Air change per hour\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 100,
+                                        "y": 94
+                                      },
+                                      {
+                                        "x": 120,
+                                        "y": 114
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TRoo"
+                            },
+                            "comment": {
+                              "string_comment": "\"Measured room temperature\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": 80
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 120
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Fluid.FixedResistances.Junction",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "mix",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "MediumA "
+                                  },
+                                  {
+                                    "name": "m_flow_nominal",
+                                    "value": "{mAirCol_flow_nominal,mAirHot_flow_nominal,\n        mAirCol_flow_nominal + mAirHot_flow_nominal}"
+                                  },
+                                  {
+                                    "name": "from_dp",
+                                    "value": "from_dp"
+                                  },
+                                  {
+                                    "name": "linearized",
+                                    "value": "linearizeFlowResistance"
+                                  },
+                                  {
+                                    "name": "dp_nominal",
+                                    "value": "20*{0,0,0}"
+                                  },
+                                  {
+                                    "name": "energyDynamics",
+                                    "value": "Modelica.Fluid.Types.Dynamics.SteadyState"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Mixer for hot and cold air deck\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -10,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 10,
+                                        "y": 10
+                                      }
+                                    ],
+                                    "rotation": 180,
+                                    "origin": {
+                                      "x": 50,
+                                      "y": 40
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Fluid.Sensors.RelativePressure",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "senRelPreHot",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "MediumA "
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Relative pressure hot deck (compared to room pressure)\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -10,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 10,
+                                        "y": 10
+                                      }
+                                    ],
+                                    "rotation": 90,
+                                    "origin": {
+                                      "x": 150,
+                                      "y": 0
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Fluid.Sensors.RelativePressure",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "senRelPreCol",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "MediumA "
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Relative pressure cold deck (compared to room pressure)\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -10,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 10,
+                                        "y": 10
+                                      }
+                                    ],
+                                    "rotation": 90,
+                                    "origin": {
+                                      "x": 170,
+                                      "y": -60
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealOutput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "p_relCol"
+                            },
+                            "comment": {
+                              "string_comment": "\"Pressure signal of cold deck\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 200,
+                                        "y": -70
+                                      },
+                                      {
+                                        "x": 220,
+                                        "y": -50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealOutput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "p_relHot"
+                            },
+                            "comment": {
+                              "string_comment": "\"Pressure signal of hot deck\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 200,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 220,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Fluid.Sensors.TemperatureTwoPort",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TSup",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "prefix": "redeclare package",
+                                    "packageName": "Medium",
+                                    "name": "MediumA"
+                                  },
+                                  {
+                                    "name": "m_flow_nominal",
+                                    "value": "m_flow_nominal"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Supply air temperature\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -10,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 10,
+                                        "y": 10
+                                      }
+                                    ],
+                                    "rotation": 90,
+                                    "origin": {
+                                      "x": 50,
+                                      "y": 168
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.OBC.CDL.Interfaces.BooleanInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "yFan"
+                            },
+                            "comment": {
+                              "string_comment": "\"Fan operation, true if fan is running\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": -20
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 20
+                                      }
+                                    ]
+                                  },
+                                  "iconTransformation": {
+                                    "extent": [
+                                      {
+                                        "x": -140,
+                                        "y": 0
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "fraMasFlo",
+                          "u"
+                        ],
+                        "component2": [
+                          "senMasFlo",
+                          "m_flow"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 100,
+                                "y": 144
+                              },
+                              {
+                                "x": 80,
+                                "y": 144
+                              },
+                              {
+                                "x": 80,
+                                "y": 134
+                              },
+                              {
+                                "x": 61,
+                                "y": 134
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "ACH",
+                          "u"
+                        ],
+                        "component2": [
+                          "senMasFlo",
+                          "m_flow"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 98,
+                                "y": 104
+                              },
+                              {
+                                "x": 80,
+                                "y": 104
+                              },
+                              {
+                                "x": 80,
+                                "y": 134
+                              },
+                              {
+                                "x": 61,
+                                "y": 134
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "con",
+                          "TRoo"
+                        ],
+                        "component2": [
+                          "TRoo"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -42,
+                                "y": 18
+                              },
+                              {
+                                "x": -60,
+                                "y": 18
+                              },
+                              {
+                                "x": -60,
+                                "y": 100
+                              },
+                              {
+                                "x": -120,
+                                "y": 100
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "vavHot",
+                          "port_a"
+                        ],
+                        "component2": [
+                          "port_aHot"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -1.12703e-16,
+                                "y": -40
+                              },
+                              {
+                                "x": -1.12703e-16,
+                                "y": -56.5
+                              },
+                              {
+                                "x": 4.42409e-16,
+                                "y": -56.5
+                              },
+                              {
+                                "x": 4.42409e-16,
+                                "y": -73
+                              },
+                              {
+                                "x": 5.55112e-16,
+                                "y": -73
+                              },
+                              {
+                                "x": 5.55112e-16,
+                                "y": -100
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "vavHot",
+                          "port_b"
+                        ],
+                        "component2": [
+                          "mix",
+                          "port_2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1.1119e-15,
+                                "y": -20
+                              },
+                              {
+                                "x": 1.1119e-15,
+                                "y": 40
+                              },
+                              {
+                                "x": 40,
+                                "y": 40
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "mix",
+                          "port_1"
+                        ],
+                        "component2": [
+                          "vavCol",
+                          "port_b"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 60,
+                                "y": 40
+                              },
+                              {
+                                "x": 100,
+                                "y": 40
+                              },
+                              {
+                                "x": 100,
+                                "y": -20
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "mix",
+                          "port_3"
+                        ],
+                        "component2": [
+                          "senMasFlo",
+                          "port_a"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 50,
+                                "y": 50
+                              },
+                              {
+                                "x": 50,
+                                "y": 124
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "senMasFlo",
+                          "m_flow"
+                        ],
+                        "component2": [
+                          "con",
+                          "mAir_flow"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 61,
+                                "y": 134
+                              },
+                              {
+                                "x": 66,
+                                "y": 134
+                              },
+                              {
+                                "x": 66,
+                                "y": 70
+                              },
+                              {
+                                "x": -52,
+                                "y": 70
+                              },
+                              {
+                                "x": -52,
+                                "y": 6
+                              },
+                              {
+                                "x": -42,
+                                "y": 6
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "con",
+                          "yHot"
+                        ],
+                        "component2": [
+                          "vavHot",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -19,
+                                "y": 14
+                              },
+                              {
+                                "x": -16,
+                                "y": 14
+                              },
+                              {
+                                "x": -16,
+                                "y": -30
+                              },
+                              {
+                                "x": -12,
+                                "y": -30
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "con",
+                          "yCol"
+                        ],
+                        "component2": [
+                          "vavCol",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -19,
+                                "y": 5
+                              },
+                              {
+                                "x": 80,
+                                "y": 5
+                              },
+                              {
+                                "x": 80,
+                                "y": -30
+                              },
+                              {
+                                "x": 88,
+                                "y": -30
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "senRelPreHot",
+                          "port_a"
+                        ],
+                        "component2": [
+                          "port_aHot"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 150,
+                                "y": -10
+                              },
+                              {
+                                "x": 150,
+                                "y": -60
+                              },
+                              {
+                                "x": 5.55112e-16,
+                                "y": -60
+                              },
+                              {
+                                "x": 5.55112e-16,
+                                "y": -100
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "senRelPreCol",
+                          "port_a"
+                        ],
+                        "component2": [
+                          "port_aCol"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 170,
+                                "y": -70
+                              },
+                              {
+                                "x": 170,
+                                "y": -76
+                              },
+                              {
+                                "x": 100,
+                                "y": -76
+                              },
+                              {
+                                "x": 100,
+                                "y": -100
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "vavCol",
+                          "port_a"
+                        ],
+                        "component2": [
+                          "port_aCol"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 100,
+                                "y": -40
+                              },
+                              {
+                                "x": 100,
+                                "y": -100
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "senRelPreHot",
+                          "port_b"
+                        ],
+                        "component2": [
+                          "mix",
+                          "port_3"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 150,
+                                "y": 10
+                              },
+                              {
+                                "x": 150,
+                                "y": 60
+                              },
+                              {
+                                "x": 50,
+                                "y": 60
+                              },
+                              {
+                                "x": 50,
+                                "y": 50
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "senRelPreCol",
+                          "port_b"
+                        ],
+                        "component2": [
+                          "mix",
+                          "port_3"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 170,
+                                "y": -50
+                              },
+                              {
+                                "x": 170,
+                                "y": 60
+                              },
+                              {
+                                "x": 50,
+                                "y": 60
+                              },
+                              {
+                                "x": 50,
+                                "y": 50
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "senRelPreCol",
+                          "p_rel"
+                        ],
+                        "component2": [
+                          "p_relCol"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 179,
+                                "y": -60
+                              },
+                              {
+                                "x": 210,
+                                "y": -60
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "senRelPreHot",
+                          "p_rel"
+                        ],
+                        "component2": [
+                          "p_relHot"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 159,
+                                "y": -5.14725e-17
+                              },
+                              {
+                                "x": 198,
+                                "y": 0
+                              },
+                              {
+                                "x": 210,
+                                "y": 5.55112e-16
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "con",
+                          "TRooSetHea"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TRooSetHea"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -42,
+                                "y": 14
+                              },
+                              {
+                                "x": -80,
+                                "y": 14
+                              },
+                              {
+                                "x": -80,
+                                "y": -40
+                              },
+                              {
+                                "x": -100,
+                                "y": -40
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%second\" ,index =1 ,extent ={{6,3},{6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "con",
+                          "TRooSetCoo"
+                        ],
+                        "component2": [
+                          "controlBus",
+                          "TRooSetCoo"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -42,
+                                "y": 10
+                              },
+                              {
+                                "x": -80,
+                                "y": 10
+                              },
+                              {
+                                "x": -80,
+                                "y": -40
+                              },
+                              {
+                                "x": -100,
+                                "y": -40
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          },
+                          "text": "textString =\"%second\" ,index =1 ,extent ={{6,3},{6,3}}"
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "senMasFlo",
+                          "port_b"
+                        ],
+                        "component2": [
+                          "TSup",
+                          "port_a"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 50,
+                                "y": 144
+                              },
+                              {
+                                "x": 50,
+                                "y": 158
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TSup",
+                          "port_b"
+                        ],
+                        "component2": [
+                          "port_b"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 50,
+                                "y": 178
+                              },
+                              {
+                                "x": 50,
+                                "y": 200
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 127,
+                              "b": 255
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "con",
+                          "yFan"
+                        ],
+                        "component2": [
+                          "yFan"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -42,
+                                "y": 2
+                              },
+                              {
+                                "x": -82,
+                                "y": 2
+                              },
+                              {
+                                "x": -82,
+                                "y": 0
+                              },
+                              {
+                                "x": -120,
+                                "y": 0
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "comp_annotation": {
+                "diagram": {
+                  "coordinateSystem": {
+                    "extent": [
+                      {
+                        "x": -100,
+                        "y": -100
+                      },
+                      {
+                        "x": 200,
+                        "y": 200
+                      }
+                    ],
+                    "preserveAspectRatio": true
+                  }
+                },
+                "icon": {
+                  "coordinateSystem": {
+                    "extent": [
+                      {
+                        "x": -100,
+                        "y": -100
+                      },
+                      {
+                        "x": 200,
+                        "y": 200
+                      }
+                    ],
+                    "preserveAspectRatio": true
+                  },
+                  "graphics": {
+                    "line": [
+                      {
+                        "points": [
+                          {
+                            "x": 206,
+                            "y": 0
+                          },
+                          {
+                            "x": 146,
+                            "y": 0
+                          },
+                          {
+                            "x": 146,
+                            "y": -36
+                          },
+                          {
+                            "x": 2,
+                            "y": -36
+                          }
+                        ],
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "smooth": "Smooth.None"
+                      },
+                      {
+                        "points": [
+                          {
+                            "x": 200,
+                            "y": -60
+                          },
+                          {
+                            "x": 104,
+                            "y": -60
+                          }
+                        ],
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "smooth": "Smooth.None"
+                      }
+                    ],
+                    "polygon": [
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "pattern": "LinePattern.None",
+                        "fillPattern": "FillPattern.Solid",
+                        "points": [
+                          {
+                            "x": 88,
+                            "y": -16
+                          },
+                          {
+                            "x": 116,
+                            "y": 0
+                          },
+                          {
+                            "x": 116,
+                            "y": -2
+                          },
+                          {
+                            "x": 88,
+                            "y": -18
+                          },
+                          {
+                            "x": 88,
+                            "y": -16
+                          }
+                        ],
+                        "smooth": "Smooth.None"
+                      },
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "pattern": "LinePattern.None",
+                        "fillPattern": "FillPattern.Solid",
+                        "points": [
+                          {
+                            "x": -16,
+                            "y": -16
+                          },
+                          {
+                            "x": 12,
+                            "y": 0
+                          },
+                          {
+                            "x": 12,
+                            "y": -2
+                          },
+                          {
+                            "x": -16,
+                            "y": -18
+                          },
+                          {
+                            "x": -16,
+                            "y": -16
+                          }
+                        ],
+                        "smooth": "Smooth.None"
+                      }
+                    ],
+                    "rectangle": [
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 255,
+                          "g": 255,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.Solid",
+                        "extent": [
+                          {
+                            "x": -100,
+                            "y": 200
+                          },
+                          {
+                            "x": 200,
+                            "y": -100
+                          }
+                        ]
+                      },
+                      {
+                        "origin": {
+                          "x": 13.492,
+                          "y": 135.83
+                        },
+                        "rotation": 90,
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 127,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.HorizontalCylinder",
+                        "extent": [
+                          {
+                            "x": -73.83,
+                            "y": -32.508
+                          },
+                          {
+                            "x": 64.17,
+                            "y": -40.508
+                          }
+                        ]
+                      },
+                      {
+                        "origin": {
+                          "x": -38.2572,
+                          "y": -14.4
+                        },
+                        "rotation": 90,
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 255,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillPattern": "FillPattern.HorizontalCylinder",
+                        "extent": [
+                          {
+                            "x": -85.6,
+                            "y": -32.2572
+                          },
+                          {
+                            "x": 74.4,
+                            "y": -40.2572
+                          }
+                        ]
+                      },
+                      {
+                        "origin": {
+                          "x": 65.7564,
+                          "y": -15.33
+                        },
+                        "rotation": 90,
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 127,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.HorizontalCylinder",
+                        "extent": [
+                          {
+                            "x": -86.67,
+                            "y": -32.2436
+                          },
+                          {
+                            "x": 75.33,
+                            "y": -40.2436
+                          }
+                        ]
+                      },
+                      {
+                        "origin": {
+                          "x": 72,
+                          "y": -92
+                        },
+                        "rotation": 90,
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 192,
+                          "g": 192,
+                          "b": 192
+                        },
+                        "fillPattern": "FillPattern.HorizontalCylinder",
+                        "extent": [
+                          {
+                            "x": 72,
+                            "y": -20
+                          },
+                          {
+                            "x": 92,
+                            "y": -40
+                          }
+                        ]
+                      },
+                      {
+                        "origin": {
+                          "x": 86,
+                          "y": -93
+                        },
+                        "rotation": 90,
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 127,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.HorizontalCylinder",
+                        "extent": [
+                          {
+                            "x": 73,
+                            "y": -10
+                          },
+                          {
+                            "x": 93,
+                            "y": -22
+                          }
+                        ]
+                      },
+                      {
+                        "origin": {
+                          "x": -32,
+                          "y": -92
+                        },
+                        "rotation": 90,
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 192,
+                          "g": 192,
+                          "b": 192
+                        },
+                        "fillPattern": "FillPattern.HorizontalCylinder",
+                        "extent": [
+                          {
+                            "x": 72,
+                            "y": -20
+                          },
+                          {
+                            "x": 92,
+                            "y": -40
+                          }
+                        ]
+                      },
+                      {
+                        "origin": {
+                          "x": -18,
+                          "y": -93
+                        },
+                        "rotation": 90,
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 127,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.HorizontalCylinder",
+                        "extent": [
+                          {
+                            "x": 73,
+                            "y": -10
+                          },
+                          {
+                            "x": 93,
+                            "y": -22
+                          }
+                        ]
+                      },
+                      {
+                        "origin": {
+                          "x": 20.7473,
+                          "y": 32.2455
+                        },
+                        "rotation": 180,
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 255,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillPattern": "FillPattern.HorizontalCylinder",
+                        "extent": [
+                          {
+                            "x": -29.2527,
+                            "y": -25.7545
+                          },
+                          {
+                            "x": 25.4253,
+                            "y": -32.0925
+                          }
+                        ]
+                      },
+                      {
+                        "origin": {
+                          "x": 75.6773,
+                          "y": 32.2455
+                        },
+                        "rotation": 180,
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "fillColor": {
+                          "r": 0,
+                          "g": 127,
+                          "b": 255
+                        },
+                        "fillPattern": "FillPattern.HorizontalCylinder",
+                        "extent": [
+                          {
+                            "x": -30.3227,
+                            "y": -25.7545
+                          },
+                          {
+                            "x": 26.3553,
+                            "y": -32.0925
+                          }
+                        ]
+                      }
+                    ],
+                    "text": [
+                      {
+                        "lineColor": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 255
+                        },
+                        "extent": [
+                          {
+                            "x": -78,
+                            "y": 198
+                          },
+                          {
+                            "x": 24,
+                            "y": 156
+                          }
+                        ],
+                        "textString": "\"%name\""
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Examples/DualFanDualDuct/ThermalZones/SupplyBranch.mo"
+  }
+]

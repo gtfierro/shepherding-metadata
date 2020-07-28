@@ -1,0 +1,30 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.DualFanDualDuct"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "package",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "ThermalZones",
+            "comment": "\"Package with models for the thermal zones\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Icons.VariantsPackage"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Examples/DualFanDualDuct/ThermalZones/package.mo"
+  }
+]
