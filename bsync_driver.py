@@ -1,3 +1,4 @@
+import secrets
 import json
 import time
 import hashlib
@@ -5,18 +6,27 @@ from datetime import datetime
 import driver
 import threading
 import rdflib
-from brickschema.namespaces import RDF, OWL
+from brickschema.namespaces import RDF, OWL, RDFS, BRICK
 import lxml.etree
 from sys import stdout
 import csv
 
+# TODO: pump systems
+relationships = [
+    {'parent_xpath': '//auc:Buildings/auc:Building', 'child_xpath': 'auc:Sections/auc:Section/auc:ThermalZones/auc:ThermalZone', 'relship': BRICK.hasPart},
+    {'parent_xpath': '//auc:Buildings/auc:Building', 'child_xpath': 'auc:Sections/auc:Section/auc:ThermalZones/auc:ThermalZone', 'relship': BRICK.isLocationOf},
+    {'parent_xpath': '//auc:Sites/auc:Site', 'child_xpath': 'auc:Buildings/auc:Building', 'relship': BRICK.hasPart},
+    {'parent_xpath': '//auc:Sites/auc:Site', 'child_xpath': 'auc:Buildings/auc:Building', 'relship': BRICK.isLocationOf},
+    {'parent_xpath': '//auc:FanSystem[auc:LinkedSystemIDs/auc:LinkedSystemID]', 'child_xpath': 'auc:LinkedSystemIDs/auc:LinkedSystemID', 'relship': BRICK.isPartOf},
+]
+
 class BuildingSyncDriver(driver.Driver):
-    def __init__(self, port, servers, bldg_ns, buildingsync_file):
-        self._filename = buildingsync_file
+    def __init__(self, port, servers, bldg_ns, opts):
+        self._filename = opts.get('bsync_file')
         super().__init__(port, servers, bldg_ns)
 
         self.mappings = {}
-        with open('data/buildingsync/BSync-to-Brick.csv') as f:
+        with open(opts.get('mapping_file')) as f:
             lines = csv.reader(f)
             next(lines)
             for line in lines:
@@ -28,7 +38,7 @@ class BuildingSyncDriver(driver.Driver):
             "auc": "http://buildingsync.net/schemas/bedes-auc/2019"
         }
 
-        t = threading.Thread(target=self._check_source)
+        t = threading.Thread(target=self._check_source, daemon=True)
         t.start()
 
     def _check_source(self):
@@ -38,11 +48,17 @@ class BuildingSyncDriver(driver.Driver):
 
     def extract_id(self, item):
         ident = item.attrib.get('ID')
-        if ident == None:
-            ident = item.getparent().attrib.get('ID')
-            if ident == None:
-                ident = 'unknown'
-        return ident
+        if ident is not None:
+            return ident
+        ident = item.attrib.get('IDref')
+        if ident is not None:
+            return ident
+        ident = item.getparent().attrib.get('ID')
+        if ident is not None:
+            return ident
+        tagname = item.tag
+        tagname = tagname[tagname.find('}')+1:]
+        return f"{tagname}-{secrets.token_hex(8)}"
 
     def load_file(self, bsync_file):
         NS = rdflib.Namespace(self._ns)
@@ -51,13 +67,12 @@ class BuildingSyncDriver(driver.Driver):
             root = lxml.etree.parse(self._filename)
             # self.haystack_model = json.load(open(haystack_file))
             timestamp = datetime.now().strftime('%Y-%m-%dT%H:%M:%S%Z')
-            things = []
+            records = {}
 
             for xpath, brick_class in self.mappings.items():
                 if brick_class == 'NA':
                     continue
                 res = root.xpath(xpath, namespaces=self.xmlns)
-                things.extend(res)
                 if len(res) == 0:
                     continue
                 print(f"Found {len(res)} instances of {brick_class}")
@@ -66,19 +81,33 @@ class BuildingSyncDriver(driver.Driver):
                     ident = self.extract_id(item)
                     subtree = str(lxml.etree.tostring(item))
                     # graph.add((NS[ident], RDF.type, rdflib.URIRef(brick_class)))
-
-                    rec = {
+                    records[ident] = {
                         'id': ident,
                         'source': type(self).__name__,
                         'record': {
                             'encoding': 'XML',
                             'content': subtree,
                         },
-                        'triples': [(NS[ident], RDF.type, rdflib.URIRef(brick_class))],
+                        'triples': [(NS[ident], RDF.type, rdflib.URIRef(brick_class)),
+                                    (NS[ident], RDFS.label, rdflib.Literal(ident))],
                         'timestamp': timestamp
                     }
-                    self.add_record(ident, rec)
 
+
+            for d in relationships:
+                srcpath = d['parent_xpath']
+                dstpath = d['child_xpath']
+                for src_elem in root.xpath(srcpath, namespaces=self.xmlns):
+                    for dst_elem in src_elem.xpath(dstpath, namespaces=self.xmlns):
+                        src = self.extract_id(src_elem)
+                        dst = self.extract_id(dst_elem)
+                        print(src, dst, d['relship'])
+                        if src not in records:
+                            continue
+                        records[src]["triples"].append((NS[src], d['relship'], NS[dst]))
+
+            for ident, rec in records.items():
+                self.add_record(ident, rec)
             # # TODO: add more relationships
             # for thing in things[:-1]:
             #     for thing2 in things[1:]:
@@ -106,6 +135,5 @@ class BuildingSyncDriver(driver.Driver):
 
 
 if __name__ == '__main__':
-    # srv = BuildingSyncDriver(8081, ["http://localhost:6483"], "http://example.com/haystack#", "data/buildingsync/examples/AT_example_SF_audit_report.xml")
-    srv = BuildingSyncDriver(8081, ["http://localhost:6483"], "http://example.com/building#", "data/buildingsync/examples/bsync-carytown.xml")
-    srv.serve()
+    import sys
+    BuildingSyncDriver.start_from_configfile(sys.argv[1])

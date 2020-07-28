@@ -1,0 +1,9 @@
+[server]
+port = 8081
+servers = ['http://localhost:6483']
+ns = 'http://example.com/building#'
+driver = 'bsync_driver.BuildingSyncDriver'
+
+[driver]
+mapping_file = 'data/buildingsync/BSync-to-Brick.csv'
+bsync_file = "data/buildingsync/examples/bsync-carytown.xml"

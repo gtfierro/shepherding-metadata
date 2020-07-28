@@ -1,6 +1,7 @@
-brickschema[reasonable]>=0.1.7a2
+brickschema[reasonable]>=0.1.8a2
 Flask
 reasonable
 jsonschema
 lxml
 pandas
+recordlinkage

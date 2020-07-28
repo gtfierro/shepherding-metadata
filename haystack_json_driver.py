@@ -2,15 +2,16 @@ import driver
 from datetime import datetime
 import time
 import threading
+from rdflib import RDFS, Literal
 from brickschema.inference import HaystackInferenceSession
 import json
 
 class HaystackJSONDriver(driver.Driver):
-    def __init__(self, port, servers, bldg_ns, haystack_file):
-        self._haystack_file = haystack_file
+    def __init__(self, port, servers, bldg_ns, opts):
+        self._haystack_file = opts['file']
         super().__init__(port, servers, bldg_ns)
 
-        t = threading.Thread(target=self._check_source)
+        t = threading.Thread(target=self._check_source, daemon=True)
         t.start()
 
 
@@ -30,6 +31,8 @@ class HaystackJSONDriver(driver.Driver):
                 model = {'rows': [row]}
                 model = sess.infer_model(model)
 
+                # already has labels attached
+                triples = list(sess._generated_triples)
                 rec = {
                     'id': row['id'],
                     'source': type(self).__name__,
@@ -37,16 +40,16 @@ class HaystackJSONDriver(driver.Driver):
                         'encoding': 'JSON',
                         'content': row,
                     },
-                    'triples': list(sess._generated_triples),
+                    'triples': triples,
                     'timestamp': timestamp
                 }
                 self.add_record(rec['id'], rec)
             self.app.logger.info(f"Loaded {len(self._records)} records")
             self._compute_changed()
         # start thread
-        t = threading.Thread(target=do_load_file)
+        t = threading.Thread(target=do_load_file, daemon=True)
         t.start()
 
 if __name__ == '__main__':
-    srv = HaystackJSONDriver(8080, ["http://localhost:6483"], "http://example.com/building#", "data/haystack/carytown.json")
-    srv.serve()
+    import sys
+    HaystackJSONDriver.start_from_configfile(sys.argv[1])

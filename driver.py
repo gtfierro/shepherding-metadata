@@ -1,5 +1,6 @@
 from flask import Flask, request, json
 from datetime import datetime
+import toml
 import logging
 import requests
 import threading
@@ -22,10 +23,11 @@ class Driver:
         self.app.add_url_rule('/', view_func=self.http_resources)
         self.app.add_url_rule('/ids', view_func=self.http_ids)
         self.app.add_url_rule('/id/<ident>', view_func=self.http_record)
+        self.app.add_url_rule('/shutdown', methods=['POST'], view_func=self.shutdown_server)
 
         self.app.logger.info("INITIALIZED")
         # start thread
-        t = threading.Thread(target=self._monitor_push)
+        t = threading.Thread(target=self._monitor_push, daemon=True)
         t.start()
 
     def _compute_changed(self):
@@ -93,3 +95,38 @@ class Driver:
 
     def serve(self):
         self.app.run(host='localhost', port=str(self._port))
+
+    def shutdown_server(self):
+        func = request.environ.get('werkzeug.server.shutdown')
+        if func is None:
+            raise RuntimeError('Not running with the Werkzeug Server')
+        func()
+        return 'Shutting down...'
+
+    @staticmethod
+    def start_from_config(cfg):
+        from importlib import import_module
+        srv_cfg = cfg.get('server')
+        if srv_cfg is None:
+            raise Exception("Need 'server' section")
+        mod_name = srv_cfg['driver'].split('.')
+        class_name = mod_name[-1]
+        module = '.'.join(mod_name[:-1])
+        mod = getattr(import_module(module), class_name)
+        srv = mod(srv_cfg['port'], srv_cfg['servers'], srv_cfg['ns'], cfg.get('driver'))
+        srv.serve()
+
+    @staticmethod
+    def start_from_configfile(filename):
+        from importlib import import_module
+
+        cfg = toml.load(open(filename))
+        srv_cfg = cfg.get('server')
+        if srv_cfg is None:
+            raise Exception("Need 'server' section")
+        mod_name = srv_cfg['driver'].split('.')
+        class_name = mod_name[-1]
+        module = '.'.join(mod_name[:-1])
+        mod = getattr(import_module(module), class_name)
+        srv = mod(srv_cfg['port'], srv_cfg['servers'], srv_cfg['ns'], cfg.get('driver'))
+        srv.serve()

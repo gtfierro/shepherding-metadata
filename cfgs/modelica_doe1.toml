@@ -1,0 +1,10 @@
+[server]
+port = 8081
+servers = ['http://localhost:6483']
+ns = 'http://example.com/doe-building#'
+driver = 'modelica_driver.ModelicaJSONDriver'
+
+[driver]
+lib_path='Buildings.Examples.VAVReheat'
+modelica_json_file='Guideline36'
+path='data/modelica/example-2'

@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<auc:BuildingSync xmlns:auc="http://buildingsync.net/schemas/bedes-auc/2019" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://buildingsync.net/schemas/bedes-auc/2019 https://raw.githubusercontent.com/BuildingSync/schema/feat/original-occupancy-classification/BuildingSync.xsd" version="2.0.0">
+  <auc:Facilities>
+    <auc:Facility ID="Fac-1">
+      <auc:Sites>
+        <auc:Site ID="Site-1">
+          <auc:Buildings>
+            <auc:Building ID="Building1">
+              <auc:PremisesName>Medium Office Building in Chicago</auc:PremisesName>
+              <auc:Address>
+                <auc:StreetAddressDetail>
+                  <auc:Simplified>
+                    <auc:StreetAddress>111 S Wacker Dr Suite 1800</auc:StreetAddress>
+                  </auc:Simplified>
+                </auc:StreetAddressDetail>
+                <auc:City>Chicago</auc:City>
+                <auc:State>IL</auc:State>
+                <auc:PostalCode>60606</auc:PostalCode>
+                <auc:Country>USA</auc:Country>
+              </auc:Address>
+              <auc:ClimateZoneType>
+                <auc:ASHRAE>
+                  <auc:ClimateZone>5A</auc:ClimateZone>
+                </auc:ASHRAE>
+              </auc:ClimateZoneType>
+              <auc:BuildingClassification>Commercial</auc:BuildingClassification>
+              <auc:OccupancyClassification>Office</auc:OccupancyClassification>
+              <auc:PrimaryContactID IDref="Building-Owner"/>
+              <auc:FloorsAboveGrade>1</auc:FloorsAboveGrade>
+              <auc:FloorsBelowGrade>0</auc:FloorsBelowGrade>
+              <auc:ConditionedFloorsAboveGrade>1</auc:ConditionedFloorsAboveGrade>
+              <auc:ConditionedFloorsBelowGrade>0</auc:ConditionedFloorsBelowGrade>
+              <auc:BuildingAutomationSystem>false</auc:BuildingAutomationSystem>
+              <auc:HistoricalLandmark>false</auc:HistoricalLandmark>
+              <auc:FloorAreas>
+                <auc:FloorArea>
+                  <auc:FloorAreaType>Gross</auc:FloorAreaType>
+                  <auc:FloorAreaValue>17876</auc:FloorAreaValue>
+                </auc:FloorArea>
+                <auc:FloorArea>
+                  <auc:FloorAreaType>Conditioned</auc:FloorAreaType>
+                  <auc:FloorAreaValue>17876</auc:FloorAreaValue>
+                </auc:FloorArea>
+              </auc:FloorAreas>
+              <auc:YearOfConstruction>2004</auc:YearOfConstruction>
+              <auc:YearOfLastEnergyAudit>2015</auc:YearOfLastEnergyAudit>
+              <auc:YearOfLatestRetrofit>2004</auc:YearOfLatestRetrofit>
+              <auc:Sections>
+                <auc:Section ID="Section-First-Floor">
+                  <auc:SectionType>Space function</auc:SectionType>
+                  <auc:OccupancyClassification>Office</auc:OccupancyClassification>
+                  <auc:OriginalOccupancyClassification>Office</auc:OriginalOccupancyClassification>
+                  <auc:OccupancyLevels>
+                    <auc:OccupancyLevel>
+                      <auc:OccupantQuantityType>Peak total occupants</auc:OccupantQuantityType>
+                      <auc:OccupantQuantity>90</auc:OccupantQuantity>
+                    </auc:OccupancyLevel>
+                  </auc:OccupancyLevels>
+                  <auc:TypicalOccupantUsages>
+                    <auc:TypicalOccupantUsage>
+                      <auc:TypicalOccupantUsageValue>60</auc:TypicalOccupantUsageValue>
+                      <auc:TypicalOccupantUsageUnits>Hours per week</auc:TypicalOccupantUsageUnits>
+                    </auc:TypicalOccupantUsage>
+                    <auc:TypicalOccupantUsage>
+                      <auc:TypicalOccupantUsageValue>52</auc:TypicalOccupantUsageValue>
+                      <auc:TypicalOccupantUsageUnits>Weeks per year</auc:TypicalOccupantUsageUnits>
+                    </auc:TypicalOccupantUsage>
+                  </auc:TypicalOccupantUsages>
+                  <auc:FloorAreas>
+                    <auc:FloorArea>
+                      <auc:FloorAreaType>Gross</auc:FloorAreaType>
+                      <auc:FloorAreaValue>17876</auc:FloorAreaValue>
+                    </auc:FloorArea>
+                    <auc:FloorArea>
+                      <auc:FloorAreaType>Conditioned</auc:FloorAreaType>
+                      <auc:FloorAreaValue>17876</auc:FloorAreaValue>
+                    </auc:FloorArea>
+                  </auc:FloorAreas>
+                </auc:Section>
+              </auc:Sections>
+            </auc:Building>
+          </auc:Buildings>
+        </auc:Site>
+      </auc:Sites>
+      <auc:Systems>
+        <auc:HVACSystems>
+          <auc:HVACSystem ID="HVAC-1">
+            <auc:PrimaryHVACSystemType>Packaged Rooftop VAV with Hot Water Reheat</auc:PrimaryHVACSystemType>
+            <auc:LinkedPremises>
+              <auc:Building>
+                <auc:LinkedBuildingID IDref="Building1"/>
+              </auc:Building>
+              <auc:Section>
+                <auc:LinkedSectionID IDref="Section-First-Floor"/>
+              </auc:Section>
+            </auc:LinkedPremises>
+          </auc:HVACSystem>
+        </auc:HVACSystems>
+        <auc:LightingSystems>
+          <auc:LightingSystem ID="Lights-1">
+            <auc:LampType>
+              <auc:LinearFluorescent>
+                <auc:LampLabel>T8</auc:LampLabel>
+              </auc:LinearFluorescent>
+            </auc:LampType>
+            <auc:LinkedPremises>
+              <auc:Building>
+                <auc:LinkedBuildingID IDref="Building1"/>
+              </auc:Building>
+              <auc:Section>
+                <auc:LinkedSectionID IDref="Section-First-Floor"/>
+              </auc:Section>
+            </auc:LinkedPremises>
+          </auc:LightingSystem>
+        </auc:LightingSystems>
+        <auc:PlugLoads>
+          <auc:PlugLoad ID="PL-1">
+            <auc:WeightedAverageLoad>0.75</auc:WeightedAverageLoad>
+            <auc:LinkedPremises>
+              <auc:Building>
+                <auc:LinkedBuildingID IDref="Building1"/>
+              </auc:Building>
+              <auc:Section>
+                <auc:LinkedSectionID IDref="Section-First-Floor"/>
+              </auc:Section>
+            </auc:LinkedPremises>
+          </auc:PlugLoad>
+        </auc:PlugLoads>
+      </auc:Systems>
+      <auc:Reports>
+        <auc:Report ID="Main-Report">
+          <auc:Scenarios>
+            <auc:Scenario ID="Measured-Scenario">
+              <auc:ScenarioType>
+                <auc:CurrentBuilding>
+                  <auc:CalculationMethod>
+                    <auc:Measured/>
+                  </auc:CalculationMethod>
+                </auc:CurrentBuilding>
+              </auc:ScenarioType>
+              <auc:ResourceUses>
+                <auc:ResourceUse ID="Elec">
+                  <auc:EnergyResource>Electricity</auc:EnergyResource>
+                  <auc:ResourceUnits>kWh</auc:ResourceUnits>
+                  <auc:EndUse>All end uses</auc:EndUse>
+                  <auc:AnnualFuelUseNativeUnits>740560.8</auc:AnnualFuelUseNativeUnits>
+                  <auc:PeakResourceUnits>kW</auc:PeakResourceUnits>
+                  <auc:AnnualPeakNativeUnits>302.08</auc:AnnualPeakNativeUnits>
+                  <auc:UtilityIDs>
+                    <auc:UtilityID IDref="Elec-Utility"/>
+                  </auc:UtilityIDs>
+                </auc:ResourceUse>
+                <auc:ResourceUse ID="NG">
+                  <auc:EnergyResource>Natural gas</auc:EnergyResource>
+                  <auc:ResourceUnits>MMBtu</auc:ResourceUnits>
+                  <auc:EndUse>All end uses</auc:EndUse>
+                  <auc:AnnualFuelUseNativeUnits>460.24</auc:AnnualFuelUseNativeUnits>
+                  <auc:UtilityIDs>
+                    <auc:UtilityID IDref="NG-Utility"/>
+                  </auc:UtilityIDs>
+                </auc:ResourceUse>
+              </auc:ResourceUses>
+              <auc:TimeSeriesData>
+                <auc:TimeSeries ID="Elec-Jan">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-01-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-02-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>78006.6</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="Elec-Feb">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-02-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-03-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>63499.6</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="Elec-Mar">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-03-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-04-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>59503.8</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="Elec-Apr">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-04-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-05-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>51753.57</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="Elec-May">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-05-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-06-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>52793.26</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="Elec-Jun">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-06-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-07-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>59853.43</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="Elec-Jul">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-07-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-08-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>68095.86</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="Elec-Aug">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-08-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-09-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>64732.32</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="Elec-Sep">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-09-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-10-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>55419.06</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="Elec-Oct">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-10-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-11-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>51672.36</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="Elec-Nov">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-11-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-12-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>62003.2</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="Elec-Dec">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-12-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2020-01-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>73227.73</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Jan">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-01-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-02-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>104.2</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Feb">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-02-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-03-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>81.86</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Mar">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-03-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-04-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>40.65</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Apr">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-04-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-05-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>22.73</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-May">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-05-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-06-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>11.75</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Jun">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-06-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-07-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>10.89</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Jul">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-07-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-08-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>10.72</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Aug">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-08-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-09-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>10.92</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Sep">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-09-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-10-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>10.52</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Oct">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-10-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-11-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>13.12</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Nov">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-11-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2019-12-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>45.41</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="NG-Dec">
+                  <auc:ReadingType>Total</auc:ReadingType>
+                  <auc:StartTimestamp>2019-12-01T00:00:00</auc:StartTimestamp>
+                  <auc:EndTimestamp>2020-01-01T00:00:00</auc:EndTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>97.47</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="NG"/>
+                </auc:TimeSeries>
+              </auc:TimeSeriesData>
+              <auc:LinkedPremises>
+                <auc:Building>
+                  <auc:LinkedBuildingID IDref="Building1"></auc:LinkedBuildingID>
+                </auc:Building>
+              </auc:LinkedPremises>
+            </auc:Scenario>
+          </auc:Scenarios>
+          <auc:AuditDates>
+            <auc:AuditDate>
+              <auc:Date>2020-07-23</auc:Date>
+              <auc:DateType>Site Visit</auc:DateType>
+            </auc:AuditDate>
+          </auc:AuditDates>
+          <auc:ASHRAEAuditLevel>Level 1: Walk-through</auc:ASHRAEAuditLevel>
+          <auc:Utilities>
+            <auc:Utility ID="Elec-Utility">
+              <auc:RateSchedules>
+                <auc:RateSchedule ID="Elec-Rate-Schedule">
+                  <auc:TypeOfRateStructure>
+                    <auc:TimeOfUseRate/>
+                  </auc:TypeOfRateStructure>
+                </auc:RateSchedule>
+              </auc:RateSchedules>
+              <auc:MeteringConfiguration>Direct metering</auc:MeteringConfiguration>
+              <auc:UtilityName>ComEd</auc:UtilityName>
+              <auc:UtilityMeterNumbers>
+                <auc:UtilityMeterNumber>1235-abce</auc:UtilityMeterNumber>
+              </auc:UtilityMeterNumbers>
+              <auc:UtilityAccountNumber>An-Account-Number</auc:UtilityAccountNumber>
+            </auc:Utility>
+            <auc:Utility ID="NG-Utility">
+              <auc:RateSchedules>
+                <auc:RateSchedule ID="NG-Rate-Schedule">
+                  <auc:TypeOfRateStructure>
+                    <auc:FlatRate/>
+                  </auc:TypeOfRateStructure>
+                </auc:RateSchedule>
+              </auc:RateSchedules>
+              <auc:MeteringConfiguration>Direct metering</auc:MeteringConfiguration>
+              <auc:UtilityName>ComEd</auc:UtilityName>
+              <auc:UtilityMeterNumbers>
+                <auc:UtilityMeterNumber>ng-1235-abce</auc:UtilityMeterNumber>
+              </auc:UtilityMeterNumbers>
+              <auc:UtilityAccountNumber>A-NG-Account-Number</auc:UtilityAccountNumber>
+            </auc:Utility>
+          </auc:Utilities>
+        </auc:Report>
+      </auc:Reports>
+      <auc:Contacts>
+        <auc:Contact ID="Building-Owner">
+          <auc:ContactRoles>
+            <auc:ContactRole>Owner</auc:ContactRole>
+            <auc:ContactRole>Customer</auc:ContactRole>
+          </auc:ContactRoles>
+          <auc:ContactName>Somebody</auc:ContactName>
+          <auc:ContactCompany>A Big company</auc:ContactCompany>
+          <auc:ContactTelephoneNumbers>
+            <auc:ContactTelephoneNumber>
+              <auc:TelephoneNumber>123-456-7890</auc:TelephoneNumber>
+            </auc:ContactTelephoneNumber>
+          </auc:ContactTelephoneNumbers>
+          <auc:ContactEmailAddresses>
+            <auc:ContactEmailAddress>
+              <auc:EmailAddress>somebody@abigcompany.com</auc:EmailAddress>
+            </auc:ContactEmailAddress>
+          </auc:ContactEmailAddresses>
+        </auc:Contact>
+        <auc:Contact ID="Energy-Auditor">
+          <auc:ContactRoles>
+            <auc:ContactRole>Energy Auditor</auc:ContactRole>
+          </auc:ContactRoles>
+          <auc:ContactName>Nobody</auc:ContactName>
+          <auc:ContactCompany>A small company</auc:ContactCompany>
+          <auc:ContactTelephoneNumbers>
+            <auc:ContactTelephoneNumber>
+              <auc:TelephoneNumber>123-456-7890</auc:TelephoneNumber>
+            </auc:ContactTelephoneNumber>
+          </auc:ContactTelephoneNumbers>
+          <auc:ContactEmailAddresses>
+            <auc:ContactEmailAddress>
+              <auc:EmailAddress>nobody@asmallcompany.com</auc:EmailAddress>
+            </auc:ContactEmailAddress>
+          </auc:ContactEmailAddresses>
+        </auc:Contact>
+      </auc:Contacts>
+    </auc:Facility>
+  </auc:Facilities>
+</auc:BuildingSync>
