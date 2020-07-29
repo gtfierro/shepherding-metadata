@@ -1,0 +1,1540 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.DualFanDualDuct.Controls"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "model",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "PreHeatCoil",
+            "comment": "\"Controller for preheat coil\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Blocks.Icons.Block"
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Controls.Continuous.LimPID",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "preHeaCoiCon",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "yMax",
+                                    "value": "1"
+                                  },
+                                  {
+                                    "name": "yMin",
+                                    "value": "0"
+                                  },
+                                  {
+                                    "name": "Td",
+                                    "value": "60"
+                                  },
+                                  {
+                                    "name": "initType",
+                                    "value": "Modelica.Blocks.Types.InitPID.InitialState"
+                                  },
+                                  {
+                                    "name": "Ti",
+                                    "value": "120"
+                                  },
+                                  {
+                                    "name": "strict",
+                                    "value": "true"
+                                  },
+                                  {
+                                    "name": "k",
+                                    "value": "0.1"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Controller for pre-heating coil\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": -70
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": -50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "zero",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "0"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Zero output signal\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": -40
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": -20
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Logical.Switch",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "swiPumPreCoi"
+                            },
+                            "comment": {
+                              "string_comment": "\"Switch for preheat coil pump\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 60,
+                                        "y": 0
+                                      },
+                                      {
+                                        "x": 80,
+                                        "y": 20
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Logical.OnOffController",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "preHeaOn",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "bandwidth",
+                                    "value": "1"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Switch to enable preheat coil\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -40,
+                                        "y": 20
+                                      },
+                                      {
+                                        "x": -20,
+                                        "y": 40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TPreHeaOn",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "273.15 + 10"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Temperature when preheat coil is switched on.\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": 30
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": 50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "one",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "1"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Outputs 1\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -20,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TAirSup",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "unit",
+                                    "value": "\"K\""
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Supply air temperature after the coil\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -120,
+                                        "y": -70
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": -50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TSupSetHea",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "unit",
+                                    "value": "\"K\""
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Heating set point temperature for supply air\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -120,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealOutput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "yVal",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "unit",
+                                    "value": "\"1\""
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Control signal for valve\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 100,
+                                        "y": -60
+                                      },
+                                      {
+                                        "x": 120,
+                                        "y": -40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealInput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TMix",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "unit",
+                                    "value": "\"K\""
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Mixed air temperature upstream of coil\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -120,
+                                        "y": 50
+                                      },
+                                      {
+                                        "x": -100,
+                                        "y": 70
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Interfaces.RealOutput",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "yPum",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "unit",
+                                    "value": "\"1\""
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Control signal for pump\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 100,
+                                        "y": 40
+                                      },
+                                      {
+                                        "x": 120,
+                                        "y": 60
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Logical.Switch",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "swiValOp"
+                            },
+                            "comment": {
+                              "string_comment": "\"Switch to close valve if pump is not running\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 60,
+                                        "y": -70
+                                      },
+                                      {
+                                        "x": 80,
+                                        "y": -50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.StateGraph.InitialStep",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "pumOff"
+                            },
+                            "comment": {
+                              "string_comment": "\"Pump is off\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -40,
+                                        "y": 60
+                                      },
+                                      {
+                                        "x": -20,
+                                        "y": 80
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.StateGraph.TransitionWithSignal",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "toOn"
+                            },
+                            "comment": {
+                              "string_comment": "\"Switch pump on\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -10,
+                                        "y": 60
+                                      },
+                                      {
+                                        "x": 10,
+                                        "y": 80
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "prefix": "inner ",
+                    "component_clause": {
+                      "type_specifier": "Modelica.StateGraph.StateGraphRoot",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "stateGraphRoot"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": 60
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": 80
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.StateGraph.StepWithSignal",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "pumOn"
+                            },
+                            "comment": {
+                              "string_comment": "\"Pump on\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 20,
+                                        "y": 60
+                                      },
+                                      {
+                                        "x": 40,
+                                        "y": 80
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.StateGraph.TransitionWithSignal",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "toOff",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "enableTimer",
+                                    "value": "true"
+                                  },
+                                  {
+                                    "name": "waitTime",
+                                    "value": "30*\n        60"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Switch pump off\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 60,
+                                        "y": 60
+                                      },
+                                      {
+                                        "x": 80,
+                                        "y": 80
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Logical.Not",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "not1"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 10,
+                                        "y": 20
+                                      },
+                                      {
+                                        "x": 30,
+                                        "y": 40
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "preHeaOn",
+                          "reference"
+                        ],
+                        "component2": [
+                          "TPreHeaOn",
+                          " y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -42,
+                                "y": 36
+                              },
+                              {
+                                "x": -52,
+                                "y": 36
+                              },
+                              {
+                                "x": -52,
+                                "y": 40
+                              },
+                              {
+                                "x": -59,
+                                "y": 40
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "zero",
+                          "y"
+                        ],
+                        "component2": [
+                          "swiPumPreCoi",
+                          "u3"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1,
+                                "y": -30
+                              },
+                              {
+                                "x": 40,
+                                "y": -30
+                              },
+                              {
+                                "x": 40,
+                                "y": 2
+                              },
+                              {
+                                "x": 58,
+                                "y": 2
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "one",
+                          "y"
+                        ],
+                        "component2": [
+                          "swiPumPreCoi",
+                          "u1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1,
+                                "y": 0
+                              },
+                              {
+                                "x": 30,
+                                "y": 0
+                              },
+                              {
+                                "x": 30,
+                                "y": 18
+                              },
+                              {
+                                "x": 58,
+                                "y": 18
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            },
+                            "smooth": "Smooth.None"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TAirSup"
+                        ],
+                        "component2": [
+                          "preHeaCoiCon",
+                          "u_m"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -110,
+                                "y": -60
+                              },
+                              {
+                                "x": -110,
+                                "y": -60
+                              },
+                              {
+                                "x": -90,
+                                "y": -60
+                              },
+                              {
+                                "x": -90,
+                                "y": -80
+                              },
+                              {
+                                "x": -10,
+                                "y": -80
+                              },
+                              {
+                                "x": -10,
+                                "y": -72
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TSupSetHea"
+                        ],
+                        "component2": [
+                          "preHeaCoiCon",
+                          "u_s"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -110,
+                                "y": 0
+                              },
+                              {
+                                "x": -80,
+                                "y": 0
+                              },
+                              {
+                                "x": -80,
+                                "y": -60
+                              },
+                              {
+                                "x": -22,
+                                "y": -60
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TMix"
+                        ],
+                        "component2": [
+                          "preHeaOn",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -110,
+                                "y": 60
+                              },
+                              {
+                                "x": -110,
+                                "y": 60
+                              },
+                              {
+                                "x": -94,
+                                "y": 60
+                              },
+                              {
+                                "x": -94,
+                                "y": 24
+                              },
+                              {
+                                "x": -42,
+                                "y": 24
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "yPum"
+                        ],
+                        "component2": [
+                          "swiPumPreCoi",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 110,
+                                "y": 50
+                              },
+                              {
+                                "x": 88,
+                                "y": 50
+                              },
+                              {
+                                "x": 88,
+                                "y": 10
+                              },
+                              {
+                                "x": 81,
+                                "y": 10
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "zero",
+                          "y"
+                        ],
+                        "component2": [
+                          "swiValOp",
+                          "u3"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1,
+                                "y": -30
+                              },
+                              {
+                                "x": 16,
+                                "y": -30
+                              },
+                              {
+                                "x": 40,
+                                "y": -30
+                              },
+                              {
+                                "x": 40,
+                                "y": -68
+                              },
+                              {
+                                "x": 58,
+                                "y": -68
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "swiValOp",
+                          "y"
+                        ],
+                        "component2": [
+                          "yVal"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 81,
+                                "y": -60
+                              },
+                              {
+                                "x": 90,
+                                "y": -60
+                              },
+                              {
+                                "x": 90,
+                                "y": -50
+                              },
+                              {
+                                "x": 98,
+                                "y": -50
+                              },
+                              {
+                                "x": 110,
+                                "y": -50
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "pumOff",
+                          "outPort[1]"
+                        ],
+                        "component2": [
+                          "toOn",
+                          "inPort"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -19.5,
+                                "y": 70
+                              },
+                              {
+                                "x": -11.75,
+                                "y": 70
+                              },
+                              {
+                                "x": -4,
+                                "y": 70
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "toOn",
+                          "condition"
+                        ],
+                        "component2": [
+                          "preHeaOn",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 0,
+                                "y": 58
+                              },
+                              {
+                                "x": 0,
+                                "y": 30
+                              },
+                              {
+                                "x": -19,
+                                "y": 30
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "pumOn",
+                          "inPort[1]"
+                        ],
+                        "component2": [
+                          "toOn",
+                          "outPort"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 19,
+                                "y": 70
+                              },
+                              {
+                                "x": 1.5,
+                                "y": 70
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "toOff",
+                          "inPort"
+                        ],
+                        "component2": [
+                          "pumOn",
+                          "outPort[1]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 66,
+                                "y": 70
+                              },
+                              {
+                                "x": 40.5,
+                                "y": 70
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "preHeaOn",
+                          "y"
+                        ],
+                        "component2": [
+                          "not1",
+                          "u"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -19,
+                                "y": 30
+                              },
+                              {
+                                "x": -19,
+                                "y": 30
+                              },
+                              {
+                                "x": 8,
+                                "y": 30
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "not1",
+                          "y"
+                        ],
+                        "component2": [
+                          "toOff",
+                          "condition"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 31,
+                                "y": 30
+                              },
+                              {
+                                "x": 70,
+                                "y": 30
+                              },
+                              {
+                                "x": 70,
+                                "y": 58
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "toOff",
+                          "outPort"
+                        ],
+                        "component2": [
+                          "pumOff",
+                          "inPort[1]"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 71.5,
+                                "y": 70
+                              },
+                              {
+                                "x": 88,
+                                "y": 70
+                              },
+                              {
+                                "x": 88,
+                                "y": 92
+                              },
+                              {
+                                "x": -50,
+                                "y": 92
+                              },
+                              {
+                                "x": -50,
+                                "y": 70
+                              },
+                              {
+                                "x": -41,
+                                "y": 70
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "pumOn",
+                          "active"
+                        ],
+                        "component2": [
+                          "swiPumPreCoi",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 30,
+                                "y": 59
+                              },
+                              {
+                                "x": 30,
+                                "y": 59
+                              },
+                              {
+                                "x": 30,
+                                "y": 52
+                              },
+                              {
+                                "x": 36,
+                                "y": 52
+                              },
+                              {
+                                "x": 48,
+                                "y": 52
+                              },
+                              {
+                                "x": 48,
+                                "y": 10
+                              },
+                              {
+                                "x": 58,
+                                "y": 10
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "pumOn",
+                          "active"
+                        ],
+                        "component2": [
+                          "swiValOp",
+                          "u2"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 30,
+                                "y": 59
+                              },
+                              {
+                                "x": 30,
+                                "y": 52
+                              },
+                              {
+                                "x": 48,
+                                "y": 52
+                              },
+                              {
+                                "x": 48,
+                                "y": -60
+                              },
+                              {
+                                "x": 58,
+                                "y": -60
+                              }
+                            ],
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 255
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "preHeaCoiCon",
+                          "y"
+                        ],
+                        "component2": [
+                          "swiValOp",
+                          "u1"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": 1,
+                                "y": -60
+                              },
+                              {
+                                "x": 20,
+                                "y": -60
+                              },
+                              {
+                                "x": 20,
+                                "y": -52
+                              },
+                              {
+                                "x": 58,
+                                "y": -52
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "comp_annotation": {
+                "documentation": {
+                  "info": "\"<html>\n<p>\nController for the preheat coil. If the air inlet temperature is below\na minimum temperature, such as <i>10</i>&deg;C, the preheat coil is activated.\nIt then switches the pump on, and regulates the valve\nto meet the set point temperature for the supply air.\n</p>\n</html>\"",
+                  "revisions": "\"<html>\n<ul>\n<li>\nMarch 15, 2015, by Michael Wetter:<br/>\nFirst implementation.\n</li>\n</ul>\n</html>\""
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Examples/DualFanDualDuct/Controls/PreHeatCoil.mo"
+  }
+]

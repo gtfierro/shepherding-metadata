@@ -1,0 +1,355 @@
+[
+  {
+    "within": [
+      "Buildings.Examples.DualFanDualDuct.Controls.Examples"
+    ],
+    "class_definition": [
+      {
+        "class_prefixes": "model",
+        "class_specifier": {
+          "long_class_specifier": {
+            "name": "PreHeatCoil",
+            "comment": "\"Test model for preheat coil controller\"",
+            "composition": {
+              "element_list": {
+                "element": [
+                  {
+                    "extends_clause": {
+                      "name": "Modelica.Icons.Example"
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TSupSet",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "273.15 + 16"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Set point for supply air temperature\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": 30
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": 50
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.Constant",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TAirSup",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "k",
+                                    "value": "273.15 + 15"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Supply air temperature\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": -20
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": 0
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Modelica.Blocks.Sources.Trapezoid",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "TMix",
+                              "class_modification": {
+                                "modifications": [
+                                  {
+                                    "name": "amplitude",
+                                    "value": "15"
+                                  },
+                                  {
+                                    "name": "rising",
+                                    "value": "900"
+                                  },
+                                  {
+                                    "name": "width",
+                                    "value": "900"
+                                  },
+                                  {
+                                    "name": "falling",
+                                    "value": "900"
+                                  },
+                                  {
+                                    "name": "period",
+                                    "value": "3600"
+                                  },
+                                  {
+                                    "name": "offset",
+                                    "value": "273.15 + 5"
+                                  }
+                                ]
+                              }
+                            },
+                            "comment": {
+                              "string_comment": "\"Mixed air temperature\"",
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": -80,
+                                        "y": 60
+                                      },
+                                      {
+                                        "x": -60,
+                                        "y": 80
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component_clause": {
+                      "type_specifier": "Buildings.Examples.DualFanDualDuct.Controls.PreHeatCoil",
+                      "component_list": {
+                        "component_declaration": [
+                          {
+                            "declaration": {
+                              "name": "preHeatCoil"
+                            },
+                            "comment": {
+                              "annotation": {
+                                "placement": {
+                                  "transformation": {
+                                    "extent": [
+                                      {
+                                        "x": 0,
+                                        "y": -10
+                                      },
+                                      {
+                                        "x": 20,
+                                        "y": 10
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "equation_section": [
+                {
+                  "prefix": "equation",
+                  "equation": [
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "TMix",
+                          "y"
+                        ],
+                        "component2": [
+                          "preHeatCoil",
+                          "TMix"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -59,
+                                "y": 70
+                              },
+                              {
+                                "x": -30,
+                                "y": 70
+                              },
+                              {
+                                "x": -30,
+                                "y": 6
+                              },
+                              {
+                                "x": -1,
+                                "y": 6
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "preHeatCoil",
+                          "TSupSetHea"
+                        ],
+                        "component2": [
+                          "TSupSet",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -1,
+                                "y": 0
+                              },
+                              {
+                                "x": -24,
+                                "y": 0
+                              },
+                              {
+                                "x": -50,
+                                "y": 0
+                              },
+                              {
+                                "x": -50,
+                                "y": 40
+                              },
+                              {
+                                "x": -59,
+                                "y": 40
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "connect_clause": {
+                        "component1": [
+                          "preHeatCoil",
+                          "TAirSup"
+                        ],
+                        "component2": [
+                          "TAirSup",
+                          "y"
+                        ]
+                      },
+                      "comment": {
+                        "annotation": {
+                          "line": {
+                            "points": [
+                              {
+                                "x": -1,
+                                "y": -6
+                              },
+                              {
+                                "x": -54,
+                                "y": -6
+                              },
+                              {
+                                "x": -54,
+                                "y": -10
+                              },
+                              {
+                                "x": -59,
+                                "y": -10
+                              }
+                            ],
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 127
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "comp_annotation": {
+                "documentation": {
+                  "info": "\"<html>\n<p>\nTest model for the preheat coil controller.\n</p>\n</html>\"",
+                  "revisions": "\"<html>\n<ul>\n<li>\nMarch 15, 2015, by Michael Wetter:<br/>\nFirst implementation.\n</li>\n</ul>\n</html>\""
+                },
+                "vendor_annotation": {
+                  "name": "__Dymola_Commands",
+                  "annotation": [
+                    {
+                      "name": "file",
+                      "value": "\"modelica://Buildings/Resources/Scripts/Dymola/Examples/DualFanDualDuct/Controls/Examples/PreHeatCoil.mos\" \"Simulate and plot"
+                    }
+                  ]
+                },
+                "othAnns": "__Dymola_Commands (file =\"modelica://Buildings/Resources/Scripts/Dymola/Examples/DualFanDualDuct/Controls/Examples/PreHeatCoil.mos\" \"Simulate and plot\") ,experiment (Tolerance =1e-6 ,StopTime =10800 ) ,"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "modelicaFile": "Examples/DualFanDualDuct/Controls/Examples/PreHeatCoil.mo"
+  }
+]
