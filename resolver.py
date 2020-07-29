@@ -3,7 +3,7 @@ from collections import defaultdict
 import pandas as pd
 from scipy import stats
 import numpy as np
-from rdflib import Namespace, Literal, URIRef, BNode
+from rdflib import Namespace, Literal
 from brickschema.namespaces import BRICK, A, OWL
 # from brickschema.inference import BrickInferenceSession
 from brickschema.inference import OWLRLAllegroInferenceSession
@@ -13,7 +13,6 @@ import resolve_ui as ui
 import distance
 import recordlinkage
 from recordlinkage.base import BaseCompareFeature
-
 
 
 def graph_from_triples(triples):
@@ -298,11 +297,15 @@ def resolve(records):
               for source, triples in records.items()}
 
     clusters = []
+    clustered = set()
 
-    new_clusters, clustered = cluster_on_labels(graphs)
-    clusters.extend(new_clusters)
-    for c in new_clusters:
-        print(f"Label cluster: {c}")
+    # TODO: due to limitation of the recordlinkage, can only compare *pairs*
+    # of graphs. Need to address this
+    if len(graphs) == 2:
+        new_clusters, clustered = cluster_on_labels(graphs)
+        clusters.extend(new_clusters)
+        for c in new_clusters:
+            print(f"Label cluster: {c}")
 
     new_clusters, clustered = cluster_on_type_alignment(graphs, clustered)
     clusters.extend(new_clusters)
