@@ -17,7 +17,7 @@ class Modelica_Brick_Parser:
         self.get_model_elements_equations()
         self.get_model_elements_df()
 
-    def init_mapping(self):
+    def init_mapping(self): # one to many mapping
         self.modelica_brick_sensor_type_map = {
             'TemperatureTwoPort': BRICK['Temperature_Sensor'],
             'Temperature': BRICK['Temperature_Sensor'],
@@ -33,10 +33,10 @@ class Modelica_Brick_Parser:
         self.modelica_brick_heat_exchanger_type_map = {
             'DryCoilCounterFlow': BRICK['Heating_Coil'],
             'DryCoilDiscretized': BRICK['Heating_Coil'],
-            'DryCoilEffectivenessNTU': BRICK['Heating_Coil'],
+            'DryCoilEffectivenessNTU': BRICK['Heating_Coil'], #DryCoil could also be for cooling in some climate zones, could be part of a heat exchanger,
             'WetCoilCounterFlow': BRICK['Cooling_Coil'],
             'WetCoilDiscretized': BRICK['Cooling_Coil'],
-            'EvaporatorCondenser': BRICK['Heat_Exchanger'],
+            'EvaporatorCondenser': BRICK['Heat_Exchanger'], #look at which side of compressor it is on to decide if it is evaporator or condensor
             'Heater_T': BRICK['Space_Heater'],
         }
 
@@ -45,7 +45,7 @@ class Modelica_Brick_Parser:
             'Dampers.MixingBox': BRICK['Damper'],
             'Dampers.MixingBoxMinimumFlow': BRICK['Damper'],
             'Dampers.PressureIndependent': BRICK['Damper'],
-            'Valves.ThreeWayEqualPercentageLinear': BRICK['Valve'],
+            'Valves.ThreeWayEqualPercentageLinear': BRICK['Valve'], #need more clarity on the brick side for valves
             'Valves.ThreeWayLinear': BRICK['Valve'],
             'Valves.ThreeWayTable': BRICK['Valve'],
             'Valves.TwoWayEqualPercentageLinear': BRICK['Valve'],
@@ -56,14 +56,14 @@ class Modelica_Brick_Parser:
             'Valves.TwoWayTable': BRICK['Valve']
         }
 
-        self.modelica_brick_mover_type_map = {
-            'FlowControlled_dp': BRICK['Pump'],
+        self.modelica_brick_mover_type_map = { # anything can be pump or fan according to the media
+            'FlowControlled_dp': BRICK['Pump'], 
             'FlowControlled_m_flow': BRICK['Pump'],
-            'SpeedCotnrolled_Nrpm': BRICK['Fan'],
+            'SpeedControlled_Nrpm': BRICK['Fan'],
             'SpeedControlled_y': BRICK['Fan']
         }
 
-        self.modelica_brick_thermal_zone_type_map = {
+        self.modelica_brick_thermal_zone_type_map = { 
             'Detailed.MixedAir': BRICK['HVAC_Zone'],
             'ReducedOrder.EquivalentAirTemperature': BRICK['HVAC_Zone'],
             'ReducedOrder.RC': BRICK['HVAC_Zone'],
@@ -251,27 +251,28 @@ class Modelica_Brick_Parser:
                         self.elements_df.loc[element, 'group'] = 5
 
         self.elements_df = pd.concat([self.elements_df] + df_list, axis=0, sort=False)
-        new_elements_df = pd.concat(df_list)
-        for element_idx, row in new_elements_df.iterrows():
-            element_name = row['element_name']
-            parent_element = element_name.split('.')[0]
-            old_name = element_name.split('.')[1]
-            equations = self.model_equations.get(old_name, [])
-            for equation in equations:
-                comp2_df = self.elements_df.loc[self.elements_df.element_name == parent_element+'.'+equation.get('connected_to').split('[')[0]]
-                if comp2_df.empty:
-                    comp2_df = self.elements_df.loc[self.elements_df.element_name == equation.get('connected_to').split('[')[0]]
-                new_equation = {'connected_to': comp2_df.element_name.values[0], 'connect_clause_obj': equation['connect_clause_obj']}
+        if len(df_list) > 0:
+            new_elements_df = pd.concat(df_list)
+            for element_idx, row in new_elements_df.iterrows():
+                element_name = row['element_name']
+                parent_element = element_name.split('.')[0]
+                old_name = element_name.split('.')[1]
+                equations = self.model_equations.get(old_name, [])
+                for equation in equations:
+                    comp2_df = self.elements_df.loc[self.elements_df.element_name == parent_element+'.'+equation.get('connected_to').split('[')[0]]
+                    if comp2_df.empty:
+                        comp2_df = self.elements_df.loc[self.elements_df.element_name == equation.get('connected_to').split('[')[0]]
+                    new_equation = {'connected_to': comp2_df.element_name.values[0], 'connect_clause_obj': equation['connect_clause_obj']}
 
-                if 'comp1_interface' in equation: 
-                    new_equation['comp1_interface']= equation['comp1_interface']
-                if 'comp2_interface' in equation: 
-                    new_equation['comp2_interface']= equation['comp2_interface']
+                    if 'comp1_interface' in equation: 
+                        new_equation['comp1_interface']= equation['comp1_interface']
+                    if 'comp2_interface' in equation: 
+                        new_equation['comp2_interface']= equation['comp2_interface']
 
-                if not element_name in self.model_equations:
-                    self.model_equations[element_name] = [new_equation]
-                else:
-                    self.model_equations[element_name].append(new_equation)
+                    if not element_name in self.model_equations:
+                        self.model_equations[element_name] = [new_equation]
+                    else:
+                        self.model_equations[element_name].append(new_equation)
 
         for relationship in self.elements_df.dropna().apply(lambda x: {'obj1': x.element_name, 'relationship': RDF['type'], 'obj2': x.brick_type}, axis=1).values:
             if not relationship in self.brick_relationships:
@@ -316,7 +317,7 @@ class Modelica_Brick_Parser:
             
             if "port" in element and comp1_port is None:
                 comp2_port = equation.get('comp2_interface')
-                if not comp2_port is None and (comp2_port.startswith("port_b") or comp2_port.startswith("port_2")):
+                if not comp2_port is None and not (comp2_port.startswith("port_a") or comp2_port.startswith("port_1")):
                     continue
 
             if connected_element_df.empty:
