@@ -10,13 +10,13 @@ ts = Triplestore("triples.db")
 
 with ts.cursor() as cur:
     res = cur.execute("SELECT DISTINCT src FROM latest_triples")
-    sites = [row[0] for row in res]
-    print(sites)
+    srcs = [row[0] for row in res]
+    print(srcs)
 
 graphs = {}
 
 full_graph, canonical = resolver.resolve(ts.to_records())
-full_graph.serialize('eval.ttl', format='ttl')
+full_graph.serialize('graph-eval.ttl', format='ttl')
 
 # canonicalize
 def canonicalize_ent(t):
@@ -62,19 +62,19 @@ res = [t for t in res if 'building#' in str(t)]
 # TODO: do not "double count" triples when the entities are the same
 
 
-for site in sites:
+for src in srcs:
     with ts.cursor() as cur:
-        triples = cur.execute("SELECT s, p, o FROM latest_triples where src = ?", (site, ))#  and (s LIKE '%building#%' or o LIKE '%building#%')", (site, ))
+        triples = cur.execute("SELECT s, p, o FROM latest_triples where src = ?", (src, ))#  and (s LIKE '%building#%' or o LIKE '%building#%')", (src, ))
         triples = list(map(canonicalize_ent, triples))
-        graphs[site] = triples
+        graphs[src] = triples
 
 # unions
-for site, subgraph in graphs.items():
-    print(f"UNION,{site},{len(subgraph) / len(res)}")
+for src, subgraph in graphs.items():
+    print(f"UNION,{src},{len(subgraph) / len(res)}")
 
 # intersections
 common_triples = set()
-for site, subgraph in graphs.items():
+for src, subgraph in graphs.items():
     print('-'*20)
     fix = lambda x: tuple(map(str, x))
     if len(common_triples) == 0:
@@ -84,8 +84,28 @@ for site, subgraph in graphs.items():
         common_triples = common_triples.intersection(trips)
 print(f"INTERSECTION,{len(common_triples)},{len(common_triples)/len(res)}")
 
+for src, subgraph in graphs.items():
+    fix = lambda x: tuple(map(str, x))
+    my_trips = set([fix(t) for t in subgraph])
+    other_trips = set()
+
+    # print("mine", my_trips)
+    for othersrc, othergraph in graphs.items():
+        if othersrc == src:
+            continue
+        [other_trips.add(fix(t)) for t in othergraph]
+        # other_trips = other_trips.union(set([fix(t) for t in othergraph]))
+        # print(other_trips)
+
+    unique = my_trips.difference(other_trips)
+    print(len(unique), len(my_trips), len(my_trips.union(other_trips)))
+    # print("unique", unique)
+    print(f"SET DIFF,{src},{len(unique)},{len(unique)/len(my_trips)}")
+
+
+print(f"GRAPH SIZE: {len(res)}")
 # # set diferences
-# for site, subgraph in graphs.items():
+# for src, subgraph in graphs.items():
 #     fix = lambda x: tuple(map(str, x))
 #     trips = set([fix(t) for t in subgraph])
-#     print(f"SET DIFF,{site},{
+#     print(f"SET DIFF,{src},{
