@@ -1,0 +1,8 @@
+[server]
+port = 8080
+servers = ['http://localhost:6483']
+ns = 'http://example.com/doe-building#'
+driver = 'haystack_json_driver.HaystackJSONDriver'
+
+[driver]
+file = 'data/haystack/modelica.json'
