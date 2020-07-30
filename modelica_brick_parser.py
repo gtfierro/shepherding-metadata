@@ -110,6 +110,38 @@ class Modelica_Brick_Parser:
                                                     if type_specifier_obj.startswith(self.main_folder):
                                                         if not type_specifier_obj in extends_files:
                                                             extends_files.append(type_specifier_obj)
+                                                            
+                                if not prefixed_element_obj_list is None:
+                                    for prefixed_element_obj in prefixed_element_obj_list:
+                                        element_obj_list2 = prefixed_element_obj.get('element')
+                                        for element_obj2 in element_obj_list2:
+                                            class_definition_obj2 = element_obj2.get('class_definition')
+                                            component_clause_obj4 = element_obj2.get('component_clause')
+
+                                            if not class_definition_obj2 is None:
+                                                class_specifier_obj2 = class_definition_obj2.get('class_specifier')
+                                                if not class_specifier_obj2 is None:
+                                                    long_class_specifier_obj2 = class_specifier_obj2.get('long_class_specifier')
+                                                    composition_obj2 = long_class_specifier_obj2.get('composition')
+                                                    if not composition_obj2 is None:
+                                                        element_list_obj3 = composition_obj2.get('element_list')
+                                                        if not element_list_obj3 is None:
+                                                            element_obj_list3 = element_list_obj3.get('element')
+                                                            for element_obj3 in element_obj_list3:
+                                                                component_clause_obj3 = element_obj3.get('component_clause')
+                                                                if not component_clause_obj3 is None:
+                                                                    type_specifier_obj3 = component_clause_obj3.get('type_specifier')
+
+                                                                    if not type_specifier_obj3 is None:
+                                                                        name = component_clause_obj3.get('component_list', {}).get('component_declaration', {})[0].get('declaration', {}).get('name')
+                                                                        model_elements[filename+'.'+name] = {'type':type_specifier_obj3, 'obj': element_obj3}
+
+                                            if not component_clause_obj4 is None:
+                                                type_specifier_obj4 = component_clause_obj4.get('type_specifier')
+
+                                                if not type_specifier_obj4 is None:
+                                                    name = component_clause_obj4.get('component_list', {}).get('component_declaration', {})[0].get('declaration', {}).get('name')
+                                                    model_elements[filename+'.'+name] = {'type':type_specifier_obj4, 'obj': element_obj2}
 
                                 if not equation_section_obj_list is None:
                                     for equation_section_obj in equation_section_obj_list:
@@ -146,37 +178,7 @@ class Modelica_Brick_Parser:
                                                         if not equation_dict2 in model_equations[comp2_element]:
                                                             model_equations[comp2_element].append(equation_dict2)
 
-                                    if not prefixed_element_obj_list is None:
-                                        for prefixed_element_obj in prefixed_element_obj_list:
-                                            element_obj_list2 = prefixed_element_obj.get('element')
-                                            for element_obj2 in element_obj_list2:
-                                                class_definition_obj2 = element_obj2.get('class_definition')
-                                                component_clause_obj4 = element_obj2.get('component_clause')
 
-                                                if not class_definition_obj2 is None:
-                                                    class_specifier_obj2 = class_definition_obj2.get('class_specifier')
-                                                    if not class_specifier_obj2 is None:
-                                                        long_class_specifier_obj2 = class_specifier_obj2.get('long_class_specifier')
-                                                        composition_obj2 = long_class_specifier_obj2.get('composition')
-                                                        if not composition_obj2 is None:
-                                                            element_list_obj3 = composition_obj2.get('element_list')
-                                                            if not element_list_obj3 is None:
-                                                                element_obj_list3 = element_list_obj3.get('element')
-                                                                for element_obj3 in element_obj_list3:
-                                                                    component_clause_obj3 = element_obj3.get('component_clause')
-                                                                    if not component_clause_obj3 is None:
-                                                                        type_specifier_obj3 = component_clause_obj3.get('type_specifier')
-
-                                                                        if not type_specifier_obj3 is None:
-                                                                            name = component_clause_obj3.get('component_list', {}).get('component_declaration', {})[0].get('declaration', {}).get('name')
-                                                                            model_elements[filename+'.'+name] = {'type':type_specifier_obj3, 'obj': element_obj3}
-
-                                                if not component_clause_obj4 is None:
-                                                    type_specifier_obj4 = component_clause_obj4.get('type_specifier')
-
-                                                    if not type_specifier_obj4 is None:
-                                                        name = component_clause_obj4.get('component_list', {}).get('component_declaration', {})[0].get('declaration', {}).get('name')
-                                                        model_elements[filename+'.'+name] = {'type':type_specifier_obj4, 'obj': element_obj2}
 
 
         return model_elements, model_equations, extends_files
