@@ -82,7 +82,7 @@ for site, subgraph in graphs.items():
     else:
         trips = set([fix(t) for t in subgraph])
         common_triples = common_triples.intersection(trips)
-print(f"INTERSECTION,{len(common_triples)},{len(common_triples)/len(full_graph)}")
+print(f"INTERSECTION,{len(common_triples)},{len(common_triples)/len(res)}")
 
 # # set diferences
 # for site, subgraph in graphs.items():
