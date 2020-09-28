@@ -87,6 +87,11 @@ class Triplestore:
                 records[row[0]].append((fix_term(row[1]), fix_term(row[2]), fix_term(row[3])))
         return records
 
+    def latest_version(self, srcname):
+        with self.cursor() as cur:
+            cur.execute("SELECT distinct timestamp FROM latest_triples WHERE src = ?", (srcname,))
+            return cur.fetchone()
+
     def dump(self):
         with self.cursor() as cur:
             cur.execute("SELECT s, p, o FROM latest_triples")
@@ -135,7 +140,7 @@ def add_triples():
     print(f"Graph now contains {len(graph)} triples (updated in {t1-t0:.2f} sec)")
     graph.serialize('output.ttl', format='ttl')
 
-    return "ok"
+    return jsonify({'latest': triplestore.latest_version(rec['source'])})
 
 @app.route('/resolve', methods=['GET'])
 def resolve():

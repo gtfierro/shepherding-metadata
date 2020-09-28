@@ -57,13 +57,13 @@ class Modelica_Brick_Parser:
         }
 
         self.modelica_brick_mover_type_map = { # anything can be pump or fan according to the media
-            'FlowControlled_dp': BRICK['Pump'], 
+            'FlowControlled_dp': BRICK['Pump'],
             'FlowControlled_m_flow': BRICK['Pump'],
             'SpeedControlled_Nrpm': BRICK['Fan'],
             'SpeedControlled_y': BRICK['Fan']
         }
 
-        self.modelica_brick_thermal_zone_type_map = { 
+        self.modelica_brick_thermal_zone_type_map = {
             'Detailed.MixedAir': BRICK['HVAC_Zone'],
             'ReducedOrder.EquivalentAirTemperature': BRICK['HVAC_Zone'],
             'ReducedOrder.RC': BRICK['HVAC_Zone'],
@@ -110,7 +110,7 @@ class Modelica_Brick_Parser:
                                                     if type_specifier_obj.startswith(self.main_folder):
                                                         if not type_specifier_obj in extends_files:
                                                             extends_files.append(type_specifier_obj)
-                                                            
+
                                 if not prefixed_element_obj_list is None:
                                     for prefixed_element_obj in prefixed_element_obj_list:
                                         element_obj_list2 = prefixed_element_obj.get('element')
@@ -266,9 +266,9 @@ class Modelica_Brick_Parser:
                         comp2_df = self.elements_df.loc[self.elements_df.element_name == equation.get('connected_to').split('[')[0]]
                     new_equation = {'connected_to': comp2_df.element_name.values[0], 'connect_clause_obj': equation['connect_clause_obj']}
 
-                    if 'comp1_interface' in equation: 
+                    if 'comp1_interface' in equation:
                         new_equation['comp1_interface']= equation['comp1_interface']
-                    if 'comp2_interface' in equation: 
+                    if 'comp2_interface' in equation:
                         new_equation['comp2_interface']= equation['comp2_interface']
 
                     if not element_name in self.model_equations:
@@ -316,7 +316,7 @@ class Modelica_Brick_Parser:
             comp1_port = equation.get('comp1_interface')
 
             connected_element_df = self.elements_df.loc[self.elements_df.element_name == connected_to_element]
-            
+
             if "port" in element and comp1_port is None:
                 comp2_port = equation.get('comp2_interface')
                 if not comp2_port is None and not (comp2_port.startswith("port_a") or comp2_port.startswith("port_1")):
