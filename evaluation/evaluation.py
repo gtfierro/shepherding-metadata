@@ -47,6 +47,8 @@ def canonicalize_ent(t):
 # print(clusters)
 # entities = [list(c)[0] for c in clusters]
 
+res = full_graph.query("SELECT ?x ?y WHERE { ?x owl:sameAs ?y }")
+sames = [(x[0], x[1]) for x in res if x[0] != x[1]]
 
 # get all of the triples with an entity as a subject
 res = full_graph.query("SELECT ?s ?p ?o WHERE { \
@@ -77,6 +79,7 @@ common_triples = set()
 for src, subgraph in graphs.items():
     print('-'*20)
     fix = lambda x: tuple(map(str, x))
+    ft = lambda x: (x[0], x[1])
     if len(common_triples) == 0:
         [common_triples.add(fix(t)) for t in subgraph]
     else:
@@ -86,21 +89,26 @@ print(f"INTERSECTION,{len(common_triples)},{len(common_triples)/len(res)}")
 
 for src, subgraph in graphs.items():
     fix = lambda x: tuple(map(str, x))
-    my_trips = set([fix(t) for t in subgraph])
+    my_trips = set([ft(fix(t)) for t in subgraph])
     other_trips = set()
 
-    # print("mine", my_trips)
+    #print("mine", my_trips)
+    # for t in my_trips:
+    #     print(t)
+    # print('-'*50)
     for othersrc, othergraph in graphs.items():
         if othersrc == src:
             continue
-        [other_trips.add(fix(t)) for t in othergraph]
+        [other_trips.add(ft(fix(t))) for t in othergraph]
         # other_trips = other_trips.union(set([fix(t) for t in othergraph]))
-        # print(other_trips)
+    # for t in other_trips:
+    #     print(t)
 
     unique = my_trips.difference(other_trips)
     print(len(unique), len(my_trips), len(my_trips.union(other_trips)))
     # print("unique", unique)
     print(f"SET DIFF,{src},{len(unique)},{len(unique)/len(my_trips)}")
+    # input()
 
 
 print(f"GRAPH SIZE: {len(res)}")
