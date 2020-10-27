@@ -50,6 +50,27 @@ config = {
         "servers": ['http://localhost:6483']
     },
     "timeline": [
+        #{
+        #    "time": "2020-01-01T00:00:00Z",
+        #    "label": "BuildingSync model",
+        #    "driver": "bsync_driver.BuildingSyncDriver",
+        #    "mapping_file": "data/buildingsync/BSync-to-Brick.csv",
+        #    "bsync_file": "data/buildingsync/examples/Medium Office - 2004 BSync.xml"
+        #},
+        #{
+        #    "time": "2020-02-01T00:00:00Z",
+        #    "label": "Modelica Model created",
+        #    "driver": "modelica_driver.ModelicaJSONDriver",
+        #    "lib_path": 'Buildings.Examples.HydronicHeating',
+        #    "modelica_json_file": 'TwoRoomsWithStorage',
+        #    "path": 'data/modelica/example-4',
+        #},
+        #{
+        #    "time": "2020-03-01T00:00:00Z",
+        #    "label": "Haystack Model created",
+        #    "driver": "haystack_json_driver.HaystackJSONDriver",
+        #    "file": 'data/haystack/modelica.json',
+        #},
         {
             "time": "2020-01-01T00:00:00Z",
             "label": "First Haystack",
@@ -61,7 +82,7 @@ config = {
             "label": "First Building Sync",
             "driver": "bsync_driver.BuildingSyncDriver",
             "mapping_file": "data/buildingsync/BSync-to-Brick.csv",
-            "bsync_file": "data/buildingsync/examples/bsync-carytown.xml"
+            "bsync_file": "data/buildingsync/examples/bsync-carytown-v1-fake.xml"
         },
         {
             "time": "2019-05-01T00:00:00Z",

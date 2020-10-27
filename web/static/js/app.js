@@ -7,6 +7,19 @@ async function postData(url, data) {
     return response.json();
 }
 
+function newWriter() {
+    return new N3.Writer({ prefixes: { 
+        brick: 'https://brickschema.org/schema/1.1/Brick#' ,
+        rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#', 
+        rdfs: 'http://www.w3.org/2000/01/rdf-schema#',
+        // owl: 'http://www.w3.org/2002/07/owl#',
+        // qudt: 'http://qudt.org/schema/qudt/',
+        // qudtqk: 'http://qudt.org/vocab/quantitykind/',
+        tag: 'https://brickschema.org/schema/1.1/BrickTag#',
+        // unit: 'http://qudt.org/vocab/unit/'
+    } });
+}
+
 
 // from https://jsfiddle.net/klesun/sgeryvyu/369/
 function prettifyXml(sourceXml)
@@ -56,7 +69,7 @@ window.addEventListener("load", function() {
         },
         template: `
             <div class="record">
-                <p>Record {{this.rec.id}} From {{this.rec.source}}</p>
+                <p>Record <b>{{this.rec.id}}</b> from <i>{{this.rec.source}}</i></p>
                 <div class="recordscroll">
                     <pre v-bind:class="codeclass"><code v-bind:class="codeclass">{{ formatted }}</code></pre>
                 </div>
@@ -66,16 +79,31 @@ window.addEventListener("load", function() {
 
 	Vue.component('triplerec', {
         props: ['rec'],
-        computed: {
-            formatted: function() {
-                return JSON.stringify(this.rec.triples, null, 2);
-            },
+        data: function() {
+            return {
+                turtle: "",
+            }
+        },
+        created() {
+            const w = newWriter();
+            this.rec.triples.forEach(t => {
+                let s = new N3.NamedNode(t[0]);
+                let p = new N3.NamedNode(t[1]);
+                if (t[2].indexOf("http") >= 0) {
+                    var o = new N3.NamedNode(t[2]);
+                } else {
+                    var o = new N3.DataFactory.literal(t[2]);
+                }
+                w.addQuad(new N3.Triple(s, p, o));
+            });
+            var self = this;
+            w.end((error, result) => self.turtle = result);
         },
         template: `
             <div class="record">
-                <p>Record {{this.rec.id}} From {{this.rec.source}}</p>
+                <p>Record <b>{{this.rec.id}}</b> from <i>{{this.rec.source}}</i></p>
                 <div class="recordscroll">
-                    <pre class="language-json recordcode"><code class="language-json recordcode">{{ formatted }}</code></pre>
+                    <pre class="language-turtle recordcode"><code class="language-turtle recordcode">{{ turtle }}</code></pre>
                 </div>
             </div>
         `
@@ -131,6 +159,9 @@ window.addEventListener("load", function() {
             reloadRecords: function() {
                 this.renderRecord(this.tldata.get(this.tlidx).start);
             },
+        },
+        updated() {
+            Prism.highlightAll();
         },
         created () {
             this.getTimeline();
