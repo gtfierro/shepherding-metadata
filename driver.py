@@ -18,7 +18,7 @@ class Driver:
         self._source_hash = None
 
         self.app = Flask(__name__, static_url_path='')
-        self.app.logger.setLevel(logging.INFO)
+        self.app.logger.setLevel(logging.DEBUG)
         self.app.logger.info(f"Setting up Flask routes")
         self.app.add_url_rule('/', view_func=self.http_resources)
         self.app.add_url_rule('/ids', view_func=self.http_ids)
@@ -94,6 +94,7 @@ class Driver:
         return json.jsonify(self._records.get(ident))
 
     def serve(self):
+        self.app.logger.info(f"Starting driver webserver on port http://localhost:{self._port}")
         self.app.run(host='localhost', port=str(self._port))
 
     def shutdown_server(self):

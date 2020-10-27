@@ -79,7 +79,7 @@ class BuildingSyncDriver(driver.Driver):
 
                 for item in res:
                     ident = self.extract_id(item)
-                    subtree = str(lxml.etree.tostring(item))
+                    subtree = lxml.etree.tostring(item, pretty_print=True)
                     # graph.add((NS[ident], RDF.type, rdflib.URIRef(brick_class)))
                     records[ident] = {
                         'id': ident,

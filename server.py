@@ -59,7 +59,7 @@ class Triplestore:
             triples GROUP BY sourcename""")
 
         self.conn.execute("""CREATE VIEW IF NOT EXISTS latest_triples AS
-            SELECT s, p, o, lv.sourcename as src FROM triples
+            SELECT s, p, o, lv.sourcename as src, lv.timestamp as timestamp FROM triples
             INNER JOIN latest_versions AS lv
             ON lv.sourcename = triples.sourcename
                AND lv.timestamp = triples.timestamp""")
@@ -101,7 +101,7 @@ class Triplestore:
 triplestore = Triplestore("triples.db")
 
 app = Flask(__name__, static_url_path='')
-app.logger.setLevel(logging.INFO)
+app.logger.setLevel(logging.DEBUG)
 
 _add_record_schema = json.load(open('./schemas/record.schema.json'))
 
