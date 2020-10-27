@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
+        <link rel="stylesheet" href="static/css/vis-timeline-graph2d.min.css" type="text/css" >
+        <link rel="stylesheet" href="static/css/prism.css" type="text/css" >
+        <link rel="stylesheet" href="static/css/site.css" type="text/css" >
+        <title>Shepherding Demo</title>
+    </head>
+    <body>
+        <div id="app">
+            <h3>Shepherding Demo</h3>
+            <button id="step_next" v-on:click="stepTimeline">Step</button>
+            <button id="reload" v-on:click="reloadRecords">Reload</button>
+            <div id="visualization"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Most Recent Records</h4>
+                    <record v-for="rec in records" v-bind:key="rec.source + rec.id" v-bind:rec="rec"></record>
+                </div>
+                <div class="col-md-6">
+                    <h4>Most Recent Triples</h4>
+                    <triplerec v-for="rec in records" v-bind:key="rec.source + rec.id" v-bind:rec="rec"></triplerec>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <hr />
+            <p>Built by Gabe</p>
+        </div>
+        <script src="https://unpkg.com/vue"></script>
+        <script src="static/js/vis-timeline-graph2d.min.js"></script>
+        <script src="static/js/prism.js"></script>
+        <script src="static/js/app.js"></script>
+    </body>
+</html>
+
