@@ -18,7 +18,7 @@ class HaystackJSONDriver(driver.Driver):
     def _check_source(self):
         while True:
             self.load_file(self._haystack_file)
-            time.sleep(60)
+            time.sleep(600)
 
     def load_file(self, haystack_file):
 

@@ -101,7 +101,7 @@ class GBXMLDriver(driver.Driver):
     def _check_source(self):
         while True:
             self.load_file(self._filename)
-            time.sleep(60)
+            time.sleep(600)
 
     def load_file(self, gbxml_file):
         BLDG = rdflib.Namespace(self._ns)
