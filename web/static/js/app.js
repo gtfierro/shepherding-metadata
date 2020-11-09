@@ -148,6 +148,14 @@ window.addEventListener("load", function() {
                 this.timeline.setCustomTimeMarker(tlitem.content, "current");
                 this.renderRecord(tlitem.start);
             },
+            stepTimelinePrev: function() {
+                console.log("Step from", this.tlidx, this.tldata.get(this.tlidx));
+                this.tlidx -= 1;
+                let tlitem = this.tldata.get(this.tlidx);
+                this.timeline.setCustomTime(tlitem.start, "current");
+                this.timeline.setCustomTimeMarker(tlitem.content, "current");
+                this.renderRecord(tlitem.start);
+            },
             renderRecord: function(timestamp) {
                 console.log("get records at", timestamp);
                 var self = this;
