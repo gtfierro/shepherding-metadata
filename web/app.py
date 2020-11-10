@@ -16,6 +16,7 @@ app.logger.setLevel(logging.INFO)
 next_port = 8081
 ports = {}
 drivers = {}
+driver_configs = {}
 
 def pt(timestamp):
     """parses RFC3339 timestamps"""
@@ -24,24 +25,28 @@ def pt(timestamp):
 def start_driver(driver_cfg):
     global next_port
     # TODO: change key to just 'driver' and kill old servers
+    print("Trying to start driver", driver_cfg)
     key = driver_cfg['driver']
     port = None
-    print(key, drivers.keys())
-    if key in drivers:
+    # driver is already running but w/ outdated config
+    if key in drivers and driver_configs.get(key) != driver_cfg:
         print('shutting down', ports[key])
+        del drivers[key]
         requests.post(f"http://localhost:{ports[key]}/shutdown")
-    cfg = {
-        "server": config['server'],
-    }
-    cfg['server']['port'] = next_port
-    ports[key] = next_port
-    next_port += 1
-    cfg['server']['driver'] = driver_cfg.pop('driver')
-    cfg['driver'] = driver_cfg
-    logging.info(f"Starting driver {key}")
-    t = Thread(target=Driver.start_from_config, args=(cfg,), daemon=True)
-    t.start()
-    drivers[key] = t
+    if key not in drivers:
+        driver_configs[key] = driver_cfg.copy()
+        cfg = {
+            "server": config['server'],
+        }
+        cfg['server']['port'] = next_port
+        ports[key] = next_port
+        next_port += 1
+        cfg['server']['driver'] = driver_cfg.pop('driver')
+        cfg['driver'] = driver_cfg
+        logging.info(f"Starting driver {key}")
+        t = Thread(target=Driver.start_from_config, args=(cfg,), daemon=True)
+        t.start()
+        drivers[key] = t
     # return address of driver
     return f"http://localhost:{ports[key]}"
 

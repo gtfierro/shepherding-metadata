@@ -115,6 +115,7 @@ resolved = None
 
 @app.route('/add_record', methods=['POST'])
 def add_triples():
+    global resolved
     try:
         msg = request.get_json(force=True)
         validate(msg, schema=_add_record_schema)
