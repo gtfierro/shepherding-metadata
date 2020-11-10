@@ -7,10 +7,17 @@ async function postData(url, data) {
     return response.json();
 }
 
+async function getData(url) {
+    const response = await fetch(url, {
+        method: 'GET',
+    }).catch(e => console.error(e));
+    return response.json();
+}
+
 function newWriter() {
-    return new N3.Writer({ prefixes: { 
+    return new N3.Writer({ prefixes: {
         brick: 'https://brickschema.org/schema/1.1/Brick#' ,
-        rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#', 
+        rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
         rdfs: 'http://www.w3.org/2000/01/rdf-schema#',
         // owl: 'http://www.w3.org/2002/07/owl#',
         // qudt: 'http://qudt.org/schema/qudt/',
@@ -39,7 +46,7 @@ function prettifyXml(sourceXml)
         '</xsl:stylesheet>',
     ].join('\n'), 'application/xml');
 
-    var xsltProcessor = new XSLTProcessor();    
+    var xsltProcessor = new XSLTProcessor();
     xsltProcessor.importStylesheet(xsltDoc);
     var resultDoc = xsltProcessor.transformToDocument(xmlDoc);
     var resultXml = new XMLSerializer().serializeToString(resultDoc);
@@ -49,7 +56,7 @@ function prettifyXml(sourceXml)
 window.addEventListener("load", function() {
     console.log("Starting");
 
-	Vue.component('record', {
+    Vue.component('record', {
         props: ['rec'],
         computed: {
             formatted: function() {
@@ -77,7 +84,7 @@ window.addEventListener("load", function() {
         `
     });
 
-	Vue.component('triplerec', {
+    Vue.component('triplerec', {
         props: ['rec'],
         data: function() {
             return {
@@ -116,6 +123,7 @@ window.addEventListener("load", function() {
             timeline: null,
             records: [],
             tldata: new vis.DataSet(),
+            graph: null,
         },
         methods: {
             drawTimeline: function(items) {
@@ -166,6 +174,7 @@ window.addEventListener("load", function() {
             },
             reloadRecords: function() {
                 this.renderRecord(this.tldata.get(this.tlidx).start);
+                this.updateGraph();
             },
         },
         updated() {

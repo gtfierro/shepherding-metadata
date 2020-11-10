@@ -152,7 +152,7 @@ def cluster_on_type_alignment(graphs, clustered):
     for source, graph in graphs.items():
         res = graph.query("SELECT ?ent ?type ?lab WHERE { \
                 ?ent rdf:type ?type .\
-                { ?type rdfs:subClassOf: brick:Equipment } \
+                { ?type rdfs:subClassOf+ brick:Equipment } \
                 UNION \
                 { ?type rdfs:subClassOf+ brick:Point } \
                 UNION \
@@ -301,11 +301,11 @@ def resolve(records):
 
     # TODO: due to limitation of the recordlinkage, can only compare *pairs*
     # of graphs. Need to address this
-    if len(graphs) == 2:
-        new_clusters, clustered = cluster_on_labels(graphs)
-        clusters.extend(new_clusters)
-        for c in new_clusters:
-            print(f"Label cluster: {c}")
+    # if len(graphs) == 2:
+    #     new_clusters, clustered = cluster_on_labels(graphs)
+    #     clusters.extend(new_clusters)
+    #     for c in new_clusters:
+    #         print(f"Label cluster: {c}")
 
     new_clusters, clustered = cluster_on_type_alignment(graphs, clustered)
     clusters.extend(new_clusters)

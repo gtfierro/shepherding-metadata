@@ -61,7 +61,7 @@ class HaystackJSONDriver(driver.Driver):
                     'timestamp': timestamp
                 }
                 self.add_record(rec['id'], rec)
-            lf.app.logger.info(f"Loaded {len(self._records)} records")
+            self.app.logger.info(f"Loaded {len(self._records)} records")
             self._compute_changed()
         do_load_file()
         # # start thread

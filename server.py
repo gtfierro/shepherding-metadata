@@ -1,4 +1,5 @@
 from flask import Flask, request, json, jsonify
+from flask_cors import CORS, cross_origin
 from jsonschema import validate
 from collections import defaultdict
 from brickschema.namespaces import RDF, RDFS, BRICK
@@ -102,6 +103,7 @@ triplestore = Triplestore("triples.db")
 
 app = Flask(__name__, static_url_path='')
 app.logger.setLevel(logging.DEBUG)
+cors = CORS(app, send_wildcard=True)
 
 _add_record_schema = json.load(open('./schemas/record.schema.json'))
 
@@ -109,6 +111,7 @@ graph = rdflib.Graph()
 graph.parse("ttl/Brick.ttl", format="ttl")
 r = reasonable.PyReasoner()
 r.from_graph(graph)
+resolved = None
 
 @app.route('/add_record', methods=['POST'])
 def add_triples():
@@ -126,8 +129,8 @@ def add_triples():
         triples = map(fix_triple, rec['triples'])
         triples = rewrite_labels(triples)
         triples = list(triples)
-        for t in triples:
-            print(t)
+        # for t in triples:
+        #     print(t)
 
         r.load_triples(triples)
         triplestore.add_triples(rec['source'], rec['timestamp'], triples)
@@ -139,17 +142,76 @@ def add_triples():
     t1 = time.time()
     print(f"Graph now contains {len(graph)} triples (updated in {t1-t0:.2f} sec)")
     graph.serialize('output.ttl', format='ttl')
+    # clear cache
+    resolved = None
 
     return jsonify({'latest': triplestore.latest_version(rec['source'])})
 
+@app.route('/graph', methods=['GET'])
+@cross_origin()
+def get_graph():
+    global resolved
+    if resolved is None:
+        make_resolve_graph()
+    context = {"@vocab": "https://brickschema.org/schema/1.1/Brick#", "@language": "en"}
+    return resolved.serialize(format='json-ld', context=context)
+
 @app.route('/resolve', methods=['GET'])
 def resolve():
-    records = triplestore.to_records()
+    global resolved
+    make_resolve_graph()
+    return jsonify({'size': len(resolved)})
+
+def make_resolve_graph():
+    global resolved
     t0 = time.time()
+    records = triplestore.to_records()
     graph, _ = resolver.resolve(records)
     t1 = time.time()
     print(f"Resolve took {t1-t0:.2f} seconds, had {len(graph)} triples")
-    return jsonify({'size': len(graph)})
+
+    res = list(graph.query("SELECT ?s ?p ?o WHERE { \
+                        ?s rdf:type ?type .\
+                        { ?type rdfs:subClassOf+ brick:Equipment } \
+                        UNION \
+                        { ?type rdfs:subClassOf+ brick:System } \
+                        UNION \
+                        { ?type rdfs:subClassOf+ brick:Point } \
+                        UNION \
+                        { ?type rdfs:subClassOf+ brick:Location } \
+                        ?s ?p ?o . \
+                        FILTER (!isBlank(?o))}"))
+    resolved = rdflib.Graph()
+    # add everything to the graph
+    for row in res:
+        resolved.add(row)
+    # loop through and remove
+    entities = set((r[0] for r in res))
+    for ent in entities:
+        eclasses = list(resolved.objects(predicate=rdflib.RDF.type, subject=ent))
+        print("\n\nlook at", ent)
+        if len(eclasses) == 1:
+            print("only", eclasses)
+            continue
+        for eclass in eclasses:
+            # if eclass is not the most specific class, remove this triple
+            print(f"SELECT ?subc WHERE {{ ?subc rdfs:subClassOf+ <{eclass}> }}")
+            subclasses = [r[0] for r in graph.query(f"SELECT ?subc WHERE {{ ?subc rdfs:subClassOf+ <{eclass}> }}")]
+            if len(subclasses) < 10:
+                print(f"----{eclass}:\nsubclasses {subclasses}\nbase {eclasses}")
+            else:
+                print(f"----{eclass}:\nsubclasses {len(subclasses)}\nbase {eclasses}")
+
+            if len(subclasses) == 0:
+                print(f"class {eclass} is specific (is leaf class)")
+                continue
+            overlap = len(set(subclasses).intersection(set(eclasses)))
+            if  overlap > 2 or (overlap <= 2 and eclass not in subclasses):
+                print(f"class {eclass} is not specific enough (overlap) {overlap}")
+                resolved.remove((ent, rdflib.RDF.type, eclass))
+            else:
+                print(f"class {eclass} is specific")
+    resolved.serialize('resolved.ttl', format='ttl')
 
 if __name__ == '__main__':
     app.run(host='localhost', port='6483')

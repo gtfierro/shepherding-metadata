@@ -23,23 +23,25 @@ def pt(timestamp):
 
 def start_driver(driver_cfg):
     global next_port
-    key = (driver_cfg['time'], driver_cfg['driver'])
+    # TODO: change key to just 'driver' and kill old servers
+    key = driver_cfg['driver']
     port = None
-    if key not in drivers:
-        cfg = {
-            "server": config['server'],
-        }
-        cfg['server']['port'] = next_port
-        ports[key] = next_port
-        next_port += 1
-        cfg['server']['driver'] = driver_cfg.pop('driver')
-        cfg['driver'] = driver_cfg
-        logging.info(f"Starting driver {key}")
-        t = Thread(target=Driver.start_from_config, args=(cfg,), daemon=True)
-        t.start()
-        drivers[key] = t
-    else:
-        logging.info(f"Driver {key} already started")
+    print(key, drivers.keys())
+    if key in drivers:
+        print('shutting down', ports[key])
+        requests.post(f"http://localhost:{ports[key]}/shutdown")
+    cfg = {
+        "server": config['server'],
+    }
+    cfg['server']['port'] = next_port
+    ports[key] = next_port
+    next_port += 1
+    cfg['server']['driver'] = driver_cfg.pop('driver')
+    cfg['driver'] = driver_cfg
+    logging.info(f"Starting driver {key}")
+    t = Thread(target=Driver.start_from_config, args=(cfg,), daemon=True)
+    t.start()
+    drivers[key] = t
     # return address of driver
     return f"http://localhost:{ports[key]}"
 
@@ -50,53 +52,57 @@ config = {
         "servers": ['http://localhost:6483']
     },
     "timeline": [
+        # {
+        #     "time": "2020-01-01T00:00:00Z",
+        #     "label": "BuildingSync model",
+        #     "driver": "bsync_driver.BuildingSyncDriver",
+        #     "mapping_file": "data/buildingsync/BSync-to-Brick.csv",
+        #     "bsync_file": "data/buildingsync/examples/Medium Office - 2004 BSync.xml"
+        # },
+        # {
+        #     "time": "2020-02-01T00:00:00Z",
+        #     "label": "Modelica Model created",
+        #     "driver": "modelica_driver.ModelicaJSONDriver",
+        #     "lib_path": 'Buildings.Examples.HydronicHeating',
+        #     "modelica_json_file": 'TwoRoomsWithStorage',
+        #     "path": 'data/modelica/example-4',
+        # },
+        # {
+        #     "time": "2020-03-01T00:00:00Z",
+        #     "label": "Haystack Model created",
+        #     "driver": "haystack_json_driver.HaystackJSONDriver",
+        #     "file": 'data/haystack/modelica.json',
+        # },
         {
             "time": "2020-01-01T00:00:00Z",
-            "label": "BuildingSync model",
+            "label": "First Haystack",
+            "driver": "haystack_json_driver.HaystackJSONDriver",
+            "file": "data/haystack/carytown.json"
+        },
+        {
+            "time": "2019-01-01T00:00:00Z",
+            "label": "First Building Sync",
             "driver": "bsync_driver.BuildingSyncDriver",
             "mapping_file": "data/buildingsync/BSync-to-Brick.csv",
-            "bsync_file": "data/buildingsync/examples/Medium Office - 2004 BSync.xml"
+            "bsync_file": "data/buildingsync/examples/bsync-carytown-v1-fake.xml"
         },
         {
-            "time": "2020-02-01T00:00:00Z",
-            "label": "Modelica Model created",
-            "driver": "modelica_driver.ModelicaJSONDriver",
-            "lib_path": 'Buildings.Examples.HydronicHeating',
-            "modelica_json_file": 'TwoRoomsWithStorage',
-            "path": 'data/modelica/example-4',
-        },
-        {
-            "time": "2020-03-01T00:00:00Z",
-            "label": "Haystack Model created",
-            "driver": "haystack_json_driver.HaystackJSONDriver",
-            "file": 'data/haystack/modelica.json',
-        },
-        #{
-        #    "time": "2020-01-01T00:00:00Z",
-        #    "label": "First Haystack",
-        #    "driver": "haystack_json_driver.HaystackJSONDriver",
-        #    "file": "data/haystack/carytown.json"
-        #},
-        #{
-        #    "time": "2019-01-01T00:00:00Z",
-        #    "label": "First Building Sync",
-        #    "driver": "bsync_driver.BuildingSyncDriver",
-        #    "mapping_file": "data/buildingsync/BSync-to-Brick.csv",
-        #    "bsync_file": "data/buildingsync/examples/bsync-carytown-v1-fake.xml"
-        #},
-        #{
-        #    "time": "2019-05-01T00:00:00Z",
-        #    "label": "Updated BSync",
-        #    "driver": "bsync_driver.BuildingSyncDriver",
-        #    "mapping_file": "data/buildingsync/BSync-to-Brick.csv",
-        #    "bsync_file": "data/buildingsync/examples/bsync-carytown.xml"
-        #}
+            "time": "2019-05-01T00:00:00Z",
+            "label": "Updated BSync",
+            "driver": "bsync_driver.BuildingSyncDriver",
+            "mapping_file": "data/buildingsync/BSync-to-Brick.csv",
+            "bsync_file": "data/buildingsync/examples/bsync-carytown.xml"
+        }
     ]
 }
 
 @app.route('/', methods=['GET'])
 def index():
     return send_from_directory('static', 'index.html')
+
+@app.route('/graph', methods=['GET'])
+def showgraph():
+    return send_from_directory('static', 'graph.html')
 
 @app.route('/timeline', methods=['GET'])
 def get_timeline():

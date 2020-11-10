@@ -60,7 +60,7 @@ class ModelicaJSONDriver(driver.Driver):
                     'record': {
                         'encoding': 'JSON',
                         # TODO: get some JSON for the entity?
-                        # 'content': row,
+                        'content': '{"content": "N/A"}',
                     },
                     'triples': triples,
                     'timestamp': timestamp

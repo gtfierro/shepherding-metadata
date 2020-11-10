@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
+        <link rel="stylesheet" href="static/css/vis-timeline-graph2d.min.css" type="text/css" >
+        <link rel="stylesheet" href="static/css/prism.css" type="text/css" >
+        <link rel="stylesheet" href="static/css/site.css" type="text/css" >
+        <title>Shepherding Demo</title>
+    </head>
+    <body>
+        <div id="app">
+            <h3>Shepherding Demo: Unified Brick Graph</h3>
+            <button id="reload" v-on:click="reloadRecords">Reload</button>
+            <div class="row">
+              <div id="unifiedBrickGraph" style="background-color: whitesmoke; border: solid 1px black; width: 100%; height: 700px"></div>
+            </div>
+        </div>
+        <div class="footer">
+            <hr />
+            <p>Built by Gabe</p>
+        </div>
+        <script src="https://unpkg.com/vue"></script>
+        <script src="static/js/go.js"></script>
+        <script src="static/js/graphapp.js"></script>
+    </body>
+</html>
+
+
