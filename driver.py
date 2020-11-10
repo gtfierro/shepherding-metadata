@@ -16,6 +16,7 @@ class Driver:
         self._ns = bldg_ns
         self._records = {}
         self._source_hash = None
+        self._shutdown = False
 
         self.app = Flask(__name__, static_url_path='')
         self.app.logger.setLevel(logging.DEBUG)
@@ -54,7 +55,7 @@ class Driver:
         self._records[ident] = record
 
     def _monitor_push(self):
-        while True:
+        while not self._shutdown:
             # self.app.logger.info("Start update")
             for srv, updated in self._server_updated.items():
                 # if updated:
@@ -101,7 +102,9 @@ class Driver:
         func = request.environ.get('werkzeug.server.shutdown')
         if func is None:
             raise RuntimeError('Not running with the Werkzeug Server')
+        self._shutdown = True
         func()
+        raise RuntimeError("shut down")
         return 'Shutting down...'
 
     @staticmethod
